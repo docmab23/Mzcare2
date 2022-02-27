@@ -1,21 +1,41 @@
-import { ethers } from 'ethers'
-import {useEffect , useState } from 'react'
-import axios from 'axios'
-import Web3Modal from "web3modal"
-
-import {
-  nftaddress , nftmarketaddress}
-from "../config"
-
-export default function Home() {
+// import "../styles/global.css"
+import Link from "next/link"
+function MyApp({ Component, pageProps}) {
   return (
-    <div className={styles.container}>
-      <h1>Home</h1>
-      </div>
+    <div>
+      <nav className="border-b p-6">
+        <p className="text-4xl font-bold">Mzcare</p>
+        <div className="flex mt-4">
+          <Link href="/">
 
+            <a className="mr-4 text-pink-500">
+              Home
+            </a>
+          </Link>
+          <Link href="/create-item">
+            <a className="mr-6 text-pink-500">
+              Sell Asset
+            </a>
+    
+          </Link>
+          <Link href="/my-assets">
+            My Assets 
+          </Link>
+          <Link href="/creator-dashboard">
+            <a className="mr-6 text-pink-500">
+              Creator Dashboard
+            </a>
+          </Link>
+        </div>
+        </nav>
+        <Component {...pageProps} />
+        </div>
 
-
-  
   )
 }
+
+export default MyApp
+  
+  
+
 
