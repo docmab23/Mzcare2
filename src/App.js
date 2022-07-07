@@ -11,7 +11,7 @@ function App() {
   return (
     
     <div className="App">
-     <a href={'launch?iss=https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4&aud='}>Google</a>
+     <a href={'launch?iss=https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4&aud='}>Share your Medical record</a>
     </div>
     
   );
