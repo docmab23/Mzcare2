@@ -51,6 +51,27 @@ export function AuthProvider({ children }: AuthProps) {
     return sendPasswordResetEmail(auth, email);
   }
 
+  function updateUserEmail(email: any) {
+    return updateEmail(auth.currentUser!, email);
+  }
+
+  function deActivate() {
+    return deleteUser(auth.currentUser!);
+  }
+
+  function reAuthenticate(password: any, email: any) {
+    const credentials = EmailAuthProvider.credential(
+      email,
+      password
+    );
+    return reauthenticateWithCredential(auth.currentUser!, credentials);
+  }
+
+  function updateUserPassword(password: any) {
+    return updatePassword(auth.currentUser!, password);
+  }
+
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user: any) => {
       setCurrentUser(user);
