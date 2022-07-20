@@ -6,11 +6,11 @@ import { defineCustomElements } from '@ionic/pwa-elements/loader';
 import { AuthProvider } from "./contexts/AuthContext";
 defineCustomElements(window);
 
-ReactDOM.render(<React.StrictMode>
+ReactDOM.render(
     <AuthProvider>
       <App />
     </AuthProvider>
-  </React.StrictMode>, document.getElementById('root'));
+, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

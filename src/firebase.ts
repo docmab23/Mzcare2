@@ -3,6 +3,22 @@ import { getStorage } from "firebase/storage";
 import "firebase/auth";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import firebase from "firebase/app";
+import {toast} from "./toast" ;
+import {
+  createUserWithEmailAndPassword,
+  signOut,
+  sendPasswordResetEmail,
+  sendEmailVerification,
+  signInWithEmailAndPassword,
+  updateEmail,
+  updatePassword,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+  deleteUser,
+  onAuthStateChanged,
+} from "firebase/auth";
+
 
 const app = initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -18,3 +34,42 @@ export const storage = getStorage(app);
 export const db = getFirestore(app);
 
 export default app;
+
+
+export function getCurrentUser() {
+	return new Promise((resolve, reject) => {
+		const unsubscribe = auth.onAuthStateChanged(function (user) {
+			if (user) {
+				resolve(user);
+			} else {
+				resolve(null);
+			}
+			unsubscribe();
+		});
+	});
+}
+
+export function logoutUser() {
+	return auth.signOut();
+}
+
+export async function loginUser(email: string, password: string) {
+	try {
+		const res = signInWithEmailAndPassword(auth,email,password);
+		return res;
+	} catch (error) {
+	// 	toast(error.message, 4000);
+		return false;
+	}
+}
+
+export async function registerUser(email: string, password: string) {
+	try {
+		const res = await createUserWithEmailAndPassword(auth,email ,password);
+
+		return res;
+	} catch (error) {
+		// toast(error.message, 4000);
+		return false;
+	}
+}

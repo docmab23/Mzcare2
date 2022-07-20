@@ -1,5 +1,5 @@
 import React, { useContext , useRef, useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar , IonItem, IonLabel, IonInput , IonCheckbox , IonButton} from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar , IonItem, IonLabel, IonInput , IonCheckbox , IonButton } from '@ionic/react';
 import './Tab1.css';
 import { useAuth } from '../contexts/AuthContext';
 import {auth} from "../firebase" ;
@@ -9,7 +9,7 @@ import {createUserWithEmailAndPassword} from "firebase/auth";
 
 const Signup: React.FC = () => {
 // Import the signup function we defined in AuthContext.js
-  const user = useAuth;
+  const user = useAuth();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const createAccount = async () => {
@@ -18,8 +18,11 @@ const Signup: React.FC = () => {
         auth,
         emailRef.current!.value,
         passwordRef.current!.value
+        
       );
+      console.log("created fucker");
     } catch (error) {
+      console.log("Fuckkkkkkkkkkkkkkkkkkkk");
       console.error(error);
     }
   };
@@ -45,7 +48,7 @@ const Signup: React.FC = () => {
     Signup
   </IonButton>
 </form>
-  );
-};
+  )
+}
 
 export default Signup;
