@@ -65,7 +65,7 @@ export async function loginUser(email: string, password: string) {
 
 export async function registerUser(email: string, password: string) {
 	try {
-		const res = await createUserWithEmailAndPassword(auth,email ,password);
+		const res = await createUserWithEmailAndPassword(auth, email, password);
 
 		return res;
 	} catch (error) {
