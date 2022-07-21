@@ -1,21 +1,66 @@
-import React, { useContext , useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput , IonButton} from '@ionic/react';
-import './Tab1.css';
-import { useAuth } from '../contexts/AuthContext';
-import {createUserWithEmailAndPassword} from "firebase/auth";
+import {
+	IonContent,
+	IonHeader,
+	IonPage,
+	IonTitle,
+	IonToolbar,
+	IonInput,
+	IonButton,
+	IonLoading,
+} from "@ionic/react";
+
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { loginUser } from "../firebase";
+import { toast } from "../toast";
+// import { setUserState } from "../redux/actions";
+import { useDispatch } from "react-redux";
+
 const Login: React.FC = () => {
+	const [busy, setBusy] = useState<boolean>(false);
+	const history = useHistory();
+	// const dispatch = useDispatch();
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
 
-    const [userame , setusername] = useState("");
-    const [password , setPassword] = useState("");
+	async function login() {
+		setBusy(true);
+		const res: any = await loginUser(username, password);
+		if (res) {
+			console.log("login res", res);
+			// dispatch(setUserState(res.user.email));
+			// history.replace("/dashboard");
+			toast("You have logged in");
+		}
+		setBusy(false);
+	}
 
+	return (
+		<IonPage>
+			<IonHeader>
+				<IonToolbar>
+					<IonTitle>Login</IonTitle>
+				</IonToolbar>
+			</IonHeader>
+			<IonLoading message="Please wait.." duration={0} isOpen={busy} />
+			<IonContent className="ion-padding">
+				<IonInput
+					placeholder="Username"
+					onIonChange={(e: any) => setUsername(e.target.value)}
+				/>
+				<IonInput
+					type="password"
+					placeholder="Password"
+					onIonChange={(e: any) => setPassword(e.target.value)}
+				/>
+				<IonButton onClick={login}>Login</IonButton>
 
-  return (
-    <IonPage>
-     <h1 color="red">Hello</h1>
-     <IonButton onClick={(e) => console.log(e)}>Click me </IonButton>
-     <IonInput onIonChange={(e) => console.log(e)}> Input </IonInput>
-    </IonPage>
-  );
+				<p>
+					New here? <Link to="/register">Register</Link>
+				</p>
+			</IonContent>
+		</IonPage>
+	);
 };
 
 export default Login;
