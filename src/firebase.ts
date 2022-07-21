@@ -78,7 +78,7 @@ export async function registerUser(email: string, password: string) {
     // console.log(arr_mes);
     if (arr_mes=="Firebase: Error (auth/email-already-in-use)."){
       console.log("hello");
-      toast("Email already exists, Fuckoff!",4000);
+      toast("Email already exists",4000);
 
     }
 		return false;
