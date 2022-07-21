@@ -49,7 +49,7 @@ const Register: React.FC = () => {
         <div className="ion-padding container">
         <IonText >
           <h2>
-          Sign Up
+          SIGN UP
             </h2></IonText>
           <IonItem lines="none" className="form-border">
             <IonLabel position="floating">Email</IonLabel>

@@ -59,9 +59,10 @@ export function AuthProvider({ children }: AuthProps) {
     return deleteUser(auth.currentUser!);
   }
 
-  function reAuthenticate(password: any, email: any) {
+  function reAuthenticate(password: any) {
+    const user = auth.currentUser!;
     const credentials = EmailAuthProvider.credential(
-      email,
+      user.email!,
       password
     );
     return reauthenticateWithCredential(auth.currentUser!, credentials);

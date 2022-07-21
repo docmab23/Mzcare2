@@ -39,6 +39,9 @@ import './theme/variables.css';
 /* Global CSS */
 import './global.css';
 import Signup from './pages/Signup';
+import ChangeEmail from './pages/ChangeEmail';
+import ChangePassword from './pages/ChangePassword';
+import ForgotPassword from './pages/ForgotPassword';
 
 const App: React.FC = () => (
   <IonApp>
@@ -53,6 +56,9 @@ const App: React.FC = () => (
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/signup" component={Signup} />
+          <Route path="/changeEmail" component={ChangeEmail} />
+          <Route path="/changePassword" component={ChangePassword} />
+          <Route path="/forgotPassword" component={ForgotPassword} />
           <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">

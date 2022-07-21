@@ -14,28 +14,36 @@ import {
 
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { loginUser } from "../firebase";
+import { loginUser, reAuthenticate, updateUserPassword } from "../firebase";
 import { toast } from "../toast";
 // import { setUserState } from "../redux/actions";
 import { useDispatch } from "react-redux";
 import FormTopBar from "../components/FormTopBar";
 
-const Login: React.FC = () => {
+const ChangePassword: React.FC = () => {
 	const [busy, setBusy] = useState<boolean>(false);
 	const history = useHistory();
 	// const dispatch = useDispatch();
-	const [email, setEmail] = useState("");
+	const [oldPassword, setOldPassword] = useState("");
 	const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-	async function login() {
+	async function changePassword() {
 		setBusy(true);
-		const res: any = await loginUser(email, password);
-		if (res) {
-			console.log("login res", res);
-			// dispatch(setUserState(res.user.email));
-			// history.replace("/dashboard");
-			toast("You have logged in");
-		}
+
+    if (password !== confirmPassword) {
+      toast("Passwords do not match")
+      return;
+    }
+
+    try {
+      await reAuthenticate(oldPassword);
+      await updateUserPassword(password);
+      toast("Password Reset Succesfully")
+    } catch {
+      toast("error")
+    }
+		// const res: any = await loginUser(username, password);
 		setBusy(false);
 	}
 
@@ -47,34 +55,38 @@ const Login: React.FC = () => {
         <div className="ion-padding container">
         <IonText >
           <h2>
-          SIGN IN
+          CHANGE PASSWORD
             </h2></IonText>
           <IonItem lines="none" className="form-border">
-            <IonLabel position="floating">Email</IonLabel>
+            <IonLabel position="floating">Password</IonLabel>
             <IonInput
-              type="email"
-              onIonChange={(e: any) => setEmail(e.target.value)}
+              type="password"
+              onIonChange={(e: any) => setOldPassword(e.target.value)}
             />
           </IonItem>
           <IonItem lines="none" className="form-border">
-            <IonLabel position="floating">Password</IonLabel>
+            <IonLabel position="floating">New Password</IonLabel>
             <IonInput
               type="password"
               onIonChange={(e: any) => setPassword(e.target.value)}
             />
           </IonItem>
+          <IonItem lines="none" className="form-border">
+            <IonLabel position="floating">Confirm New Password</IonLabel>
+            <IonInput
+              type="password"
+              onIonChange={(e: any) => setConfirmPassword(e.target.value)}
+            />
+          </IonItem>
           <div className="padding-lign">
-            <IonButton class="form-button" onClick={login}>
-              SIGN IN
+            <IonButton class="form-button" onClick={changePassword}>
+              Change Password
             </IonButton>
           </div>
-          <span className="padding-lign">
-            New to MzCare? <Link to="/register">Sign Up</Link>
-          </span>
         </div>
       </IonContent>
     </IonPage>
 	);
 };
 
-export default Login;
+export default ChangePassword;
