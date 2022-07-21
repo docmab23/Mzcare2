@@ -14,7 +14,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "../toast";
 import { registerUser } from "../firebase";
-import './Register.css';
+import "./Register.css";
+import FormTopBar from "../components/FormTopBar";
 
 const Register: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -41,37 +42,35 @@ const Register: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Register</IonTitle>
-        </IonToolbar>
-      </IonHeader>
       <IonContent className="ion-padding">
+      <FormTopBar></FormTopBar>
         <IonLoading message="Registering..." duration={0} isOpen={busy} />
         <div className="ion-padding container">
           <IonItem lines="none" className="form-border">
-          <IonLabel position="floating">Email</IonLabel>
+            <IonLabel position="floating">Email</IonLabel>
             <IonInput
               type="email"
               onIonChange={(e: any) => setUsername(e.target.value)}
             />
           </IonItem>
           <IonItem lines="none" className="form-border">
-          <IonLabel position="floating">Password</IonLabel>
+            <IonLabel position="floating">Password</IonLabel>
             <IonInput
               type="password"
               onIonChange={(e: any) => setPassword(e.target.value)}
             />
           </IonItem>
           <IonItem lines="none" className="form-border">
-          <IonLabel position="floating">Confirm Password</IonLabel>
+            <IonLabel position="floating">Confirm Password</IonLabel>
             <IonInput
               type="password"
               onIonChange={(e: any) => setCPassword(e.target.value)}
             />
           </IonItem>
           <div className="padding-lign">
-          <IonButton  class="form-button" onClick={register}>SIGN UP</IonButton>
+            <IonButton class="form-button" onClick={register}>
+              SIGN UP
+            </IonButton>
           </div>
           <span className="padding-lign">
             Already signed up? <Link to="/login">Login</Link>
