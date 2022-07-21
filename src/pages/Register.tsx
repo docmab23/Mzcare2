@@ -9,6 +9,7 @@ import {
   IonLoading,
   IonItem,
   IonLabel,
+  IonText,
 } from "@ionic/react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -46,6 +47,10 @@ const Register: React.FC = () => {
       <FormTopBar></FormTopBar>
         <IonLoading message="Registering..." duration={0} isOpen={busy} />
         <div className="ion-padding container">
+        <IonText >
+          <h2>
+          Sign Up
+            </h2></IonText>
           <IonItem lines="none" className="form-border">
             <IonLabel position="floating">Email</IonLabel>
             <IonInput
