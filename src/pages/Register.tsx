@@ -7,6 +7,7 @@ import {
 	IonInput,
 	IonButton,
 	IonLoading,
+    IonItem
 } from "@ionic/react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -40,9 +41,9 @@ const Register: React.FC = () => {
 		<IonPage>
 			<IonHeader>
 				<IonToolbar>
-					<IonTitle>Register</IonTitle>
 				</IonToolbar>
 			</IonHeader>
+            <IonItem aria-setsize={20} color="red"></IonItem>
 			<IonContent className="ion-padding">
 				<IonLoading message="Registering..." duration={0} isOpen={busy} />
 				<IonInput
@@ -59,7 +60,7 @@ const Register: React.FC = () => {
 					placeholder="Confirm Password?"
 					onIonChange={(e: any) => setCPassword(e.target.value)}
 				/>
-				<IonButton onClick={register}>Register</IonButton>
+				<IonButton onClick={register} color="#628E50">Register</IonButton>
 
 				<p>
 					Already have an account? <Link to="/login">Login</Link>
