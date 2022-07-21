@@ -48,7 +48,7 @@ const Register: React.FC = () => {
       </IonHeader>
       <IonContent className="ion-padding">
         <IonLoading message="Registering..." duration={0} isOpen={busy} />
-        <div className="ion-padding">
+        <div className="ion-padding container">
           <IonItem lines="none" className="form-border">
           <IonLabel position="floating">Email</IonLabel>
             <IonInput
@@ -70,11 +70,12 @@ const Register: React.FC = () => {
               onIonChange={(e: any) => setCPassword(e.target.value)}
             />
           </IonItem>
-          <IonButton onClick={register}>Register</IonButton>
-
-          <p>
-            Already have an account? <Link to="/login">Login</Link>
-          </p>
+          <div className="padding-lign">
+          <IonButton  class="form-button" onClick={register}>SIGN UP</IonButton>
+          </div>
+          <span className="padding-lign">
+            Already signed up? <Link to="/login">Login</Link>
+          </span>
         </div>
       </IonContent>
     </IonPage>

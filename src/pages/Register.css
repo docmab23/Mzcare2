@@ -2,3 +2,13 @@
     border-bottom: 2px solid rgb(98, 142, 80);
     /* border-bottom-color: rgb(186, 218, 85); */
 }
+
+.form-button {
+    --background: rgb(98, 142, 80);
+    position: relative;
+    width: 132px;
+}
+
+.padding-lign {
+    padding-top: 50px;
+}
