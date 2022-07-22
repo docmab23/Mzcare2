@@ -1,0 +1,6 @@
+.rbutton {
+    size: 30px;
+    width: 100%;
+    height: 90%;
+    --background-hover: #FFFFFF;
+}

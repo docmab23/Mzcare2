@@ -48,6 +48,7 @@ export function getCurrentUser() {
 }
 
 export function logoutUser() {
+  alert("Logged out !")
   return auth.signOut();
 }
 

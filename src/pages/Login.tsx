@@ -33,7 +33,7 @@ const Login: React.FC = () => {
 		if (res) {
 			console.log("login res", res);
 			// dispatch(setUserState(res.user.email));
-			// history.replace("/dashboard");
+			history.replace("/home");
 			toast("You have logged in");
 		}
 		setBusy(false);

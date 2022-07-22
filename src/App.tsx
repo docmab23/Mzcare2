@@ -42,24 +42,21 @@ import Signup from './pages/Signup';
 import ChangeEmail from './pages/ChangeEmail';
 import ChangePassword from './pages/ChangePassword';
 import ForgotPassword from './pages/ForgotPassword';
+import Home from './pages/Home';
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route path="/tab1" component={Tab1} exact={true} />
-          <Route path="/tab2" component={Tab2} exact={true} />
-          <Route path="/login" component={Login} exact={true} />
-          <Route path="/tab2/details" component={Details} />
-          <Route path="/tab3" component={Tab3} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/signup" component={Signup} />
+          <Route path="/home" component={Home} />
           <Route path="/changeEmail" component={ChangeEmail} />
           <Route path="/changePassword" component={ChangePassword} />
           <Route path="/forgotPassword" component={ForgotPassword} />
-          <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />
+          <Route path="/" render={() => <Redirect to="/login" />} exact={true} />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
   
