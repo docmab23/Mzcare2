@@ -43,6 +43,10 @@ import ChangeEmail from './pages/ChangeEmail';
 import ChangePassword from './pages/ChangePassword';
 import ForgotPassword from './pages/ForgotPassword';
 import Home from './pages/Home';
+import Allergy from './pages/resource-pages/Allergy';
+import Immunizations from './pages/resource-pages/Immunizations';
+import Ice from './pages/resource-pages/Ice';
+import General from './pages/resource-pages/General';
 
 const App: React.FC = () => (
   <IonApp>
@@ -50,12 +54,17 @@ const App: React.FC = () => (
       <IonTabs>
         <IonRouterOutlet>
           <Route path="/login" component={Login} />
+          <Route path="/tab1" component={Tab1} />
           <Route path="/register" component={Register} />
           <Route path="/signup" component={Signup} />
           <Route path="/home" component={Home} />
           <Route path="/changeEmail" component={ChangeEmail} />
           <Route path="/changePassword" component={ChangePassword} />
           <Route path="/forgotPassword" component={ForgotPassword} />
+          <Route path="/allergy" component={Allergy} />
+          <Route path="/immune" component={Immunizations} />
+          <Route path="/ice" component={Ice} />
+          <Route path="/general" component={General} />
           <Route path="/" render={() => <Redirect to="/login" />} exact={true} />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
