@@ -18,7 +18,7 @@ import {
     IonTabBar,
     IonTabs,
     IonBadge,
-    IonRouterOutlet,
+    IonRouterOutlet
     
     
 
@@ -37,10 +37,10 @@ import {
   import {logoutUser} from "../firebase";
   import FormTopBar from "../components/FormTopBar";
   import "./Home.css";
-  import hicon from "../images/home-icon.png" ; 
-  import sett from "../images/settings-icon.png" ;
+  import hicon from "../images/home-icon.svg" ; 
+  import sett from "../images/settings-icon.svg" ;
   import { IonReactRouter } from "@ionic/react-router";
-  import em from "../images/em.png" ;
+  import em from "../images/em.svg" ;
   import { calendar, personCircle, map, informationCircle } from 'ionicons/icons';
 import Tab1 from "./Tab1";
 import Allergy from "./resource-pages/Allergy";
@@ -73,7 +73,7 @@ import Immunizations from "./resource-pages/Immunizations";
           <div className="ion-padding container">
           <IonText >
             <h2 >
-              Home sweet home 
+
               </h2></IonText>
               <IonItem>
 
@@ -101,19 +101,19 @@ import Immunizations from "./resource-pages/Immunizations";
                         <IonRouterOutlet>
                             <Route path='/home/ice' component={Ice} exact />
                             <Route path='/home/immune' component={Immunizations} exact />
-                            <Route path='/home' exact />
+                            
                            
                         </IonRouterOutlet>
 
                         <IonTabBar slot='bottom'>
                             <IonTabButton tab='EM Profile' href='/home/ice'>
-                                <IonLabel>EM</IonLabel>
+                                <IonIcon src={em}>EM</IonIcon>
                             </IonTabButton>
-                            <IonTabButton tab='Home' href='/home'>
-                                <IonLabel>Home</IonLabel>
+                            <IonTabButton tab='Home' href='/'>
+                                <IonIcon src={hicon}>Home</IonIcon>
                             </IonTabButton>
                             <IonTabButton tab='Settings' href='/home/immune'>
-                                <IonLabel>Settings</IonLabel>
+                                <IonIcon src={sett}>Settings</IonIcon>
                             </IonTabButton>
                         </IonTabBar>
                     </IonTabs>

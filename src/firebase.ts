@@ -48,7 +48,8 @@ export function getCurrentUser() {
 }
 
 export function logoutUser() {
-  alert("Logged out !")
+ // alert("Logged out !")
+   
   return auth.signOut();
 }
 
@@ -69,7 +70,14 @@ export async function loginUser(email: string, password: string) {
     return res;
   } catch (error) {
     // 	toast(error.message, 4000);
-    console.log(error as Error);
+    // console.log(error as Error);
+    var arr_mes = (error as Error).message;
+    console.log(arr_mes);
+    if (arr_mes == "Firebase: Error (auth/wrong-password).") {
+      console.log("hello");
+      toast("Wrong password",4000);
+
+    }
 
     return false;
   }
