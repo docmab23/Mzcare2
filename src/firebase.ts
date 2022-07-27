@@ -2,8 +2,9 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import "firebase/auth";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, setDoc } from "firebase/firestore";
 import firebase from "firebase/app";
+import { doc, updateDoc } from "firebase/firestore";
 import { toast } from "./toast";
 import {
   createUserWithEmailAndPassword,
@@ -18,6 +19,7 @@ import {
   deleteUser,
   onAuthStateChanged,
 } from "firebase/auth";
+import { JsxOpeningLikeElement } from "typescript";
 
 const app = initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -115,4 +117,25 @@ export async function registerUser(email: string, password: string) {
     }
     return false;
   }
+}
+
+export async function setImmunization(data: any) {
+  console.log("here")
+  const immunizationRef = doc(db, auth.currentUser?.uid + "/immunization")
+  setDoc(immunizationRef, data)
+}
+
+export async function setMedication(data: JSON) {
+  const medicationRef = doc(db, auth.currentUser?.uid + "/medication")
+  setDoc(medicationRef, data)
+}
+
+export async function setICE(data: JSON) {
+  const iceRef = doc(db, auth.currentUser?.uid + "/ice")
+  setDoc(iceRef, data)
+}
+
+export async function setAllergy(data: JSON) {
+  const allergyRef = doc(db, auth.currentUser?.uid + "/allergy")
+  setDoc(allergyRef, data)
 }
