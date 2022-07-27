@@ -99,9 +99,8 @@ import Immunizations from "./resource-pages/Immunizations";
       
                     <IonTabs>
                         <IonRouterOutlet>
-                            <Route path='/home/ice' component={Ice} exact />
-                            <Route path='/home/immune' component={Immunizations} exact />
-                            
+                            <Route path='/' component={Home} exact />
+                           
                            
                         </IonRouterOutlet>
 
@@ -112,7 +111,7 @@ import Immunizations from "./resource-pages/Immunizations";
                             <IonTabButton tab='Home' href='/'>
                                 <IonIcon src={hicon}>Home</IonIcon>
                             </IonTabButton>
-                            <IonTabButton tab='Settings' href='/home/immune'>
+                            <IonTabButton tab='Settings' href='/home'>
                                 <IonIcon src={sett}>Settings</IonIcon>
                             </IonTabButton>
                         </IonTabBar>

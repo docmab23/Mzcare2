@@ -10,6 +10,14 @@ import {
 	IonText,
 	IonLabel,
 	IonItem,
+	IonFooter,
+    IonCard,
+    IonCardSubtitle,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonIcon
+	
 } from "@ionic/react";
 
 import React, { useState } from "react";
@@ -18,21 +26,63 @@ import { Link, useHistory } from "react-router-dom";
 // import { toast } from ".../toast";
 // import { setUserState } from "../redux/actions";
 import { useDispatch } from "react-redux";
-// import FormTopBar from "../components/FormTopBar";
+import FormTopBar from "../../components/FormTopBar";
+import {IoIosAddCircleOutline} from "react-icons/io" ;
 
 const Immunizations: React.FC = () => {
+
+    const history = useHistory();
+  
+    const routeChange = () =>{ 
+      let path = `/immune-form`; 
+      history.push(path);
+    }
 
 	return (
 		<IonPage>
       <IonContent className="ion-padding">
+      <FormTopBar/>
+      <p>      </p>
      <h1>Immunizations</h1>
-     <div>
-            <IonItem>
-          <IonButton className="back-button" routerLink="/home"> ICE details </IonButton>
-          </IonItem>
-          </div>
+     <IonCard>
+          <IonCardHeader>
+            <IonCardTitle>HPV</IonCardTitle>
+           
+          </IonCardHeader>
+         
+          <IonCardContent>
+          <IonCardSubtitle>Administred Date: 05/12/13</IonCardSubtitle>
+            <IonCardSubtitle>Expiry date: 05/12/21</IonCardSubtitle>
+      </IonCardContent>
+        </IonCard>
+        <IonCard>
+          <IonCardHeader>
+            <IonCardTitle>Tetanus</IonCardTitle>
+           
+          </IonCardHeader>
+         
+          <IonCardContent>
+          <IonCardSubtitle>Administred Date: 05/12/13</IonCardSubtitle>
+            <IonCardSubtitle>Expiry date: 05/12/21</IonCardSubtitle>
+      </IonCardContent>
+        </IonCard>
+         
+	<IonItem>
+	<IoIosAddCircleOutline height="40%"
+      width="40%"
+      onClick={routeChange}
+    />
+	</IonItem>
+
+	
       </IonContent>
+	  <IonFooter>
+	
+
+
+	  </IonFooter>
     </IonPage>
+
 	);
 };
 
