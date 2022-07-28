@@ -30,7 +30,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import FormTopBar from "../../components/FormTopBar";
 import {IoIosAddCircleOutline} from "react-icons/io" ;
-import {setAllergy} from "../../firebase" ;
+import {setAllergy} from "../database" ;
 
 
 const Allergy: React.FC = () => {
