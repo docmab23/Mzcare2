@@ -21,7 +21,7 @@ import { Link, useHistory } from "react-router-dom";
 // import { setUserState } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import FormTopBar from "../../components/FormTopBar";
-import { setImmunization } from "../../firebase";
+import { setImmunization } from "../database";
 import { addVaccine } from '../database';
 
 const ImmunizationsForm: React.FC = () => {
