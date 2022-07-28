@@ -19,7 +19,6 @@ import {
   deleteUser,
   onAuthStateChanged,
 } from "firebase/auth";
-import { JsxOpeningLikeElement } from "typescript";
 
 const app = initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -50,8 +49,6 @@ export function getCurrentUser() {
 }
 
 export function logoutUser() {
- // alert("Logged out !")
-   
   return auth.signOut();
 }
 
@@ -75,7 +72,7 @@ export async function loginUser(email: string, password: string) {
     // console.log(error as Error);
     var arr_mes = (error as Error).message;
     console.log(arr_mes);
-    if (arr_mes == "Firebase: Error (auth/wrong-password).") {
+    if (arr_mes === "Firebase: Error (auth/wrong-password).") {
       console.log("hello");
       toast("Wrong password",4000);
 
@@ -110,7 +107,7 @@ export async function registerUser(email: string, password: string) {
     // toast(error.message, 4000);
     var arr_mes = (error as Error).message;
     // console.log(arr_mes);
-    if (arr_mes == "Firebase: Error (auth/email-already-in-use).") {
+    if (arr_mes === "Firebase: Error (auth/email-already-in-use).") {
       console.log("hello");
       toast("Email already exists",4000);
 
@@ -120,22 +117,21 @@ export async function registerUser(email: string, password: string) {
 }
 
 export async function setImmunization(data: any) {
-  console.log("here")
   const immunizationRef = doc(db, auth.currentUser?.uid + "/immunization")
   setDoc(immunizationRef, data)
 }
 
-export async function setMedication(data: JSON) {
+export async function setMedication(data: any) {
   const medicationRef = doc(db, auth.currentUser?.uid + "/medication")
   setDoc(medicationRef, data)
 }
 
-export async function setICE(data: JSON) {
+export async function setICE(data: any) {
   const iceRef = doc(db, auth.currentUser?.uid + "/ice")
   setDoc(iceRef, data)
 }
 
-export async function setAllergy(data: JSON) {
+export async function setAllergy(data: any) {
   const allergyRef = doc(db, auth.currentUser?.uid + "/allergy")
   setDoc(allergyRef, data)
 }
