@@ -1,7 +1,6 @@
 import React, { useContext , useRef, useState } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar , IonItem, IonLabel, IonInput , IonCheckbox , IonButton } from '@ionic/react';
 import './Tab1.css';
-import { useAuth } from '../contexts/AuthContext';
 import {auth} from "../firebase" ;
 import { useHistory } from 'react-router';
 // import {signup} from "../contexts/AuthContext"
@@ -9,7 +8,7 @@ import {createUserWithEmailAndPassword} from "firebase/auth";
 
 const Signup: React.FC = () => {
 // Import the signup function we defined in AuthContext.js
-  const user = useAuth();
+  // const user = useAuth();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const createAccount = async () => {

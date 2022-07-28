@@ -17,6 +17,8 @@ import Tab3 from './pages/Tab3';
 import Details from './pages/Details';
 import Login from "./pages/Login";
 import Register from './pages/Register';
+import { Provider } from 'react-redux';
+import store from './pages/storage';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -52,6 +54,7 @@ import General from './pages/resource-pages/General';
 
 const App: React.FC = () => (
   <IonApp>
+     <Provider store={store}>
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
@@ -74,7 +77,8 @@ const App: React.FC = () => (
   
         </IonTabBar>
       </IonTabs>
-    </IonReactRouter>
+    </IonReactRouter> 
+</Provider>
   </IonApp>
 );
 

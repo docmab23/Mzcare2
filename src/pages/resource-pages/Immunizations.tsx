@@ -1,89 +1,78 @@
 import {
-	IonContent,
-	IonHeader,
-	IonPage,
-	IonTitle,
-	IonToolbar,
-	IonInput,
-	IonButton,
-	IonLoading,
-	IonText,
-	IonLabel,
-	IonItem,
-	IonFooter,
-    IonCard,
-    IonCardSubtitle,
-    IonCardContent,
-    IonCardHeader,
-    IonCardTitle,
-    IonIcon
-	
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonInput,
+  IonButton,
+  IonLoading,
+  IonText,
+  IonLabel,
+  IonItem,
+  IonFooter,
+  IonCard,
+  IonCardSubtitle,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+  IonIcon,
 } from "@ionic/react";
 
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-// import { loginUser, reAuthenticate, updateUserPassword } from ".../firebase"
-// import { toast } from ".../toast";
-// import { setUserState } from "../redux/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FormTopBar from "../../components/FormTopBar";
-import {IoIosAddCircleOutline} from "react-icons/io" ;
+import { IoIosAddCircleOutline } from "react-icons/io";
 
 const Immunizations: React.FC = () => {
+  const history = useHistory();
+  const vaccineName = useSelector((state: any = {}) => state.immunization.vaccine);
+  console.log(vaccineName)
 
-    const history = useHistory();
-  
-    const routeChange = () =>{ 
-      let path = `/immune-form`; 
-      history.push(path);
-    }
+  const routeChange = () => {
+    let path = `/immune-form`;
+    history.push(path);
+  };
 
-	return (
-		<IonPage>
+  return (
+    <IonPage>
       <IonContent className="ion-padding">
-      <FormTopBar/>
-      <p>      </p>
-     <h1>Immunizations</h1>
-     <IonCard>
+        <FormTopBar />
+        <p> </p>
+        <h1>Immunizations</h1>
+        <IonCard>
           <IonCardHeader>
             <IonCardTitle>HPV</IonCardTitle>
-           
           </IonCardHeader>
-         
+
           <IonCardContent>
-          <IonCardSubtitle>Administred Date: 05/12/13</IonCardSubtitle>
+            <IonCardSubtitle>Administred Date: 05/12/13</IonCardSubtitle>
             <IonCardSubtitle>Expiry date: 05/12/21</IonCardSubtitle>
-      </IonCardContent>
+          </IonCardContent>
         </IonCard>
         <IonCard>
           <IonCardHeader>
-            <IonCardTitle>Tetanus</IonCardTitle>
-           
+            <IonCardTitle>{vaccineName}</IonCardTitle>
           </IonCardHeader>
-         
+
           <IonCardContent>
-          <IonCardSubtitle>Administred Date: 05/12/13</IonCardSubtitle>
+            <IonCardSubtitle>Administred Date: 05/12/13</IonCardSubtitle>
             <IonCardSubtitle>Expiry date: 05/12/21</IonCardSubtitle>
-      </IonCardContent>
+          </IonCardContent>
         </IonCard>
-         
-	<IonItem>
-	<IoIosAddCircleOutline height="40%"
-      width="40%"
-      onClick={routeChange}
-    />
-	</IonItem>
 
-	
+        <IonItem>
+          <IoIosAddCircleOutline
+            height="40%"
+            width="40%"
+            onClick={routeChange}
+          />
+        </IonItem>
       </IonContent>
-	  <IonFooter>
-	
-
-
-	  </IonFooter>
+      <IonFooter></IonFooter>
     </IonPage>
-
-	);
+  );
 };
 
 export default Immunizations;
