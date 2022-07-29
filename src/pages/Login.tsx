@@ -14,16 +14,17 @@ import {
 
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { loginUser } from "../firebase";
+import { auth, loginUser } from "../firebase";
 import { toast } from "../toast";
 // import { setUserState } from "../redux/actions";
 import { useDispatch } from "react-redux";
 import FormTopBar from "../components/FormTopBar";
+import  { changeUser } from "./auth";
 
 const Login: React.FC = () => {
 	const [busy, setBusy] = useState<boolean>(false);
 	const history = useHistory();
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
@@ -31,8 +32,7 @@ const Login: React.FC = () => {
 		setBusy(true);
 		const res: any = await loginUser(email, password);
 		if (res) {
-			console.log("login res", res);
-			// dispatch(setUserState(res.user.email));
+      dispatch(changeUser(auth.currentUser!.uid))
 			history.replace("/home");
 			toast("You have logged in");
 		}

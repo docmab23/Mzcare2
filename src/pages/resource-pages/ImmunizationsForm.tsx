@@ -16,13 +16,9 @@ import {
 
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-// import { loginUser, reAuthenticate, updateUserPassword } from ".../firebase"
-// import { toast } from ".../toast";
-// import { setUserState } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import FormTopBar from "../../components/FormTopBar";
-import { setImmunization } from "../database";
-import { addVaccine } from '../database';
+import { addVaccine, setImmunization } from "../database";
 
 const ImmunizationsForm: React.FC = () => {
 
@@ -31,7 +27,6 @@ const ImmunizationsForm: React.FC = () => {
   const [expiry, setExpiry] = useState("");
   const [busy, setBusy] = useState<boolean>(false);
   const history = useHistory();
-  const vaccineNames = useSelector((state: any = {}) => state.immunization.vaccine);
   const dispatch = useDispatch();
   
 
@@ -44,8 +39,7 @@ const ImmunizationsForm: React.FC = () => {
 		expiryDate: expiry
 	}
 	submitVaccineData[vaccineName] = vaccineData;
-	dispatch(addVaccine(vaccineName))
-	console.log(vaccineNames)
+	dispatch(addVaccine(vaccineName));
 	await setImmunization(submitVaccineData);
 	setBusy(false);
 	history.replace("/immune");

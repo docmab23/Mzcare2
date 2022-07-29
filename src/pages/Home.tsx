@@ -11,7 +11,7 @@ import {
   IonTabs,
   IonRouterOutlet,
 } from "@ionic/react";
-import { Route } from "react-router-dom";
+import { Route, useHistory } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
@@ -29,20 +29,17 @@ import Tab1 from "./Tab1";
 import Allergy from "./resource-pages/Allergy";
 import Ice from "./resource-pages/Ice";
 import Immunizations from "./resource-pages/Immunizations";
+import { useDispatch, useSelector } from "react-redux";
 
 const Home: React.FC = () => {
   const [user, setUser] = useState({ loggedIn: false });
-  const [error, setError] = useState("");
+  const [error, setError] = useState([]);
   const [busy, setBusy] = useState<boolean>(false);
-  /* useEffect(() => {
-      const unsubscribe = onAuthStateChange(setUser);
-      return () => {
-        unsubscribe();
-      }
-    }, []);  */
+  const history = useHistory();
+  const dispatch = useDispatch()
 
-  function hello() {
-    console.log("hello");
+  async function goImmunization() {
+    history.replace("/immune");
   }
 
   return (
@@ -70,7 +67,7 @@ const Home: React.FC = () => {
           </IonItem>
 
           <IonItem>
-            <IonButton className="rbutton" routerLink="/immune">
+            <IonButton className="rbutton" onClick={goImmunization}>
               {" "}
               Immunizations{" "}
             </IonButton>
@@ -84,12 +81,12 @@ const Home: React.FC = () => {
           </IonItem>
         </div>
         <IonReactRouter>
-          <IonTabs>
+          {/* <IonTabs>
             <IonRouterOutlet>
               <Route path="/" component={Home} exact />
-            </IonRouterOutlet>
+            </IonRouterOutlet> */}
 
-            <IonTabBar slot="bottom">
+            {/* <IonTabBar slot="bottom">
               <IonTabButton tab="EM Profile" href="/home/ice">
                 <IonIcon src={em}>EM</IonIcon>
               </IonTabButton>
@@ -100,7 +97,7 @@ const Home: React.FC = () => {
                 <IonIcon src={sett}>Settings</IonIcon>
               </IonTabButton>
             </IonTabBar>
-          </IonTabs>
+          </IonTabs> */}
         </IonReactRouter>
       </IonContent>
     </IonPage>

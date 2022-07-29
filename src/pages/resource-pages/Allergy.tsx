@@ -35,9 +35,6 @@ import {setAllergy} from "../database" ;
 
 const Allergy: React.FC = () => {
 
-  
-  
-
 	const modal = useRef<HTMLIonModalElement>(null);
 	const input = useRef<HTMLIonInputElement>(null);
 	const [status,setStatus] = useState(false)

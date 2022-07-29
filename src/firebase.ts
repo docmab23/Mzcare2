@@ -1,10 +1,11 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
+import { createSlice } from '@reduxjs/toolkit'
 import "firebase/auth";
 import { getAuth } from "firebase/auth";
 import { getFirestore, setDoc } from "firebase/firestore";
 import firebase from "firebase/app";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { toast } from "./toast";
 import {
   createUserWithEmailAndPassword,
@@ -19,6 +20,7 @@ import {
   deleteUser,
   onAuthStateChanged,
 } from "firebase/auth";
+import { useDispatch } from "react-redux";
 
 const app = initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -36,17 +38,31 @@ export const db = getFirestore(app);
 export default app;
 
 export function getCurrentUser() {
-  return new Promise((resolve, reject) => {
-    const unsubscribe = auth.onAuthStateChanged(function (user) {
-      if (user) {
-        resolve(user);
-      } else {
-        resolve(null);
-      }
-      unsubscribe();
-    });
-  });
+  return auth.currentUser!;
 }
+
+export async function GetImmunizations() {
+  const user = auth.currentUser!
+  console.log(user)
+  const immunizationDataRef = doc(db,  auth.currentUser?.uid + "/immunization")
+  console.log(auth.currentUser?.uid)
+  const vaccines: any[] = [];
+  await getDoc(immunizationDataRef).then((docSnap) => {
+    if (docSnap.exists()) {
+      const immunizationData = docSnap.data();
+      for (let key in immunizationData) {
+        vaccines.push(immunizationData[key])
+      }
+      console.log(vaccines)
+      return "ok";
+    } else {
+      return "pk";
+    }
+  })
+  return "l";
+}
+
+export const ok = GetImmunizations();
 
 export function logoutUser() {
   return auth.signOut();
