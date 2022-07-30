@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { auth, db } from "../firebase";
-import { deleteDoc, doc } from "firebase/firestore";
-import { getStorage, ref, deleteObject } from "firebase/storage";
+import { auth } from "../firebase";
 import {
   createUserWithEmailAndPassword,
   signOut,
@@ -25,7 +23,6 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
-  const storage = getStorage();
 
   function signup(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
