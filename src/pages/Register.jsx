@@ -18,7 +18,7 @@ import { registerUser } from "../firebase";
 import "./Register.css";
 import FormTopBar from "../components/FormTopBar";
 
-const Register: React.FC = () => {
+function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setCPassword] = useState("");
@@ -55,21 +55,21 @@ const Register: React.FC = () => {
             <IonLabel position="floating">Email</IonLabel>
             <IonInput
               type="email"
-              onIonChange={(e: any) => setUsername(e.target.value)}
+              onIonChange={(e) => setUsername(e.target.value)}
             />
           </IonItem>
           <IonItem lines="none" className="form-border">
             <IonLabel position="floating">Password</IonLabel>
             <IonInput
               type="password"
-              onIonChange={(e: any) => setPassword(e.target.value)}
+              onIonChange={(e) => setPassword(e.target.value)}
             />
           </IonItem>
           <IonItem lines="none" className="form-border">
             <IonLabel position="floating">Confirm Password</IonLabel>
             <IonInput
               type="password"
-              onIonChange={(e: any) => setCPassword(e.target.value)}
+              onIonChange={(e) => setCPassword(e.target.value)}
             />
           </IonItem>
           <div className="padding-lign">
