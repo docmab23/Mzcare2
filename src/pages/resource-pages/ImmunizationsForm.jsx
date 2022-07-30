@@ -21,7 +21,7 @@ import { Link, useHistory } from "react-router-dom";
 // import { setUserState } from "../redux/actions";
 import { useDispatch } from "react-redux";
 import FormTopBar from "../../components/FormTopBar";
-// import { setImmunization } from "../../firebase";
+import { setImmunization } from "../database";
 
 function ImmunizationsForm() {
 
@@ -31,7 +31,7 @@ function ImmunizationsForm() {
   const [busy, setBusy] = useState(false);
   const history = useHistory();
 
-  /*async function createImmunization() {
+  async function createImmunization() {
 	console.log("okkk")
 	setBusy(true);
 	const submitVaccineData = {}
@@ -42,11 +42,11 @@ function ImmunizationsForm() {
 	}
 	submitVaccineData[vaccineName] = vaccineData;
 	console.log("ok")
-	await setImmunization(submitVaccineData);
+	await setImmunization(submitVaccineData)
 	setBusy(false);
 	history.push("/immune");
 }
-*/
+
 	return (
 		<IonPage>
       <IonContent className="ion-padding">
@@ -74,7 +74,7 @@ function ImmunizationsForm() {
     </IonItem>
 	 <p></p>
     <div>
-	<IonButton class="form-button" expand="block" >Submit</IonButton>
+	<IonButton class="form-button" expand="block" onClick={createImmunization}>Submit</IonButton>
 	</div>
 	</form>
      

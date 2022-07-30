@@ -18,17 +18,43 @@ export function useDatabase() {
 
 export function DatabaseProvider({ children }) {
   const { currentUser } = useAuth();
+  const [immunizationJson, setImmunizationJson] = useState("")
+  const [immunizationList, setImmunizationList] = useState([])
+  
 
   useEffect(() => {
     if (currentUser != null) {
-        
+        getData();
     }
   }, [currentUser]);
 
 
+  function getData() {
+    getImmunizations();
+  }
+
+  function getImmunizations() {
+    const immunizationRef = doc(db, currentUser.uid + "/immunization");
+    const immuneList = []
+    getDoc(immunizationRef).then((docSnap) => {
+        if (docSnap.exists()) {
+            const immunizationData = docSnap.data();
+            for (let key in immunizationData) {
+                immuneList.push(key)
+            }
+            setImmunizationJson(immunizationData);
+            setImmunizationList(immuneList);
+        }
+    })
+  }
+
+
 
   const value = {
-   
+   immunizationJson,
+   setImmunizationJson,
+   immunizationList,
+   setImmunizationList
   };
 
   return (

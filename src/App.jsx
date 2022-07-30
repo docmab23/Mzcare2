@@ -52,12 +52,14 @@ import General from './pages/resource-pages/General';
 import { AuthProvider } from './contexts/AuthContext';
 import FootNavbar from './components/Foot-Navbar';
 import Em from './pages/Em';
+import { DatabaseProvider } from './contexts/DatabaseContext';
 
 
 function App() {
   return (
   <IonApp>
     <AuthProvider>
+      <DatabaseProvider>
      <Provider store={store}>
     <IonReactRouter>
       <IonTabs>
@@ -84,6 +86,7 @@ function App() {
       </IonTabs>
     </IonReactRouter> 
 </Provider>
+</DatabaseProvider>
 </AuthProvider>
   </IonApp>
   )

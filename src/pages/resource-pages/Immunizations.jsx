@@ -21,17 +21,14 @@ import {
 
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import FormTopBar from "../../components/FormTopBar";
-import { IoIosAddCircleOutline } from "react-icons/io";
-import { doc, getDoc } from "firebase/firestore";
-import { auth, db } from "../../firebase";
-import { ok } from "assert";
+import { useDatabase } from "../../contexts/DatabaseContext";
 
-function Immunizations () {
+function Immunizations() {
   const history = useHistory();
-  const vaccineName = useSelector((state= {}) => state.immunization.vaccine);
-  alert(vaccineName);
+  const { immunizationJson, immunizationList } = useDatabase();
+  // alert(vaccineName);
   const routeChange = () => {
     let path = `/immune-form`;
     history.push(path);
@@ -41,41 +38,42 @@ function Immunizations () {
     <IonPage>
       <IonContent className="ion-padding">
         <FormTopBar />
-        <p> </p>
         <h1>Immunizations</h1>
-        <IonCard>
-          <IonCardHeader>
-            <IonCardTitle>HPV</IonCardTitle>
-          </IonCardHeader>
-
-          <IonCardContent>
-            <IonCardSubtitle>Administred Date: 05/12/13</IonCardSubtitle>
-            <IonCardSubtitle>Expiry date: 05/12/21</IonCardSubtitle>
-          </IonCardContent>
-        </IonCard>
-        <IonCard>
-          <IonCardHeader>
-            <IonCardTitle>k</IonCardTitle>
-          </IonCardHeader>
-
-          <IonCardContent>
-            <IonCardSubtitle>Administered Date: 05/12/13</IonCardSubtitle>
-            <IonCardSubtitle>Expiry date: 05/12/21</IonCardSubtitle>
-          </IonCardContent>
-        </IonCard>
-
-        <IonItem>
-          <IoIosAddCircleOutline
-            height="40%"
-            width="40%"
-            onClick={routeChange}
-          />
-        </IonItem>
-        <IonButton className="back-button" routerLink="/home">Back</IonButton>
+        {immunizationList.map((item, pos) => {
+          return (
+            <IonCard key={pos}>
+              <IonCardHeader>
+                <IonCardTitle>
+                  {immunizationJson[item]["vaccineName"]}
+                </IonCardTitle>
+              </IonCardHeader>
+              <IonCardContent>
+                <IonCardSubtitle>
+                  Administred Date: {immunizationJson[item]["administerDate"]}
+                </IonCardSubtitle>
+                <IonCardSubtitle>
+                  Expiry date: {immunizationJson[item]["expiryDate"]}
+                </IonCardSubtitle>
+              </IonCardContent>
+            </IonCard>
+          );
+        })}
       </IonContent>
-      <IonFooter></IonFooter>
     </IonPage>
   );
-};
+
+  // <IonItem>
+  //   <IoIosAddCircleOutline
+  //     height="40%"
+  //     width="40%"
+  //     onClick={routeChange}
+  //   />
+  // </IonItem>
+  //       <IonButton className="back-button" routerLink="/home">Back</IonButton>
+  //     </IonContent>
+  //     <IonFooter></IonFooter>
+  //   </IonPage>
+  // );
+}
 
 export default Immunizations;
