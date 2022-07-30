@@ -1,25 +1,39 @@
 import React, { useContext, useEffect, useState } from "react";
-import { auth } from "../firebase";
-import firebase from "firebase/app" ; 
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
+import { db } from "../firebase";
+import { useAuth } from "./AuthContext";
 
 
-let immune_ref = firebase.database().ref("Immunizations");
+const DatabaseContext = React.createContext();
 
+export function useDatabase() {
+  return useContext(DatabaseContext);
+}
 
-useEffect(() => {
-    function getData() {
+export function DatabaseProvider({ children }) {
+  const { currentUser } = useAuth();
 
-
-        let immuneRef = firebase.database().ref('arts/')
-
-        return immuneRef.once('value', (snapshot) => {
-
-            const data = snapshot.val()
-
-            dispatch({type: 'GET_ARTS', payload: data})
-        })
-
+  useEffect(() => {
+    if (currentUser != null) {
+        
     }
-    getData()
+  }, [currentUser]);
 
-},[dispatch])
+
+
+  const value = {
+   
+  };
+
+  return (
+    <DatabaseContext.Provider value={value}>
+      {children}
+    </DatabaseContext.Provider>
+  );
+}
