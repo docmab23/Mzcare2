@@ -22,7 +22,7 @@ import FormTopBar from "../components/FormTopBar";
 import  { changeUser } from "./auth";
 
 function Login() {
-	const [busy, setBusy] = useState<boolean>(false);
+	const [busy, setBusy] = useState(false);
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const [email, setEmail] = useState("");

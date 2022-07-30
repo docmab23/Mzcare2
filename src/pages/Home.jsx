@@ -34,7 +34,7 @@ import { useDispatch, useSelector } from "react-redux";
 function Home() {
   const [user, setUser] = useState({ loggedIn: false });
   const [error, setError] = useState([]);
-  const [busy, setBusy] = useState<boolean>(false);
+  const [busy, setBusy] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch()
 
