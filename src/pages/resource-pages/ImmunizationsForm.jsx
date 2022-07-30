@@ -16,35 +16,37 @@ import {
 
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+// import { loginUser, reAuthenticate, updateUserPassword } from ".../firebase"
+// import { toast } from ".../toast";
+// import { setUserState } from "../redux/actions";
+import { useDispatch } from "react-redux";
 import FormTopBar from "../../components/FormTopBar";
-import { addVaccine, setImmunization } from "../database";
+// import { setImmunization } from "../../firebase";
 
-const ImmunizationsForm: React.FC = () => {
+function ImmunizationsForm() {
 
-	const [vaccineName, setVaccineName] = useState("");
+  const [vaccineName, setVaccineName] = useState("");
   const [administer, setAdminister] = useState("");
   const [expiry, setExpiry] = useState("");
-  const [busy, setBusy] = useState<boolean>(false);
+  const [busy, setBusy] = useState(false);
   const history = useHistory();
-  const dispatch = useDispatch();
-  
 
-  async function createImmunization() {
+  /*async function createImmunization() {
+	console.log("okkk")
 	setBusy(true);
-	const submitVaccineData: any = {}
+	const submitVaccineData = {}
 	const vaccineData = {
 		vaccineName: vaccineName,
 		administerDate: administer,
 		expiryDate: expiry
 	}
 	submitVaccineData[vaccineName] = vaccineData;
-	dispatch(addVaccine(vaccineName));
+	console.log("ok")
 	await setImmunization(submitVaccineData);
 	setBusy(false);
-	history.replace("/immune");
+	history.push("/immune");
 }
-
+*/
 	return (
 		<IonPage>
       <IonContent className="ion-padding">
@@ -58,21 +60,21 @@ const ImmunizationsForm: React.FC = () => {
     <IonItem lines="full">
       <IonLabel position="floating">Vaccination Name</IonLabel>
 	  <p></p>
-      <IonInput type="text"  onIonChange={(e: any) => setVaccineName(e.target.value)} required></IonInput>
+      <IonInput type="text"  onIonChange={(e) => setVaccineName(e.target.value)} required></IonInput>
     </IonItem>
     <IonItem lines="full">
       <IonLabel position="floating">Administred Date</IonLabel>
 	  <p></p>
-      <IonInput type="date" onIonChange={(e: any) => setAdminister(e.target.value)}></IonInput>
+      <IonInput type="date" onIonChange={(e) => setAdminister(e.target.value)}></IonInput>
     </IonItem>
 	<IonItem lines="full">
       <IonLabel position="floating">Expiry Date</IonLabel>
 	  <p></p>
-      <IonInput type="date" onIonChange={(e: any) => setExpiry(e.target.value)}></IonInput>
+      <IonInput type="date" onIonChange={(e) => setExpiry(e.target.value)}></IonInput>
     </IonItem>
 	 <p></p>
     <div>
-	<IonButton class="form-button" expand="block" onClick={createImmunization}>Submit</IonButton>
+	<IonButton class="form-button" expand="block" >Submit</IonButton>
 	</div>
 	</form>
      

@@ -31,7 +31,7 @@ import { ok } from "assert";
 function Immunizations () {
   const history = useHistory();
   const vaccineName = useSelector((state= {}) => state.immunization.vaccine);
-  console.log(vaccineName)
+  alert(vaccineName);
   const routeChange = () => {
     let path = `/immune-form`;
     history.push(path);

@@ -50,6 +50,8 @@ import ImmunizationsForm from './pages/resource-pages/ImmunizationsForm';
 import Ice from './pages/resource-pages/Ice';
 import General from './pages/resource-pages/General';
 import { AuthProvider } from './contexts/AuthContext';
+import FootNavbar from './components/Foot-Navbar';
+import Em from './pages/Em';
 
 
 function App() {
@@ -61,9 +63,11 @@ function App() {
       <IonTabs>
         <IonRouterOutlet>
           <Route path="/login" component={Login} />
+         
           <Route path="/tab1" component={Tab1} />
           <Route path="/register" component={Register} />
-          <Route path="/home" component={Home} />
+          <Route path="/tabs" component={FootNavbar}/>
+          <Route path="/em" component={Em} />
           <Route path="/changeEmail" component={ChangeEmail} />
           <Route path="/changePassword" component={ChangePassword} />
           <Route path="/forgotPassword" component={ForgotPassword} />

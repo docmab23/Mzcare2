@@ -30,6 +30,7 @@ import Allergy from "./resource-pages/Allergy";
 import Ice from "./resource-pages/Ice";
 import Immunizations from "./resource-pages/Immunizations";
 import { useDispatch, useSelector } from "react-redux";
+import FootNavbar from "../components/Foot-Navbar";
 
 function Home() {
   const [user, setUser] = useState({ loggedIn: false });
@@ -80,25 +81,6 @@ function Home() {
             </IonButton>
           </IonItem>
         </div>
-        <IonReactRouter>
-          {/* <IonTabs>
-            <IonRouterOutlet>
-              <Route path="/" component={Home} exact />
-            </IonRouterOutlet> */}
-
-            {/* <IonTabBar slot="bottom">
-              <IonTabButton tab="EM Profile" href="/home/ice">
-                <IonIcon src={em}>EM</IonIcon>
-              </IonTabButton>
-              <IonTabButton tab="Home" href="/">
-                <IonIcon src={hicon}>Home</IonIcon>
-              </IonTabButton>
-              <IonTabButton tab="Settings" href="/home">
-                <IonIcon src={sett}>Settings</IonIcon>
-              </IonTabButton>
-            </IonTabBar>
-          </IonTabs> */}
-        </IonReactRouter>
       </IonContent>
     </IonPage>
   );

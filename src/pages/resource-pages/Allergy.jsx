@@ -33,20 +33,20 @@ import {IoIosAddCircleOutline} from "react-icons/io" ;
 import {setAllergy} from "../database" ;
 
 
-const Allergy: React.FC = () => {
+function Allergy() {
 
-	const modal = useRef<HTMLIonModalElement>(null);
-	const input = useRef<HTMLIonInputElement>(null);
+	const modal = useRef(null);
+	const input = useRef(null);
 	const [status,setStatus] = useState(false)
 	const [allergyName, setAllergyName] = useState("");
 	const [date_, setDate] = useState("");
-	const [busy, setBusy] = useState<boolean>(false);
+	const [busy, setBusy] = useState(false);
 	const history = useHistory();
   
 	async function createallergy() {
 	  console.log("okkk")
 	  setBusy(true);
-	  const submitAllergyData: any = {}
+	  const submitAllergyData = {}
 	  const allergyData = {
 		  allergyName: allergyName,
 		  administerDate: date_,
@@ -59,9 +59,9 @@ const Allergy: React.FC = () => {
 	  setStatus(!status);
 	}
   
-	function confirm() {
+	/*function confirm() {
 	  modal.current?.dismiss(input.current?.value, 'confirm');
-	}
+	}*/
 
 	function changestatus() {
 		setStatus(!status);
@@ -115,11 +115,11 @@ const Allergy: React.FC = () => {
           <IonContent className="ion-padding">
             <IonItem>
               <IonLabel position="stacked">Enter Allergy</IonLabel>
-              <IonInput ref={input} type="text" onIonChange={(e: any) => setAllergyName(e.target.value)} placeholder="Allergy source" />
+              <IonInput ref={input} type="text" onIonChange={(e) => setAllergyName(e.target.value)} placeholder="Allergy source" />
             </IonItem>
 			<IonItem>
               <IonLabel position="stacked">Enter Onset date</IonLabel>
-              <IonInput ref={input} type="date"  onIonChange={(e: any) => setDate(e.target.value)}placeholder="Onset Date" />
+              <IonInput ref={input} type="date"  onIonChange={(e) => setDate(e.target.value)}placeholder="Onset Date" />
             </IonItem>
 		</IonContent>
         
