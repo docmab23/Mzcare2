@@ -14,17 +14,18 @@ import {
   
   import React, { useState } from "react";
   import { Link, useHistory } from "react-router-dom";
-  import { resetPassword } from "../firebase";
   import { toast } from "../toast";
   // import { setUserState } from "../redux/actions";
   import { useDispatch } from "react-redux";
   import FormTopBar from "../components/FormTopBar";
+  import { useAuth } from "../contexts/AuthContext";
   
   function ForgotPassword () {
     const [busy, setBusy] = useState<boolean>(false);
     const history = useHistory();
     // const dispatch = useDispatch();
     const [email, setEmail] = useState("");
+    const {resetPassword} = useAuth();
   
     async function forgotPassword() {
       setBusy(true);

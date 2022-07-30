@@ -20,6 +20,7 @@ import { toast } from "../toast";
 import { useDispatch } from "react-redux";
 import FormTopBar from "../components/FormTopBar";
 import  { changeUser } from "./auth";
+import { useAuth } from "../contexts/AuthContext";
 
 function Login() {
 	const [busy, setBusy] = useState(false);
@@ -27,15 +28,21 @@ function Login() {
 	const dispatch = useDispatch();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+  const { login } = useAuth();
+  
 
-	async function login() {
-		setBusy(true);
-		const res = await loginUser(email, password);
+	async function loginUser() {
+    setBusy(true);
+    try {
+      const res = await login(email, password);
 		if (res) {
       dispatch(changeUser(auth.currentUser.uid))
 			history.replace("/home");
 			toast("You have logged in");
 		}
+    } catch (e) {
+      toast (e)
+    }
 		setBusy(false);
 	}
 
@@ -64,7 +71,7 @@ function Login() {
             />
           </IonItem>
           <div className="padding-lign">
-            <IonButton class="form-button" onClick={login}>
+            <IonButton class="form-button" onClick={loginUser}>
               SIGN IN
             </IonButton>
           </div>

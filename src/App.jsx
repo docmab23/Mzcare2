@@ -40,7 +40,6 @@ import './theme/variables.css';
 
 /* Global CSS */
 import './global.css';
-import Signup from './pages/Signup';
 import ChangeEmail from './pages/ChangeEmail';
 import ChangePassword from './pages/ChangePassword';
 import ForgotPassword from './pages/ForgotPassword';
@@ -50,11 +49,13 @@ import Immunizations from './pages/resource-pages/Immunizations';
 import ImmunizationsForm from './pages/resource-pages/ImmunizationsForm';
 import Ice from './pages/resource-pages/Ice';
 import General from './pages/resource-pages/General';
+import { AuthProvider } from './contexts/AuthContext';
 
 
 function App() {
   return (
   <IonApp>
+    <AuthProvider>
      <Provider store={store}>
     <IonReactRouter>
       <IonTabs>
@@ -62,7 +63,6 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/tab1" component={Tab1} />
           <Route path="/register" component={Register} />
-          <Route path="/signup" component={Signup} />
           <Route path="/home" component={Home} />
           <Route path="/changeEmail" component={ChangeEmail} />
           <Route path="/changePassword" component={ChangePassword} />
@@ -80,6 +80,7 @@ function App() {
       </IonTabs>
     </IonReactRouter> 
 </Provider>
+</AuthProvider>
   </IonApp>
   )
 };

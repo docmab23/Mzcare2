@@ -124,7 +124,7 @@ const Allergy: React.FC = () => {
 		</IonContent>
         
         </IonModal>
-	
+        <IonButton className="back-button" routerLink="/home">Back</IonButton>
 	
       </IonContent>
 	  <IonFooter>

@@ -14,11 +14,11 @@ import {
 
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { loginUser, reAuthenticate, updateUserPassword } from "../firebase";
 import { toast } from "../toast";
 // import { setUserState } from "../redux/actions";
 import { useDispatch } from "react-redux";
 import FormTopBar from "../components/FormTopBar";
+import { useAuth } from "../contexts/AuthContext";
 
 function ChangePassword () {
 	const [busy, setBusy] = useState<boolean>(false);
@@ -27,10 +27,10 @@ function ChangePassword () {
 	const [oldPassword, setOldPassword] = useState("");
 	const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const {reAuthenticate, updateUserPassword} = useAuth();
 
 	async function changePassword() {
 		setBusy(true);
-
     if (password !== confirmPassword) {
       toast("Passwords do not match")
       return;

@@ -2,13 +2,13 @@ import { createSlice } from '@reduxjs/toolkit'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { auth, db, getCurrentUser, ok } from '../firebase'
+import { auth, db } from '../firebase'
 import { currentUserSlice } from './auth';
 
 export const immunizationSlice = createSlice({
   name: 'immunization',
   initialState: {
-    vaccine: ok
+    vaccine: "s"
   },
   reducers: {
     addVaccine:(state,action)=>{

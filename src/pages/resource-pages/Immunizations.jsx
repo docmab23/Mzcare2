@@ -71,6 +71,7 @@ function Immunizations () {
             onClick={routeChange}
           />
         </IonItem>
+        <IonButton className="back-button" routerLink="/home">Back</IonButton>
       </IonContent>
       <IonFooter></IonFooter>
     </IonPage>

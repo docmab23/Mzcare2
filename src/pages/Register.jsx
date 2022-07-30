@@ -17,26 +17,33 @@ import { toast } from "../toast";
 import { registerUser } from "../firebase";
 import "./Register.css";
 import FormTopBar from "../components/FormTopBar";
+import { useAuth } from "../contexts/AuthContext";
 
 function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setCPassword] = useState("");
   const [busy, setBusy] = useState(false);
+  const {signup} = useAuth();
 
   async function register() {
     // validation
     setBusy(true);
-    if (password !== cpassword) {
-      return toast("Passwords do not match");
-    }
-    if (username.trim() === "" || password.trim() === "") {
-      return toast("Username and password are required");
-    }
-
-    const res = await registerUser(username, password);
-    if (res) {
-      toast("You have registered successfully");
+    try {
+      if (password !== cpassword) {
+        return toast("Passwords do not match");
+      }
+      if (username.trim() === "" || password.trim() === "") {
+        return toast("Username and password are required");
+      }
+  
+      const res = await signup(username, password);
+      if (res) {
+        toast("You have registered successfully");
+      }
+      
+    } catch (e) {
+      toast(e);
     }
     setBusy(false);
   }

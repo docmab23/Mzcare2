@@ -14,11 +14,12 @@ import {
 
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { loginUser, reAuthenticate, updateUserEmail } from "../firebase";
 import { toast } from "../toast";
 // import { setUserState } from "../redux/actions";
 import { useDispatch } from "react-redux";
 import FormTopBar from "../components/FormTopBar";
+import { useAuth } from "../contexts/AuthContext";
+
 
 function ChangeEmail ()  {
   const [busy, setBusy] = useState<boolean>(false);
@@ -26,6 +27,7 @@ function ChangeEmail ()  {
   // const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {reAuthenticate, updateUserEmail} = useAuth();
 
   async function changeEmail() {
     setBusy(true);
