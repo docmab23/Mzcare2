@@ -20,7 +20,7 @@ import { toast } from "../toast";
 import { useDispatch } from "react-redux";
 import FormTopBar from "../components/FormTopBar";
 
-const ChangeEmail: React.FC = () => {
+function ChangeEmail ()  {
   const [busy, setBusy] = useState<boolean>(false);
   const history = useHistory();
   // const dispatch = useDispatch();
@@ -52,14 +52,14 @@ const ChangeEmail: React.FC = () => {
             <IonLabel position="floating">Password</IonLabel>
             <IonInput
               type="password"
-              onIonChange={(e: any) => setPassword(e.target.value)}
+              onIonChange={(e) => setPassword(e.target.value)}
             />
           </IonItem>
           <IonItem lines="none" className="form-border">
             <IonLabel position="floating">New Email</IonLabel>
             <IonInput
               type="email"
-              onIonChange={(e: any) => setEmail(e.target.value)}
+              onIonChange={(e) => setEmail(e.target.value)}
             />
           </IonItem>
           <div className="padding-lign">

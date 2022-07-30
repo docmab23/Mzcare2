@@ -20,7 +20,7 @@ import {
   import { useDispatch } from "react-redux";
   import FormTopBar from "../components/FormTopBar";
   
-  const ForgotPassword: React.FC = () => {
+  function ForgotPassword () {
     const [busy, setBusy] = useState<boolean>(false);
     const history = useHistory();
     // const dispatch = useDispatch();
@@ -50,7 +50,7 @@ import {
               <IonLabel position="floating">Email</IonLabel>
               <IonInput
                 type="email"
-                onIonChange={(e: any) => setEmail(e.target.value)}
+                onIonChange={(e) => setEmail(e.target.value)}
               />
             </IonItem>
             <div className="padding-lign">

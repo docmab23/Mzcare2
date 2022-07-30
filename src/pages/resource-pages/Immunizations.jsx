@@ -28,9 +28,9 @@ import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { ok } from "assert";
 
-const Immunizations: React.FC = () => {
+function Immunizations () {
   const history = useHistory();
-  const vaccineName = useSelector((state: any = {}) => state.immunization.vaccine);
+  const vaccineName = useSelector((state= {}) => state.immunization.vaccine);
   console.log(vaccineName)
   const routeChange = () => {
     let path = `/immune-form`;
