@@ -38,15 +38,15 @@ export const db = getFirestore(app);
 export default app;
 
 export function getCurrentUser() {
-  return auth.currentUser!;
+  return auth.currentUser;
 }
 
 export async function GetImmunizations() {
-  const user = auth.currentUser!
+  const user = auth.currentUser
   console.log(user)
   const immunizationDataRef = doc(db,  auth.currentUser?.uid + "/immunization")
   console.log(auth.currentUser?.uid)
-  const vaccines: any[] = [];
+  const vaccines = [];
   await getDoc(immunizationDataRef).then((docSnap) => {
     if (docSnap.exists()) {
       const immunizationData = docSnap.data();
@@ -68,25 +68,25 @@ export function logoutUser() {
   return auth.signOut();
 }
 
-export async function reAuthenticate(password: string) {
+export async function reAuthenticate(password) {
   try {
-	const user = auth.currentUser!
-    const credentials = EmailAuthProvider.credential(user.email!, password);
-    return reauthenticateWithCredential(auth.currentUser!, credentials);
+	const user = auth.currentUser  
+    const credentials = EmailAuthProvider.credential(user.email  , password);
+    return reauthenticateWithCredential(auth.currentUser  , credentials);
   } catch (error) {
-    console.log(error as Error);
+    console.log(error);
     return false;
   }
 }
 
-export async function loginUser(email: string, password: string) {
+export async function loginUser(email, password ) {
   try {
     const res = signInWithEmailAndPassword(auth, email, password);
     return res;
   } catch (error) {
     // 	toast(error.message, 4000);
     // console.log(error as Error);
-    var arr_mes = (error as Error).message;
+    var arr_mes = (error).message;
     console.log(arr_mes);
     if (arr_mes === "Firebase: Error (auth/wrong-password).") {
       console.log("hello");
@@ -98,30 +98,30 @@ export async function loginUser(email: string, password: string) {
   }
 }
 
-export async function resetPassword(email: any) {
+export async function resetPassword(email) {
     return sendPasswordResetEmail(auth, email);
   }
 
-export async function updateUserEmail(email: any) {
-  return updateEmail(auth.currentUser!, email);
+export async function updateUserEmail(email) {
+  return updateEmail(auth.currentUser  , email);
 }
 
 export async function emailVerification() {
-  return sendEmailVerification(auth.currentUser!);
+  return sendEmailVerification(auth.currentUser  );
 }
 
-export async function updateUserPassword(password: any) {
-  return updatePassword(auth.currentUser!, password);
+export async function updateUserPassword(password) {
+  return updatePassword(auth.currentUser  , password);
 }
 
-export async function registerUser(email: string, password: string) {
+export async function registerUser(email, password ) {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
 
     return res;
   } catch (error) {
     // toast(error.message, 4000);
-    var arr_mes = (error as Error).message;
+    var arr_mes = (error).message;
     // console.log(arr_mes);
     if (arr_mes === "Firebase: Error (auth/email-already-in-use).") {
       console.log("hello");

@@ -53,6 +53,7 @@ import General from './pages/resource-pages/General';
 
 
 function App() {
+  return (
   <IonApp>
      <Provider store={store}>
     <IonReactRouter>
@@ -80,6 +81,7 @@ function App() {
     </IonReactRouter> 
 </Provider>
   </IonApp>
+  )
 };
 
 export default App;

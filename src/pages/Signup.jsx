@@ -6,7 +6,7 @@ import { useHistory } from 'react-router';
 // import {signup} from "../contexts/AuthContext"
 import {createUserWithEmailAndPassword} from "firebase/auth";
 
-const Signup: React.FC = () => {
+function Signup() {
 // Import the signup function we defined in AuthContext.js
   // const user = useAuth();
   const emailRef = useRef<HTMLInputElement>(null);
@@ -15,8 +15,8 @@ const Signup: React.FC = () => {
     try {
       await createUserWithEmailAndPassword(
         auth,
-        emailRef.current!.value,
-        passwordRef.current!.value
+        emailRef.current.value,
+        passwordRef.current.value
         
       );
       console.log("created fucker");

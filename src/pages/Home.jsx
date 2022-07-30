@@ -31,7 +31,7 @@ import Ice from "./resource-pages/Ice";
 import Immunizations from "./resource-pages/Immunizations";
 import { useDispatch, useSelector } from "react-redux";
 
-const Home: React.FC = () => {
+function Home() {
   const [user, setUser] = useState({ loggedIn: false });
   const [error, setError] = useState([]);
   const [busy, setBusy] = useState<boolean>(false);

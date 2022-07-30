@@ -21,7 +21,7 @@ import { useDispatch } from "react-redux";
 import FormTopBar from "../components/FormTopBar";
 import  { changeUser } from "./auth";
 
-const Login: React.FC = () => {
+function Login() {
 	const [busy, setBusy] = useState<boolean>(false);
 	const history = useHistory();
 	const dispatch = useDispatch();
@@ -30,9 +30,9 @@ const Login: React.FC = () => {
 
 	async function login() {
 		setBusy(true);
-		const res: any = await loginUser(email, password);
+		const res = await loginUser(email, password);
 		if (res) {
-      dispatch(changeUser(auth.currentUser!.uid))
+      dispatch(changeUser(auth.currentUser.uid))
 			history.replace("/home");
 			toast("You have logged in");
 		}
@@ -53,14 +53,14 @@ const Login: React.FC = () => {
             <IonLabel position="floating">Email</IonLabel>
             <IonInput
               type="email"
-              onIonChange={(e: any) => setEmail(e.target.value)}
+              onIonChange={(e) => setEmail(e.target.value)}
             />
           </IonItem>
           <IonItem lines="none" className="form-border">
             <IonLabel position="floating">Password</IonLabel>
             <IonInput
               type="password"
-              onIonChange={(e: any) => setPassword(e.target.value)}
+              onIonChange={(e) => setPassword(e.target.value)}
             />
           </IonItem>
           <div className="padding-lign">
