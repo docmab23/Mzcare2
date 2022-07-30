@@ -52,7 +52,7 @@ import Ice from './pages/resource-pages/Ice';
 import General from './pages/resource-pages/General';
 
 
-const App: React.FC = () => (
+function App() {
   <IonApp>
      <Provider store={store}>
     <IonReactRouter>
@@ -80,6 +80,6 @@ const App: React.FC = () => (
     </IonReactRouter> 
 </Provider>
   </IonApp>
-);
+};
 
 export default App;
