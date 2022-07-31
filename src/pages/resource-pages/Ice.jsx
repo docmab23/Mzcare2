@@ -43,7 +43,6 @@ function Ice() {
   const [editContact, setEditContact] = useState("");
   const [busy, setBusy] = useState(false);
   const { iceJson, iceList, setICEJson, setICEList } = useDatabase();
-  const [query, setQuery] = useState("");
   const { currentUser } = useAuth();
 
   function changestatus() {
@@ -140,13 +139,6 @@ function Ice() {
         <h1>{"\u00a0\u00a0\u00a0"} </h1>
         <h1>In Case of Emergency</h1>
         {iceList
-          .filter((item) => {
-            if (query === "") return item;
-            else if (
-              iceJson[item]["name"].toLowerCase().includes(query.toLowerCase())
-            )
-              return item;
-          })
           .map((item, pos) => {
             return (
               <IonCard
