@@ -1,100 +1,84 @@
 import {
-	IonContent,
-	IonHeader,
-	IonPage,
-	IonTitle,
-	IonToolbar,
-	IonInput,
-	IonButton,
-	IonLoading,
-	IonText,
-	IonLabel,
-	IonItem,
-	IonFooter,
-    IonCard,
-    IonCardSubtitle,
-    IonCardContent,
-    IonCardHeader,
-    IonCardTitle,
-    IonIcon,
-	IonButtons,
-	IonModal
-	
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonInput,
+  IonButton,
+  IonLoading,
+  IonText,
+  IonLabel,
+  IonItem,
+  IonFooter,
+  IonCard,
+  IonCardSubtitle,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+  IonIcon,
+  IonButtons,
+  IonModal,
 } from "@ionic/react";
 
-import React, { useState , useRef } from "react";
-import { Link, useHistory } from "react-router-dom";
-// import { loginUser, reAuthenticate, updateUserPassword } from ".../firebase"
-// import { toast } from ".../toast";
-// import { setUserState } from "../redux/actions";
-import { useDispatch } from "react-redux";
+import React, { useState, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import FormTopBar from "../../components/FormTopBar";
-import {IoIosAddCircleOutline} from "react-icons/io" ;
-import {setAllergy} from "../database" ;
-
+import { setAllergy } from "../database";
 
 function Allergy() {
+  const modal = useRef(null);
+  const input = useRef(null);
+  const [status, setStatus] = useState(false);
+  const [allergyName, setAllergyName] = useState("");
+  const [date_, setDate] = useState("");
+  const [busy, setBusy] = useState(false);
+  const history = useHistory();
 
-	const modal = useRef(null);
-	const input = useRef(null);
-	const [status,setStatus] = useState(false)
-	const [allergyName, setAllergyName] = useState("");
-	const [date_, setDate] = useState("");
-	const [busy, setBusy] = useState(false);
-	const history = useHistory();
-  
-	async function createallergy() {
-	  console.log("okkk")
-	  setBusy(true);
-	  const submitAllergyData = {}
-	  const allergyData = {
-		  allergyName: allergyName,
-		  administerDate: date_,
-		  
-	  }
-	  submitAllergyData[allergyName] = allergyData;
-	  console.log("ok");
-	  await setAllergy(submitAllergyData);
-	  setBusy(false);
-	  setStatus(!status);
-	}
-  
-	/*function confirm() {
-	  modal.current?.dismiss(input.current?.value, 'confirm');
-	}*/
+  async function createallergy() {
+    setBusy(true);
+    const submitAllergyData = {};
+    const allergyData = {
+      allergyName: allergyName,
+      administerDate: date_,
+    };
+    submitAllergyData[allergyName] = allergyData;
+    console.log("ok");
+    await setAllergy(submitAllergyData);
+    setBusy(false);
+    setStatus(!status);
+  }
 
-	function changestatus() {
-		setStatus(!status);
-	}
+  function changestatus() {
+    setStatus(!status);
+  }
 
-	return (
-		<IonPage>
+  return (
+    <IonPage>
       <IonContent className="ion-padding">
-      <FormTopBar/>
-      <p>      </p>
-     <h1>Allergies</h1>
-     <IonCard>
+        <FormTopBar />
+        {"\u00a0\u00a0\u00a0"}
+        <h1>{"\u00a0\u00a0\u00a0"} </h1>
+        <h1>Allergies</h1>
+        <IonCard>
           <IonCardHeader>
             <IonCardTitle>Peanuts</IonCardTitle>
-           
           </IonCardHeader>
-         
+
           <IonCardContent>
-          <IonCardSubtitle>Onset date: 05/12/1999</IonCardSubtitle>
-          
-      </IonCardContent>
+            <IonCardSubtitle>Onset date: 05/12/1999</IonCardSubtitle>
+          </IonCardContent>
         </IonCard>
         <IonCard>
           <IonCardHeader>
             <IonCardTitle>Pollen</IonCardTitle>
-           
           </IonCardHeader>
-         
+
           <IonCardContent>
-          <IonCardSubtitle>Onset date: 05/12/13</IonCardSubtitle>
-      </IonCardContent>
+            <IonCardSubtitle>Onset date: 05/12/13</IonCardSubtitle>
+          </IonCardContent>
         </IonCard>
-		<IonButton id="open-modal" expand="block" onClick={changestatus}>
+        <IonButton id="open-modal" expand="block" onClick={changestatus}>
           Add Allergy
         </IonButton>
 
@@ -115,26 +99,31 @@ function Allergy() {
           <IonContent className="ion-padding">
             <IonItem>
               <IonLabel position="stacked">Enter Allergy</IonLabel>
-              <IonInput ref={input} type="text" onIonChange={(e) => setAllergyName(e.target.value)} placeholder="Allergy source" />
+              <IonInput
+                ref={input}
+                type="text"
+                onIonChange={(e) => setAllergyName(e.target.value)}
+                placeholder="Allergy source"
+              />
             </IonItem>
-			<IonItem>
+            <IonItem>
               <IonLabel position="stacked">Enter Onset date</IonLabel>
-              <IonInput ref={input} type="date"  onIonChange={(e) => setDate(e.target.value)}placeholder="Onset Date" />
+              <IonInput
+                ref={input}
+                type="date"
+                onIonChange={(e) => setDate(e.target.value)}
+                placeholder="Onset Date"
+              />
             </IonItem>
-		</IonContent>
-        
+          </IonContent>
         </IonModal>
-        <IonButton className="back-button" routerLink="/home">Back</IonButton>
-	
+        <IonButton className="back-button" routerLink="/home">
+          Back
+        </IonButton>
       </IonContent>
-	  <IonFooter>
-	
-
-
-	  </IonFooter>
+      <IonFooter></IonFooter>
     </IonPage>
-
-	);
-};
+  );
+}
 
 export default Allergy;
