@@ -22,6 +22,8 @@ export function DatabaseProvider({ children }) {
   const [immunizationList, setImmunizationList] = useState([])
   const [allergyJson, setAllergyJson] = useState("")
   const [allergyList, setAllergyList] = useState([])
+  const [iceJson, setICEJson] = useState("")
+  const [iceList, setICEList] = useState([])
   
 
   useEffect(() => {
@@ -34,6 +36,7 @@ export function DatabaseProvider({ children }) {
   function getData() {
     getImmunizations();
     getAllergy();
+    getICE();
   }
 
   function getImmunizations() {
@@ -51,6 +54,21 @@ export function DatabaseProvider({ children }) {
     })
   }
 
+  function getICE() {
+    const iceRef = doc(db, currentUser.uid + "/ice");
+    const iceList = []
+    getDoc(iceRef).then((docSnap) => {
+        if (docSnap.exists()) {
+            const iceData = docSnap.data();
+            for (let key in iceData) {
+                iceList.push(key)
+            }
+            setICEJson(iceData);
+            setICEList(iceList);
+        }
+    })
+  }
+
   function getAllergy() {
     const allergyRef = doc(db, currentUser.uid + "/allergy");
     const allergyList = []
@@ -64,7 +82,6 @@ export function DatabaseProvider({ children }) {
             setAllergyList(allergyList);
         }
     })
-
   }
 
 
@@ -77,7 +94,11 @@ export function DatabaseProvider({ children }) {
    allergyJson,
    setAllergyJson,
    allergyList,
-   setAllergyList
+   setAllergyList,
+   iceJson,
+   setICEJson,
+   iceList,
+   setICEList
   };
 
   return (

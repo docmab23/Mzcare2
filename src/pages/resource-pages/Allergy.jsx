@@ -114,8 +114,7 @@ function Allergy() {
               <IonInput
                 ref={input}
                 type="text"
-                onIonChange={(e) => setAllergyName(e.target.value)}
-                placeholder="Allergy source"
+                onIonChange={(e) => setAllergyName(e.target.value)}  d
               />
             </IonItem>
             <IonItem>
