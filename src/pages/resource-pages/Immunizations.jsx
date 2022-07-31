@@ -21,14 +21,12 @@ import {
 
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
 import FormTopBar from "../../components/FormTopBar";
 import { useDatabase } from "../../contexts/DatabaseContext";
 
 function Immunizations() {
   const history = useHistory();
   const { immunizationJson, immunizationList } = useDatabase();
-  // alert(vaccineName);
   const routeChange = () => {
     let path = `/immune-form`;
     history.push(path);
@@ -38,8 +36,11 @@ function Immunizations() {
     <IonPage>
       <IonContent className="ion-padding">
         <FormTopBar />
+        {"\u00a0\u00a0\u00a0"}  
+     <h1>{"\u00a0\u00a0\u00a0"} </h1>
         <h1>Immunizations</h1>
-        {immunizationList.map((item, pos) => {
+        {
+        immunizationList.map((item, pos) => {
           return (
             <IonCard key={pos}>
               <IonCardHeader>

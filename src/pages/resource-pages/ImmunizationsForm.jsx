@@ -16,12 +16,9 @@ import {
 
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-// import { loginUser, reAuthenticate, updateUserPassword } from ".../firebase"
-// import { toast } from ".../toast";
-// import { setUserState } from "../redux/actions";
-import { useDispatch } from "react-redux";
 import FormTopBar from "../../components/FormTopBar";
 import { setImmunization } from "../database";
+import { useDatabase } from "../../contexts/DatabaseContext";
 
 function ImmunizationsForm() {
 
@@ -30,9 +27,10 @@ function ImmunizationsForm() {
   const [expiry, setExpiry] = useState("");
   const [busy, setBusy] = useState(false);
   const history = useHistory();
+  const { immunizationJson, immunizationList, setImmunizationJson, setImmunizationList } = useDatabase();
 
-  async function createImmunization() {
-	console.log("okkk")
+  async function createImmunization(e) {
+	e.preventDefault();
 	setBusy(true);
 	const submitVaccineData = {}
 	const vaccineData = {
@@ -41,8 +39,13 @@ function ImmunizationsForm() {
 		expiryDate: expiry
 	}
 	submitVaccineData[vaccineName] = vaccineData;
-	console.log("ok")
-	await setImmunization(submitVaccineData)
+	immunizationList.push(vaccineName)
+	for (let key in immunizationJson) {
+		submitVaccineData[key] = immunizationJson[key];
+	}
+	setImmunizationJson(submitVaccineData);
+	setImmunizationList(immunizationList)
+	await setImmunization(submitVaccineData);
 	setBusy(false);
 	history.push("/immune");
 }
