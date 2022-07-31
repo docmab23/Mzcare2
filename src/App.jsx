@@ -54,6 +54,12 @@ import FootNavbar from './components/Foot-Navbar';
 import Em from './pages/Em';
 import { DatabaseProvider } from './contexts/DatabaseContext';
 
+import hicon from "./images/home-icon.svg";
+import sett from "./images/settings-icon.svg";
+// import { IonReactRouter } from "@ionic/react-router";
+import em from "./images/em.svg"; 
+// import Home from "../pages/Home";
+// import {Redirect} from 'react-router-dom';
 
 function App() {
   return (
@@ -65,11 +71,10 @@ function App() {
       <IonTabs>
         <IonRouterOutlet>
           <Route path="/login" component={Login} />
-         
-          <Route path="/tab1" component={Tab1} />
+          <Route path="/home" component={Home} />
           <Route path="/register" component={Register} />
           <Route path="/tabs" component={FootNavbar}/>
-          <Route path="/em" component={Em} />
+          <Route path="/em_tab" component={Em} />
           <Route path="/changeEmail" component={ChangeEmail} />
           <Route path="/changePassword" component={ChangePassword} />
           <Route path="/forgotPassword" component={ForgotPassword} />
@@ -81,6 +86,15 @@ function App() {
           <Route path="/" render={() => <Redirect to="/login" />} exact={true} />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
+        <IonTabButton tab="EM Profile" href="/em_tab">
+                <IonIcon src={em}>EM</IonIcon>
+              </IonTabButton>
+              <IonTabButton tab="Home" href="/home">
+                <IonIcon src={hicon}>Home</IonIcon>
+              </IonTabButton>
+              <IonTabButton tab="Settings" href="/home">
+                <IonIcon src={sett}>Settings</IonIcon>
+              </IonTabButton>
   
         </IonTabBar>
       </IonTabs>
