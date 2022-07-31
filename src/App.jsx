@@ -46,7 +46,6 @@ import ForgotPassword from './pages/ForgotPassword';
 import Home from './pages/Home';
 import Allergy from './pages/resource-pages/Allergy';
 import Immunizations from './pages/resource-pages/Immunizations';
-import ImmunizationsForm from './pages/resource-pages/ImmunizationsForm';
 import Ice from './pages/resource-pages/Ice';
 import General from './pages/resource-pages/General';
 import { AuthProvider } from './contexts/AuthContext';
@@ -78,7 +77,6 @@ function App() {
           <Route path="/changeEmail" component={ChangeEmail} />
           <Route path="/changePassword" component={ChangePassword} />
           <Route path="/forgotPassword" component={ForgotPassword} />
-          <Route path="/immune-form" component={ImmunizationsForm}></Route>
           <Route path="/allergy" component={Allergy} />
           <Route path="/immune" component={Immunizations} />
           <Route path="/ice" component={Ice} />

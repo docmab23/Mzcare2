@@ -45,7 +45,7 @@ function Immunizations() {
     setStatus(!status);
   }
 
-  async function createallergy(e) {
+  async function createImmunization(e) {
     e.preventDefault();
     setBusy(true);
     const submitVaccineData = {};
@@ -104,7 +104,7 @@ function Immunizations() {
               </IonButtons>
               <IonTitle>Add Immunization </IonTitle>
               <IonButtons slot="end">
-                <IonButton strong={true} onClick={createallergy}>
+                <IonButton strong={true} onClick={createImmunization}>
                   Confirm
                 </IonButton>
               </IonButtons>

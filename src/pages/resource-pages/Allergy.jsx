@@ -25,25 +25,39 @@ import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import FormTopBar from "../../components/FormTopBar";
 import { setAllergy } from "../database";
+import { useDatabase } from "../../contexts/DatabaseContext";
 
 function Allergy() {
   const modal = useRef(null);
   const input = useRef(null);
   const [status, setStatus] = useState(false);
   const [allergyName, setAllergyName] = useState("");
-  const [date_, setDate] = useState("");
+  const [onsetDate, setDate] = useState("");
   const [busy, setBusy] = useState(false);
   const history = useHistory();
+  const {
+    allergyJson,
+    allergyList,
+    setAllergyJson,
+    setAllergyList,
+  } = useDatabase();
 
-  async function createallergy() {
+
+  async function createallergy(e) {
+    e.preventDefault()
     setBusy(true);
     const submitAllergyData = {};
     const allergyData = {
       allergyName: allergyName,
-      administerDate: date_,
+      onsetDate: onsetDate,
     };
     submitAllergyData[allergyName] = allergyData;
-    console.log("ok");
+    allergyList.push(allergyName);
+    for (let key in allergyJson) {
+      submitAllergyData[key] = allergyJson[key];
+    }
+    setAllergyJson(submitAllergyData);
+    setAllergyList(allergyList);
     await setAllergy(submitAllergyData);
     setBusy(false);
     setStatus(!status);
@@ -60,24 +74,22 @@ function Allergy() {
         {"\u00a0\u00a0\u00a0"}
         <h1>{"\u00a0\u00a0\u00a0"} </h1>
         <h1>Allergies</h1>
-        <IonCard>
-          <IonCardHeader>
-            <IonCardTitle>Peanuts</IonCardTitle>
-          </IonCardHeader>
-
-          <IonCardContent>
-            <IonCardSubtitle>Onset date: 05/12/1999</IonCardSubtitle>
-          </IonCardContent>
-        </IonCard>
-        <IonCard>
-          <IonCardHeader>
-            <IonCardTitle>Pollen</IonCardTitle>
-          </IonCardHeader>
-
-          <IonCardContent>
-            <IonCardSubtitle>Onset date: 05/12/13</IonCardSubtitle>
-          </IonCardContent>
-        </IonCard>
+        {allergyList.map((item, pos) => {
+          return (
+            <IonCard key={pos}>
+              <IonCardHeader>
+                <IonCardTitle>
+                  {allergyJson[item]["allergyName"]}
+                </IonCardTitle>
+              </IonCardHeader>
+              <IonCardContent>
+                <IonCardSubtitle>
+                  Onset Date: {allergyJson[item]["onsetDate"]}
+                </IonCardSubtitle>
+              </IonCardContent>
+            </IonCard>
+          );
+        })}
         <IonButton id="open-modal" expand="block" onClick={changestatus}>
           Add Allergy
         </IonButton>
@@ -98,7 +110,7 @@ function Allergy() {
           </IonHeader>
           <IonContent className="ion-padding">
             <IonItem>
-              <IonLabel position="stacked">Enter Allergy</IonLabel>
+              <IonLabel position="floating">Allergy Source</IonLabel>
               <IonInput
                 ref={input}
                 type="text"
@@ -107,12 +119,11 @@ function Allergy() {
               />
             </IonItem>
             <IonItem>
-              <IonLabel position="stacked">Enter Onset date</IonLabel>
+              <IonLabel position="stacked">Onset date</IonLabel>
               <IonInput
                 ref={input}
                 type="date"
                 onIonChange={(e) => setDate(e.target.value)}
-                placeholder="Onset Date"
               />
             </IonItem>
           </IonContent>
