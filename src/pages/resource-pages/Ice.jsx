@@ -28,6 +28,9 @@ import { setICE } from "../database";
 import { deleteField, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useAuth } from "../../contexts/AuthContext";
+import AddICEModal from "../../modals/AddICEModal";
+import { create } from "domain";
+import EditICEModal from "../../modals/EditICEModal";
 
 function Ice() {
   const input = useRef(null);
@@ -182,75 +185,8 @@ function Ice() {
             Add Contact
           </IonButton>
         )}
-        <IonModal isOpen={status}>
-          <IonHeader>
-            <IonToolbar>
-              <IonButtons slot="start">
-                <IonButton onClick={changestatus}>Cancel</IonButton>
-              </IonButtons>
-              <IonTitle> Add Contact Details </IonTitle>
-              <IonButtons slot="end">
-                <IonButton strong={true} onClick={createICE}>
-                  Confirm
-                </IonButton>
-              </IonButtons>
-            </IonToolbar>
-          </IonHeader>
-          <IonContent className="ion-padding">
-            <IonItem>
-              <IonLabel position="floating">Contact Name</IonLabel>
-              <IonInput
-                ref={input}
-                type="text"
-                onIonChange={(e) => setICEName(e.target.value)}
-              />
-            </IonItem>
-            <IonItem>
-              <IonLabel position="floating">Contact Number</IonLabel>
-              <IonInput
-                ref={input}
-                type="text"
-                onIonChange={(e) => setContact(e.target.value)}
-              />
-            </IonItem>
-          </IonContent>
-        </IonModal>
-
-        <IonModal isOpen={editStatus}>
-          <IonHeader>
-            <IonToolbar>
-              <IonButtons slot="start">
-                <IonButton onClick={editICE}>Save</IonButton>
-              </IonButtons>
-              <IonTitle> Edit Contact Details </IonTitle>
-              <IonButtons slot="end">
-                <IonButton strong={true} onClick={deleteICE}>
-                  Delete
-                </IonButton>
-              </IonButtons>
-            </IonToolbar>
-          </IonHeader>
-          <IonContent className="ion-padding">
-            <IonItem>
-              <IonLabel position="floating">Contact Name</IonLabel>
-              <IonInput
-                ref={input}
-                type="text"
-                onIonChange={(e) => setEditName(e.target.value)}
-                value={editName}
-              />
-            </IonItem>
-            <IonItem>
-              <IonLabel position="floating">Contact Number</IonLabel>
-              <IonInput
-                ref={input}
-                type="text"
-                onIonChange={(e) => setEditContact(e.target.value)}
-                value={editContact}
-              />
-            </IonItem>
-          </IonContent>
-        </IonModal>
+		<AddICEModal show={status} close={changestatus} create={createICE} name={setICEName} contact={setContact}></AddICEModal>
+        <EditICEModal show={editStatus} edit={editICE} delete={deleteICE} name={setEditName} contact={setEditContact} editName={editName} editContact={editContact}></EditICEModal>
         <IonButton className="back-button" routerLink="/home">
           Back
         </IonButton>
