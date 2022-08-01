@@ -24,6 +24,8 @@ export function DatabaseProvider({ children }) {
   const [allergyList, setAllergyList] = useState([])
   const [iceJson, setICEJson] = useState("")
   const [iceList, setICEList] = useState([])
+  const [genJson, setGenJson] = useState("")
+  const [genList, setGenList] = useState([])
   
 
   useEffect(() => {
@@ -37,6 +39,7 @@ export function DatabaseProvider({ children }) {
     getImmunizations();
     getAllergy();
     getICE();
+    getgeneral();
   }
 
   function getImmunizations() {
@@ -84,6 +87,21 @@ export function DatabaseProvider({ children }) {
     })
   }
 
+  function getgeneral() {
+    const generalRef = doc(db, currentUser.uid + "/general");
+    const generalList = []
+    getDoc(generalRef).then((docSnap) => {
+        if (docSnap.exists()) {
+            const generalData = docSnap.data();
+            for (let key in generalData) {
+                generalList.push(key)
+            }
+            setAllergyJson(generalData);
+            setAllergyList(generalList);
+        }
+    })
+  }
+
 
 
   const value = {
@@ -98,7 +116,12 @@ export function DatabaseProvider({ children }) {
    iceJson,
    setICEJson,
    iceList,
-   setICEList
+   setICEList,
+   genJson,
+   setGenJson,
+   genList,
+   setGenList
+
   };
 
   return (

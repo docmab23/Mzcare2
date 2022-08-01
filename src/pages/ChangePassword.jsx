@@ -21,7 +21,7 @@ import FormTopBar from "../components/FormTopBar";
 import { useAuth } from "../contexts/AuthContext";
 
 function ChangePassword () {
-	const [busy, setBusy] = useState<boolean>(false);
+	const [busy, setBusy] = useState(false);
 	const history = useHistory();
 	// const dispatch = useDispatch();
 	const [oldPassword, setOldPassword] = useState("");

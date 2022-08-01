@@ -50,13 +50,17 @@ import Ice from './pages/resource-pages/Ice';
 import General from './pages/resource-pages/General';
 import { AuthProvider } from './contexts/AuthContext';
 import FootNavbar from './components/Foot-Navbar';
-import Em from './pages/Em';
+
 import { DatabaseProvider } from './contexts/DatabaseContext';
 
 import hicon from "./images/home-icon.svg";
 import sett from "./images/settings-icon.svg";
 // import { IonReactRouter } from "@ionic/react-router";
 import em from "./images/em.svg"; 
+import Try1 from './pages/resource-pages/Try1';
+import Em from './pages/Em';
+
+
 // import Home from "../pages/Home";
 // import {Redirect} from 'react-router-dom';
 
@@ -70,6 +74,7 @@ function App() {
       <IonTabs>
         <IonRouterOutlet>
           <Route path="/login" component={Login} />
+          <Route path="/try" component={Try1} />
           <Route path="/home" component={Home} />
           <Route path="/register" component={Register} />
           <Route path="/tabs" component={FootNavbar}/>

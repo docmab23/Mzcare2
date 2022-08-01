@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { auth, db } from '../firebase'
@@ -39,4 +39,14 @@ export async function setICE(data: any) {
 export async function setAllergy(data: any) {
   const allergyRef = doc(db, auth.currentUser?.uid + "/allergy")
   setDoc(allergyRef, data)
+}
+
+export async function setGeneral(data: any) {
+  const generalRef = doc(db, auth.currentUser?.uid + "/general")
+  setDoc(generalRef, data)
+}
+
+export async function updateGeneral(data: any) {
+  const generalRef = doc(db, auth.currentUser?.uid + "/general")
+  updateDoc(generalRef, data)
 }
