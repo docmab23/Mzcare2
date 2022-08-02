@@ -27,7 +27,7 @@ import {
   import { setGeneral } from "../database";
   import { useDatabase } from "../../contexts/DatabaseContext";
   
-  function Allergy() {
+  function General() {
 	const modal = useRef(null);
 	const input = useRef(null);
 	const [status, setStatus] = useState(false);
@@ -192,5 +192,5 @@ import {
 	);
   }
   
-  export default Allergy;
+  export default General;
   
