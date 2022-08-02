@@ -219,7 +219,7 @@ import {
               />
             </IonItem>
 			<IonItem>
-              <IonLabel position="stacked">State</IonLabel>
+              <IonLabel position="stacked">Zip/Postal code</IonLabel>
 			  
               <IonInput
                 ref={input}
