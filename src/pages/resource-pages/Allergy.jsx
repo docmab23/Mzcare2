@@ -26,21 +26,94 @@ import { useHistory } from "react-router-dom";
 import FormTopBar from "../../components/FormTopBar";
 import { setAllergy } from "../database";
 import { useDatabase } from "../../contexts/DatabaseContext";
+import AddAllergyModal from "../../modals/AddAllergyModal";
+import { deleteField, doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import { useAuth } from "../../contexts/AuthContext";
+import EditAllergyModal from "../../modals/EditAllergyModal";
 
 function Allergy() {
   const modal = useRef(null);
   const input = useRef(null);
   const [status, setStatus] = useState(false);
+  const [editStatus, setEditStatus] = useState(false);
+  const [editAllergyName, setEditAllergyName] = useState("");
+  const [originalEditAllergyName, setOriginalEditAllergyName] = useState("");
   const [allergyName, setAllergyName] = useState("");
   const [onsetDate, setDate] = useState("");
+  const [editDate, setEditDate] = useState("");
   const [busy, setBusy] = useState(false);
   const history = useHistory();
+  const { currentUser } = useAuth();
   const {
     allergyJson,
     allergyList,
     setAllergyJson,
     setAllergyList,
   } = useDatabase();
+
+  function changeEditStatus(jsonToEdit) {
+    setEditAllergyName(jsonToEdit["allergyName"]);
+    setOriginalEditAllergyName(jsonToEdit["allergyName"]);
+    setEditDate(jsonToEdit["onsetDate"]);
+    setEditStatus(!status);
+  }
+
+  async function editAllergy(e) {
+    e.preventDefault();
+    const allergyRef = doc(db, currentUser.uid + "/allergy");
+    const submitAllergyData = {};
+    const allergyData = {
+      allergyName: editAllergyName,
+      onsetDate: editDate,
+    };
+    submitAllergyData[editAllergyName] = allergyData;
+    allergyList.push(editAllergyName);
+    for (let key in allergyJson) {
+      submitAllergyData[key] = allergyJson[key];
+    }
+    setAllergyJson(submitAllergyData);
+    setAllergyList(allergyList);
+    await setAllergy(submitAllergyData);
+    await updateDoc(allergyRef, {
+      [originalEditAllergyName]: deleteField(),
+    }).then(async () => {
+      const allergyLinks = [];
+      await getDoc(allergyRef).then((docSnap) => {
+        if (docSnap.exists()) {
+          const allergyData = docSnap.data();
+          for (let key in allergyData) {
+            allergyLinks.push(key);
+          }
+          setAllergyList(allergyLinks);
+          setAllergyJson(allergyData);
+        }
+      });
+    });
+    setEditStatus(!editStatus);
+  }
+
+
+  async function deleteAllergy(e) {
+    e.preventDefault();
+    const allergyRef = doc(db, currentUser.uid + "/allergy");
+    await updateDoc(allergyRef, {
+      [editAllergyName]: deleteField(),
+    }).then(async () => {
+      const allergyLinks = [];
+      getDoc(allergyRef).then((docSnap) => {
+        if (docSnap.exists()) {
+          const allergyData = docSnap.data();
+          for (let key in allergyData) {
+            allergyLinks.push(key);
+          }
+          setAllergyList(allergyLinks);
+          setAllergyJson(allergyData);
+        }
+      });
+    });
+    setEditStatus(!editStatus);
+  }
 
 
   async function createallergy(e) {
@@ -76,7 +149,9 @@ function Allergy() {
         <h1>Allergies</h1>
         {allergyList.map((item, pos) => {
           return (
-            <IonCard key={pos}>
+            <IonCard key={pos} onClick={async () => {
+              changeEditStatus(allergyJson[item]);
+            }}>
               <IonCardHeader>
                 <IonCardTitle>
                   {allergyJson[item]["allergyName"]}
@@ -93,40 +168,8 @@ function Allergy() {
         <IonButton id="open-modal" expand="block" onClick={changestatus}>
           Add Allergy
         </IonButton>
-
-        <IonModal isOpen={status}>
-          <IonHeader>
-            <IonToolbar>
-              <IonButtons slot="start">
-                <IonButton onClick={changestatus}>Cancel</IonButton>
-              </IonButtons>
-              <IonTitle>Add Allergy </IonTitle>
-              <IonButtons slot="end">
-                <IonButton strong={true} onClick={createallergy}>
-                  Confirm
-                </IonButton>
-              </IonButtons>
-            </IonToolbar>
-          </IonHeader>
-          <IonContent className="ion-padding">
-            <IonItem>
-              <IonLabel position="floating">Allergy Source</IonLabel>
-              <IonInput
-                ref={input}
-                type="text"
-                onIonChange={(e) => setAllergyName(e.target.value)}  d
-              />
-            </IonItem>
-            <IonItem>
-              <IonLabel position="stacked">Onset date</IonLabel>
-              <IonInput
-                ref={input}
-                type="date"
-                onIonChange={(e) => setDate(e.target.value)}
-              />
-            </IonItem>
-          </IonContent>
-        </IonModal>
+        <AddAllergyModal show={status} changestatus={changestatus} createallergy = {createallergy} setAllergyName={setAllergyName} setDate={setDate}></AddAllergyModal>
+        <EditAllergyModal show={editStatus} edit={editAllergy} delete={deleteAllergy} name={setEditAllergyName} date={setEditDate} editName={editAllergyName} editDate={editDate}></EditAllergyModal>
         <IonButton className="back-button" routerLink="/home">
           Back
         </IonButton>
