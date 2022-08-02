@@ -66,8 +66,8 @@ function Em() {
 
 
 	  console.log(show_);
-	  console.log(immunizationList);
-	  console.log(allergyList);
+	
+
   
 	return (
 		<IonPage>
@@ -103,6 +103,30 @@ function Em() {
 );
 })}
 
+{allergyList.map((item, pos) => {
+          return (   
+            <IonGrid>
+				<IonRow className="info" key={pos}>
+                 <IonCol>Allergy:{allergyJson[item]["allergyName"]}</IonCol> 
+				</IonRow>
+			</IonGrid>
+			
+
+);
+})}
+
+
+{immunizationList.map((item, pos) => {
+          return (   
+            <IonGrid>
+				<IonRow className="info" key={pos}>
+                 <IonCol>Immunization:{immunizationJson[item]["vaccineName"]}</IonCol> 
+				</IonRow>
+			</IonGrid>
+			
+
+);
+})}
 
 
 

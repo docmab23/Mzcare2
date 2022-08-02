@@ -96,8 +96,8 @@ export function DatabaseProvider({ children }) {
             for (let key in generalData) {
                 generalList.push(key)
             }
-            setAllergyJson(generalData);
-            setAllergyList(generalList);
+            setGenJson(generalData);
+            setGenList(generalList);
         }
     })
   }

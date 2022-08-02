@@ -48,7 +48,7 @@ import Allergy from './pages/resource-pages/Allergy';
 import Immunizations from './pages/resource-pages/Immunizations';
 import Ice from './pages/resource-pages/Ice';
 import General from './pages/resource-pages/General';
-import { AuthProvider } from './contexts/AuthContext';
+import { AuthProvider , useAuth } from './contexts/AuthContext';
 import FootNavbar from './components/Foot-Navbar';
 
 import { DatabaseProvider } from './contexts/DatabaseContext';
@@ -59,12 +59,17 @@ import sett from "./images/settings-icon.svg";
 import em from "./images/em.svg"; 
 import Try1 from './pages/resource-pages/Try1';
 import Em from './pages/Em';
+import { connectStorageEmulator } from 'firebase/storage';
 
 
 // import Home from "../pages/Home";
 // import {Redirect} from 'react-router-dom';
 
 function App() {
+
+
+  // const {currentUser} = useAuth();
+  // console.log(currentUser);
   return (
   <IonApp>
     <AuthProvider>
@@ -88,6 +93,7 @@ function App() {
           <Route path="/general" component={General} />
           <Route path="/" render={() => <Redirect to="/login" />} exact={true} />
         </IonRouterOutlet>
+        
         <IonTabBar slot="bottom">
         <IonTabButton tab="EM Profile" href="/em_tab">
                 <IonIcon src={em}>EM</IonIcon>

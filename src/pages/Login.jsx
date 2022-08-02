@@ -10,6 +10,7 @@ import {
 	IonText,
 	IonLabel,
 	IonItem,
+  IonFooter,
 } from "@ionic/react";
 
 import React, { useState } from "react";
@@ -80,6 +81,11 @@ function Login() {
           </span>
         </div>
       </IonContent>
+      <IonFooter>
+      <h1>{"\u00a0\u00a0\u00a0"} </h1>
+      {"\u00a0\u00a0\u00a0"}
+      {"\u00a0\u00a0\u00a0"}
+      </IonFooter>
     </IonPage>
 	);
 };

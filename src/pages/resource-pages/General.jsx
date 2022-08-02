@@ -37,6 +37,10 @@ import {
 	const [bgroup, setBgroup] = useState("");
 	const [fphysician, setFphysician] = useState("");
 	const [ethinicity, setEthinicity] = useState("");
+	const [address_, setAddress] = useState("");
+	const [state, setState] = useState("");
+	const [city, setCity] = useState("");
+	const [zip, setZip] = useState("");
 	const [busy, setBusy] = useState(false);
 	const history = useHistory();
 	const {
@@ -57,7 +61,11 @@ import {
 		Bloodgroup: bgroup,
 		Height: height,
 		Family_physician: fphysician,
-		Ethinicity: ethinicity
+		Ethinicity: ethinicity,
+		Str_address: address_,
+		State: state,
+		City: city,
+		Zip: zip
 
 	  };
 	  submitGeneralData[name] = generalData;
@@ -107,6 +115,10 @@ import {
 				<IonCardSubtitle>
                   Ethinicity: {genJson[item]["Ethinicity"]}
                 </IonCardSubtitle>
+				<IonCardSubtitle>
+                  Full Address: {genJson[item]["Str_address"]+", "+genJson[item]["City"]+", "+genJson[item]["State"]+", "+genJson[item]["Zip"]}
+                </IonCardSubtitle>
+				
               </IonCardContent>
             </IonCard>
           );
@@ -121,7 +133,6 @@ import {
               <IonButtons slot="start">
                 <IonButton onClick={changestatus}>Cancel</IonButton>
               </IonButtons>
-			  //genList.length=0
               <IonTitle>Add Allergy </IonTitle>
               <IonButtons slot="end">
                 <IonButton strong={true} onClick={creategeneral}>  
@@ -178,6 +189,42 @@ import {
                 ref={input}
                 type="text"
                 onIonChange={(e) => setEthinicity(e.target.value)}
+              />
+            </IonItem>
+			<IonItem>
+              <IonLabel position="stacked">Street Address</IonLabel>
+			  
+              <IonInput
+                ref={input}
+                type="text"
+                onIonChange={(e) => setAddress(e.target.value)}
+              />
+            </IonItem>
+			<IonItem>
+              <IonLabel position="stacked">City</IonLabel>
+			  
+              <IonInput
+                ref={input}
+                type="text"
+                onIonChange={(e) => setCity(e.target.value)}
+              />
+            </IonItem>
+			<IonItem>
+              <IonLabel position="stacked">State</IonLabel>
+			  
+              <IonInput
+                ref={input}
+                type="text"
+                onIonChange={(e) => setState(e.target.value)}
+              />
+            </IonItem>
+			<IonItem>
+              <IonLabel position="stacked">State</IonLabel>
+			  
+              <IonInput
+                ref={input}
+                type="number"
+                onIonChange={(e) => setZip(e.target.value)}
               />
             </IonItem>
           </IonContent>
