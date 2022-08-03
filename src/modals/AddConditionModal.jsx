@@ -27,7 +27,7 @@ return (
       </IonItem>
       <IonItem>
         <IonLabel position="floating">Status</IonLabel>
-        <IonSelect onIonChange={(e) => props.setDate(e.target.value)} >
+        <IonSelect onIonChange={(e) => props.setConditionStatus(e.target.value)} >
           <IonSelectOption value="Active">Active</IonSelectOption>
           <IonSelectOption value="Resolved">Resolved</IonSelectOption>
           <IonSelectOption value="Unknown">Unknown</IonSelectOption>

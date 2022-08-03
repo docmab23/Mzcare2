@@ -30,6 +30,7 @@ import {
   import { deleteField, doc, getDoc, updateDoc } from "firebase/firestore";
   import { db } from "../../firebase";
   import { useAuth } from "../../contexts/AuthContext";
+import EditConditionModal from "../../modals/EditConditionModal";
 //   import EditConditionModal from "../../modals/EditConditionModal";
   
   function Condition() {
@@ -40,8 +41,8 @@ import {
     const [editConditionName, setEditConditionName] = useState("");
     const [originalEditConditionName, setOriginalEditConditionName] = useState("");
     const [conditionName, setConditionName] = useState("");
-    const [onsetDate, setDate] = useState("");
-    const [editDate, setEditDate] = useState("");
+    const [conditionStatus, setConditionStatus] = useState("");
+    const [editConditionStatus, setEditConditionStatus] = useState("");
     const [busy, setBusy] = useState(false);
     const history = useHistory();
     const { currentUser } = useAuth();
@@ -55,7 +56,7 @@ import {
     function changeEditStatus(jsonToEdit) {
       setEditConditionName(jsonToEdit["conditionName"]);
       setOriginalEditConditionName(jsonToEdit["conditionName"]);
-      setEditDate(jsonToEdit["onsetDate"]);
+      setEditConditionStatus(jsonToEdit["status"]);
       setEditStatus(!status);
     }
   
@@ -65,7 +66,7 @@ import {
       const submitConditionData = {};
       const conditionData = {
         conditionName: editConditionName,
-        status: editDate,
+        status: editConditionStatus,
       };
       submitConditionData[editConditionName] = conditionData;
       conditionList.push(editConditionName);
@@ -122,7 +123,7 @@ import {
       const submitConditionData = {};
       const conditionData = {
         conditionName: conditionName,
-        status: onsetDate,
+        status: conditionStatus,
       };
       submitConditionData[conditionName] = conditionData;
       conditionList.push(conditionName);
@@ -168,8 +169,8 @@ import {
           <IonButton id="open-modal" expand="block" onClick={changestatus}>
             Add Condition
           </IonButton>
-          <AddConditionModal show={status} changestatus={changestatus} createCondition = {createCondition} setConditionName={setConditionName} setDate={setDate}></AddConditionModal>
-          {/* <EditConditionModal show={editStatus} edit={editCondition} delete={deleteCondition} name={setEditConditionName} date={setEditDate} editName={editConditionName} editDate={editDate}></EditConditionModal> */}
+          <AddConditionModal show={status} changestatus={changestatus} createCondition = {createCondition} setConditionName={setConditionName} setConditionStatus={setConditionStatus}></AddConditionModal>
+          <EditConditionModal show={editStatus} edit={editCondition} delete={deleteCondition} name={setEditConditionName} status={setEditConditionStatus} editName={editConditionName} editStatus={editConditionStatus}></EditConditionModal>
           <IonButton className="back-button" routerLink="/home">
             Back
           </IonButton>
