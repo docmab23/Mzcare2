@@ -70,6 +70,7 @@ function App() {
 
   // const {currentUser} = useAuth();
   // console.log(currentUser);
+  
   return (
   <IonApp>
     <AuthProvider>
@@ -90,7 +91,7 @@ function App() {
           <Route path="/allergy" component={Allergy} />
           <Route path="/immune" component={Immunizations} />
           <Route path="/ice" component={Ice} />
-          <Route path="/general" component={General} />
+          <Route path="/general" render={(props) => <General {...props} tell={true} />}/>
           <Route path="/" render={() => <Redirect to="/login" />} exact={true} />
         </IonRouterOutlet>
         

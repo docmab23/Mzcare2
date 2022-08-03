@@ -27,10 +27,10 @@ import {
   import { setGeneral } from "../database";
   import { useDatabase } from "../../contexts/DatabaseContext";
   
-  function General() {
+  function General(props) {
 	const modal = useRef(null);
 	const input = useRef(null);
-	const [status, setStatus] = useState(false);
+	const [status, setStatus] = useState(props.tell);
 	const [name, setName] = useState("");
 	const [age, setAge] = useState("");
 	const [height, setHeight] = useState("");

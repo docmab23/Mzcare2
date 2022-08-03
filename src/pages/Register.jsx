@@ -11,7 +11,8 @@ import {
   IonLabel,
   IonText,
 } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useState} from "react";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { toast } from "../toast";
 import { registerUser } from "../firebase";
@@ -20,6 +21,7 @@ import FormTopBar from "../components/FormTopBar";
 import { useAuth } from "../contexts/AuthContext";
 
 function Register() {
+  const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setCPassword] = useState("");
@@ -40,6 +42,7 @@ function Register() {
       const res = await signup(username, password);
       if (res) {
         toast("You have registered successfully");
+        history.replace("/general");
       }
       
     } catch (e) {
