@@ -3,7 +3,7 @@ import React from 'react'
 
 const AddAllergyModal = (props) => {
 return (
-    <IonModal isOpen={props.status}>
+    <IonModal isOpen={props.show}>
     <IonHeader>
       <IonToolbar>
         <IonButtons slot="start">
