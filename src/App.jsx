@@ -60,6 +60,7 @@ import em from "./images/em.svg";
 import Try1 from './pages/resource-pages/Try1';
 import Em from './pages/Em';
 import { connectStorageEmulator } from 'firebase/storage';
+import Condition from './pages/resource-pages/Conditions';
 
 
 // import Home from "../pages/Home";
@@ -90,6 +91,7 @@ function App() {
           <Route path="/allergy" component={Allergy} />
           <Route path="/immune" component={Immunizations} />
           <Route path="/ice" component={Ice} />
+          <Route path="/condition" component={Condition} />
           <Route path="/general" component={General} />
           <Route path="/" render={() => <Redirect to="/login" />} exact={true} />
         </IonRouterOutlet>

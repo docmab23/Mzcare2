@@ -24,6 +24,8 @@ export function DatabaseProvider({ children }) {
   const [allergyList, setAllergyList] = useState([])
   const [iceJson, setICEJson] = useState("")
   const [iceList, setICEList] = useState([])
+  const [conditionJson, setConditionJson] = useState("")
+  const [conditionList, setConditionList] = useState([])
   const [genJson, setGenJson] = useState("")
   const [genList, setGenList] = useState([])
   
@@ -39,6 +41,7 @@ export function DatabaseProvider({ children }) {
     getImmunizations();
     getAllergy();
     getICE();
+    getCondition();
     getgeneral();
   }
 
@@ -87,6 +90,21 @@ export function DatabaseProvider({ children }) {
     })
   }
 
+  function getCondition() {
+    const conditionRef = doc(db, currentUser.uid + "/condition");
+    const conditionList = []
+    getDoc(conditionRef).then((docSnap) => {
+        if (docSnap.exists()) {
+            const conditionData = docSnap.data();
+            for (let key in conditionData) {
+                conditionList.push(key)
+            }
+            setConditionJson(conditionData);
+            setConditionList(conditionList);
+        }
+    })
+  }
+
   function getgeneral() {
     const generalRef = doc(db, currentUser.uid + "/general");
     const generalList = []
@@ -120,8 +138,11 @@ export function DatabaseProvider({ children }) {
    genJson,
    setGenJson,
    genList,
-   setGenList
-
+   setGenList,
+   conditionJson, 
+   setConditionJson,
+   conditionList, 
+   setConditionList,
   };
 
   return (
