@@ -84,30 +84,32 @@ function Em() {
                  <IonCol>Name: {genJson[item]["Name"]}</IonCol> 
 				 <IonCol>Age: {genJson[item]["Age"]}</IonCol>
 				 <IonCol>Blood Group: {genJson[item]["Bloodgroup"]}</IonCol>
+				 <IonCol>Full Address:{genJson[item]["Str_address"]+", "+genJson[item]["City"]+", "+genJson[item]["State"]+", "+genJson[item]["Zip"]}</IonCol>
 				</IonRow>
 			</IonGrid>
 			
 
 );
 })}
+ICE contacts:
 {iceList.map((item, pos) => {
           return (   
             <IonGrid>
 				<IonRow className="info" key={pos}>
-                 <IonCol>ICE Contact Name: {iceJson[item]["name"]}</IonCol> 
-				 <IonCol>Contact No: : {iceJson[item]["number"]}</IonCol>
+                 <IonCol><IonLabel font="bold">ICE Contact Name </IonLabel>: {iceJson[item]["name"]}</IonCol> 
+				 <IonCol>Contact No:{iceJson[item]["number"]}</IonCol>
 				</IonRow>
 			</IonGrid>
 			
 
 );
 })}
-
+Allergies
 {allergyList.map((item, pos) => {
           return (   
             <IonGrid>
 				<IonRow className="info" key={pos}>
-                 <IonCol>Allergy:{allergyJson[item]["allergyName"]}</IonCol> 
+                 <IonCol>{allergyJson[item]["allergyName"]}</IonCol> 
 				</IonRow>
 			</IonGrid>
 			
