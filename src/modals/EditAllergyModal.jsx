@@ -29,7 +29,7 @@ return (
             <IonItem>
               <IonLabel position="floating">Onset Date</IonLabel>
               <IonInput
-                type="text"
+                type="date"
                 onIonChange={(e) => props.date(e.target.value)}
                 value={props.editDate}
               />

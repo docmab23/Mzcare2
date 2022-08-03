@@ -25,6 +25,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import FormTopBar from "../../components/FormTopBar";
 import { useDatabase } from "../../contexts/DatabaseContext";
+import AddImmunizationModal from "../../modals/AddImmunizationModal";
 import { setImmunization } from "../database";
 
 function Immunizations() {
@@ -96,45 +97,7 @@ function Immunizations() {
           Add Immunizations
         </IonButton>
 
-        <IonModal isOpen={status}>
-          <IonHeader>
-            <IonToolbar>
-              <IonButtons slot="start">
-                <IonButton onClick={changestatus}>Cancel</IonButton>
-              </IonButtons>
-              <IonTitle>Add Immunization </IonTitle>
-              <IonButtons slot="end">
-                <IonButton strong={true} onClick={createImmunization}>
-                  Confirm
-                </IonButton>
-              </IonButtons>
-            </IonToolbar>
-          </IonHeader>
-          <IonContent className="ion-padding">
-            <IonItem lines="full">
-              <IonLabel position="floating">Vaccination Name</IonLabel>
-              <IonInput
-                type="text"
-                onIonChange={(e) => setVaccineName(e.target.value)}
-                required
-              ></IonInput>
-            </IonItem>
-            <IonItem lines="full">
-              <IonLabel position="stacked">Administred Date</IonLabel>
-              <IonInput
-                type="date"
-                onIonChange={(e) => setAdminister(e.target.value)}
-              ></IonInput>
-            </IonItem>
-            <IonItem lines="full">
-              <IonLabel position="stacked">Expiry Date</IonLabel>
-              <IonInput
-                type="date"
-                onIonChange={(e) => setExpiry(e.target.value)}
-              ></IonInput>
-            </IonItem>
-          </IonContent>
-        </IonModal>
+        <AddImmunizationModal show={status} changestatus={changestatus} create={createImmunization} vaccine={setVaccineName} administer={setAdminister} expiry={setExpiry}></AddImmunizationModal>
 
         <IonButton className="back-button" routerLink="/home">
           Back
