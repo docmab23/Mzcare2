@@ -1,29 +1,17 @@
 import {
   IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
-  IonInput,
   IonButton,
-  IonLoading,
-  IonText,
-  IonLabel,
-  IonItem,
-  IonFooter,
   IonCard,
   IonCardSubtitle,
   IonCardContent,
   IonCardHeader,
   IonCardTitle,
-  IonIcon,
-  IonModal,
-  IonButtons,
+
 } from "@ionic/react";
 import { deleteField, doc, getDoc, updateDoc } from "firebase/firestore";
 
-import React, { useEffect, useRef, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useRef, useState } from "react";
 import FormTopBar from "../../components/FormTopBar";
 import { useAuth } from "../../contexts/AuthContext";
 import { useDatabase } from "../../contexts/DatabaseContext";

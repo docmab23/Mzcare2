@@ -1,27 +1,16 @@
 import {
   IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
-  IonInput,
   IonButton,
   IonLoading,
-  IonText,
-  IonLabel,
-  IonItem,
   IonCardTitle,
   IonCardHeader,
   IonCard,
   IonCardContent,
   IonCardSubtitle,
-  IonButtons,
-  IonModal,
 } from "@ionic/react";
 
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import FormTopBar from "../../components/FormTopBar";
 import { useDatabase } from "../../contexts/DatabaseContext";
 import { setICE } from "../database";
@@ -29,7 +18,6 @@ import { deleteField, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useAuth } from "../../contexts/AuthContext";
 import AddICEModal from "../../modals/AddICEModal";
-import { create } from "domain";
 import EditICEModal from "../../modals/EditICEModal";
 
 function Ice() {
