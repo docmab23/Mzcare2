@@ -16,7 +16,9 @@ import {
 	IonCard,
 	IonRow,
 	IonCol,
-	IonGrid
+	IonGrid,
+	IonCardContent,
+	IonSubTitle
 
 	
 } from "@ionic/react";
@@ -27,7 +29,7 @@ import { Link, useHistory } from "react-router-dom";
 // import { toast } from ".../toast";
 // import { setUserState } from "../redux/actions";
 import { useDispatch } from "react-redux";
-// import FormTopBar from "../../components/FormTopBar";
+import FormTopBar from "../components/FormTopBar";
 // import { setImmunization } from "../../firebase";
 import { useDatabase } from "../contexts/DatabaseContext";
   
@@ -72,69 +74,71 @@ function Em() {
 	return (
 		<IonPage>
       <IonContent className="ion-padding">
-       
+       <FormTopBar/>
         {"\u00a0\u00a0\u00a0"}
-        <h1>{"\u00a0\u00a0\u00a0"} </h1>
-        <h1>General</h1>
-		
+		<h1> {"\u00a0\u00a0\u00a0"}</h1>
+		<h1> {"\u00a0\u00a0\u00a0"}</h1>
+        <IonTitle align="center" color="primary">MzCare Emergency Profile </IonTitle>
+		<IonCard>
+        
+		<IonCardContent>
         {genList.map((item, pos) => {
           return (
             <IonGrid>
-				<IonRow className="info" key={pos}>
-                 <IonCol>Name: {genJson[item]["Name"]}</IonCol> 
-				 <IonCol>Age: {genJson[item]["Age"]}</IonCol>
-				 <IonCol>Blood Group: {genJson[item]["Bloodgroup"]}</IonCol>
-				 <IonCol>Full Address:{genJson[item]["Str_address"]+", "+genJson[item]["City"]+", "+genJson[item]["State"]+", "+genJson[item]["Zip"]}</IonCol>
+				<IonRow  key={pos}>
+                 <IonCol><IonText color="primary">Name: {genJson[item]["Name"]}</IonText></IonCol> 
+				 <IonCol><IonText color="primary">Age</IonText>: {genJson[item]["Age"]}</IonCol>
+				 <IonCol><IonText color="primary">Blood Group</IonText>: {genJson[item]["Bloodgroup"]}</IonCol>
+				 <IonCol><IonText color="primary">Full Address</IonText>: {genJson[item]["Str_address"]+", "+genJson[item]["City"]+", "+genJson[item]["State"]+", "+genJson[item]["Zip"]}</IonCol>
 				</IonRow>
 			</IonGrid>
 			
-
+			
 );
 })}
-ICE contacts:
+</IonCardContent>
+</IonCard>
+<h2>ICE contacts</h2>
+<IonCard>
+<IonCardContent>
+
 {iceList.map((item, pos) => {
           return (   
             <IonGrid>
-				<IonRow className="info" key={pos}>
-                 <IonCol><IonLabel font="bold">ICE Contact Name </IonLabel>: {iceJson[item]["name"]}</IonCol> 
-				 <IonCol>Contact No:{iceJson[item]["number"]}</IonCol>
+				<IonRow  key={pos}>
+                 <IonCol><IonText color="primary" font="bold">ICE Contact Name</IonText>: {iceJson[item]["name"]}</IonCol> 
+				 <IonCol><IonText color="primary" font="bold">Contact No:</IonText>{iceJson[item]["number"]}</IonCol>
 				</IonRow>
 			</IonGrid>
-			
-
 );
 })}
-Allergies
+</IonCardContent>
+</IonCard>
+<h2>Allergies</h2>
+<IonCard>
+<IonCardContent>
 {allergyList.map((item, pos) => {
           return (   
-            <IonGrid>
-				<IonRow className="info" key={pos}>
-                 <IonCol>{allergyJson[item]["allergyName"]}</IonCol> 
+            <IonGrid key={pos}>
+				<IonRow>
+                 <IonText color="primary">Source:</IonText>{allergyJson[item]["allergyName"]}
 				</IonRow>
 			</IonGrid>
-			
-
 );
 })}
+</IonCardContent>
+</IonCard>
 
-
+<h2>Immunizations/Vaccines</h2>
 {immunizationList.map((item, pos) => {
           return (   
             <IonGrid>
-				<IonRow className="info" key={pos}>
-                 <IonCol>Immunization:{immunizationJson[item]["vaccineName"]}</IonCol> 
+				<IonRow key={pos}>
+                 <IonCol><IonCard><IonCardContent>{immunizationJson[item]["vaccineName"]}</IonCardContent></IonCard></IonCol> 
 				</IonRow>
 			</IonGrid>
-			
-
 );
 })}
-
-
-
-
-
-
 
 </IonContent>
 </IonPage>

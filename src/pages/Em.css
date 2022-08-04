@@ -6,3 +6,13 @@
 
 
 }
+
+.field {
+
+    font-size: large;
+    font-weight: 300;
+}
+
+ion-text {
+    font-weight: 300;
+}
