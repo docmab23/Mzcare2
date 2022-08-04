@@ -80,6 +80,13 @@ function Home() {
               ICE details{" "}
             </IonButton>
           </IonItem>
+
+          <IonItem>
+            <IonButton className="rbutton" routerLink="/condition">
+              {" "}
+              Conditions{" "}
+            </IonButton>
+          </IonItem>
         </div>
       </IonContent>
     </IonPage>

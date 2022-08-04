@@ -41,6 +41,11 @@ export async function setAllergy(data: any) {
   setDoc(allergyRef, data)
 }
 
+export async function setCondition(data: any) {
+  const conditionRef = doc(db, auth.currentUser?.uid + "/condition")
+  setDoc(conditionRef, data)
+}
+
 export async function setGeneral(data: any) {
   const generalRef = doc(db, auth.currentUser?.uid + "/general")
   setDoc(generalRef, data)
