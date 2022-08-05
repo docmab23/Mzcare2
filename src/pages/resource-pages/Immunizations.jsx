@@ -8,17 +8,14 @@ import {
   IonCardContent,
   IonCardHeader,
   IonCardTitle,
-<<<<<<< HEAD
   IonIcon,
   IonModal,
   IonRow,
   IonGrid,
   IonButtons,
-=======
-
->>>>>>> ad501b5afc0bce2642842d0371d4743fcc444dc0
 } from "@ionic/react";
 import { deleteField, doc, getDoc, updateDoc } from "firebase/firestore";
+import { useHistory } from "react-router";
 
 import React, { useRef, useState } from "react";
 import FormTopBar from "../../components/FormTopBar";

@@ -24,15 +24,11 @@ function Home() {
       <IonContent className="ion-padding">
         <FormTopBar />
         <div className="ion-padding container">
-<<<<<<< HEAD
-          <IonText>
-            <h2></h2>
+        <IonText>
+            <h2> {"\u00a0\u00a0\u00a0"}
+        {"\u00a0\u00a0\u00a0"} </h2>
           </IonText>
           <IonItem></IonItem>
-         
-=======
-          <IonItem>
->>>>>>> ad501b5afc0bce2642842d0371d4743fcc444dc0
             <IonButton className="rbutton" routerLink="/general">
               {" "}
               General Info{" "}
