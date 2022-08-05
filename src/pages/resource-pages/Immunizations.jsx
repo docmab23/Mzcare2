@@ -76,7 +76,10 @@ function Immunizations() {
       expiryDate: editExpiry
     };
     submitImmunizationData[editName] = immunizationData;
-    immunizationList.push(editName);
+    if (originalEditName === editName) {
+      updateDoc(immunizationRef, submitImmunizationData)
+    } else {
+      immunizationList.push(editName);
     for (let key in immunizationJson) {
       submitImmunizationData[key] = immunizationJson[key];
     }
@@ -85,7 +88,8 @@ function Immunizations() {
     await setImmunization(submitImmunizationData);
     await updateDoc(immunizationRef, {
       [originalEditName]: deleteField(),
-    }).then(async () => {
+    })
+    }
       const immunizationLinks = [];
       await getDoc(immunizationRef).then((docSnap) => {
         if (docSnap.exists()) {
@@ -97,7 +101,6 @@ function Immunizations() {
           setImmunizationJson(immunizationData);
         }
       });
-    });
     setEditStatus(!editStatus);
   }
 

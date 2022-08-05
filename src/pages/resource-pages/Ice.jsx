@@ -53,27 +53,30 @@ function Ice() {
       number: editContact,
     };
     submitICEData[editName] = iceData;
-    iceList.push(editName);
-    for (let key in iceJson) {
-      submitICEData[key] = iceJson[key];
-    }
-    setICEJson(submitICEData);
-    setICEList(iceList);
-    await setICE(submitICEData);
-    await updateDoc(iceRef, {
-      [originalEditName]: deleteField(),
-    }).then(async () => {
-      const iceLinks = [];
-      await getDoc(iceRef).then((docSnap) => {
-        if (docSnap.exists()) {
-          const iceData = docSnap.data();
-          for (let key in iceData) {
-            iceLinks.push(key);
-          }
-          setICEList(iceLinks);
-          setICEJson(iceData);
-        }
+    if (originalEditName === editName) {
+      updateDoc(iceRef, submitICEData);
+    } else {
+      iceList.push(editName);
+      for (let key in iceJson) {
+        submitICEData[key] = iceJson[key];
+      }
+      setICEJson(submitICEData);
+      setICEList(iceList);
+      await setICE(submitICEData);
+      await updateDoc(iceRef, {
+        [originalEditName]: deleteField(),
       });
+    }
+    const iceLinks = [];
+    await getDoc(iceRef).then((docSnap) => {
+      if (docSnap.exists()) {
+        const iceData = docSnap.data();
+        for (let key in iceData) {
+          iceLinks.push(key);
+        }
+        setICEList(iceLinks);
+        setICEJson(iceData);
+      }
     });
     setEditStatus(!editStatus);
   }
@@ -126,26 +129,25 @@ function Ice() {
         {"\u00a0\u00a0\u00a0"}
         <h1>{"\u00a0\u00a0\u00a0"} </h1>
         <h1>In Case of Emergency</h1>
-        {iceList
-          .map((item, pos) => {
-            return (
-              <IonCard
-                key={item}
-                onClick={async () => {
-                  changeEditStatus(iceJson[item]);
-                }}
-              >
-                <IonCardHeader>
-                  <IonCardTitle>{iceJson[item]["name"]}</IonCardTitle>
-                </IonCardHeader>
-                <IonCardContent>
-                  <IonCardSubtitle>
-                    Number: {iceJson[item]["number"]}
-                  </IonCardSubtitle>
-                </IonCardContent>
-              </IonCard>
-            );
-          })}
+        {iceList.map((item, pos) => {
+          return (
+            <IonCard
+              key={item}
+              onClick={async () => {
+                changeEditStatus(iceJson[item]);
+              }}
+            >
+              <IonCardHeader>
+                <IonCardTitle>{iceJson[item]["name"]}</IonCardTitle>
+              </IonCardHeader>
+              <IonCardContent>
+                <IonCardSubtitle>
+                  Number: {iceJson[item]["number"]}
+                </IonCardSubtitle>
+              </IonCardContent>
+            </IonCard>
+          );
+        })}
         {iceList.length === 3 ? (
           <IonButton
             disabled={true}
@@ -165,8 +167,22 @@ function Ice() {
             Add Contact
           </IonButton>
         )}
-		<AddICEModal show={status} close={changestatus} create={createICE} name={setICEName} contact={setContact}></AddICEModal>
-        <EditICEModal show={editStatus} edit={editICE} delete={deleteICE} name={setEditName} contact={setEditContact} editName={editName} editContact={editContact}></EditICEModal>
+        <AddICEModal
+          show={status}
+          close={changestatus}
+          create={createICE}
+          name={setICEName}
+          contact={setContact}
+        ></AddICEModal>
+        <EditICEModal
+          show={editStatus}
+          edit={editICE}
+          delete={deleteICE}
+          name={setEditName}
+          contact={setEditContact}
+          editName={editName}
+          editContact={editContact}
+        ></EditICEModal>
         <IonButton className="back-button" routerLink="/home">
           Back
         </IonButton>
