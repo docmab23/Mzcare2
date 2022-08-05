@@ -7,12 +7,12 @@ return (
           <IonHeader>
             <IonToolbar>
               <IonButtons slot="start">
-                <IonButton onClick={props.edit}>Save</IonButton>
+                <IonButton onClick={props.delete}>Delete</IonButton>
               </IonButtons>
               <IonTitle> Edit Contact Details </IonTitle>
               <IonButtons slot="end">
-                <IonButton strong={true} onClick={props.delete}>
-                  Delete
+                <IonButton strong={true} onClick={props.edit}>
+                  Save
                 </IonButton>
               </IonButtons>
             </IonToolbar>

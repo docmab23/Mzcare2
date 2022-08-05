@@ -1,24 +1,13 @@
 import {
     IonContent,
-    IonHeader,
     IonPage,
-    IonTitle,
-    IonToolbar,
-    IonInput,
     IonButton,
-    IonLoading,
-    IonText,
-    IonLabel,
-    IonItem,
     IonFooter,
     IonCard,
     IonCardSubtitle,
     IonCardContent,
     IonCardHeader,
     IonCardTitle,
-    IonIcon,
-    IonButtons,
-    IonModal,
   } from "@ionic/react";
   
   import React, { useState, useRef } from "react";
@@ -44,7 +33,6 @@ import EditConditionModal from "../../modals/EditConditionModal";
     const [conditionStatus, setConditionStatus] = useState("");
     const [editConditionStatus, setEditConditionStatus] = useState("");
     const [busy, setBusy] = useState(false);
-    const history = useHistory();
     const { currentUser } = useAuth();
     const {
       conditionJson,

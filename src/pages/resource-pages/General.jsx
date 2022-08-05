@@ -6,8 +6,6 @@ import {
 	IonToolbar,
 	IonInput,
 	IonButton,
-	IonLoading,
-	IonText,
 	IonLabel,
 	IonItem,
 	IonFooter,
@@ -16,7 +14,6 @@ import {
 	IonCardContent,
 	IonCardHeader,
 	IonCardTitle,
-	IonIcon,
 	IonButtons,
 	IonModal,
   } from "@ionic/react";
@@ -28,7 +25,6 @@ import {
   import { useDatabase } from "../../contexts/DatabaseContext";
   
   function General(props) {
-	const modal = useRef(null);
 	const input = useRef(null);
 	const [status, setStatus] = useState(props.tell);
 	const [name, setName] = useState("");
@@ -42,7 +38,6 @@ import {
 	const [city, setCity] = useState("");
 	const [zip, setZip] = useState("");
 	const [busy, setBusy] = useState(false);
-	const history = useHistory();
 	const {
 	  genJson,
 	  setGenJson,
