@@ -55,6 +55,7 @@ import Try1 from './pages/resource-pages/Try1';
 import Em from './pages/Em';
 import { connectStorageEmulator } from 'firebase/storage';
 import Condition from './pages/resource-pages/Conditions';
+import "./App.css";
 
 
 // import Home from "../pages/Home";
@@ -91,7 +92,7 @@ function App() {
           <Route path="/" render={() => <Redirect to="/login" />} exact={true} />
         </IonRouterOutlet>
         
-        <IonTabBar slot="bottom">
+        <IonTabBar slot="bottom" className="footer-tab">
         <IonTabButton tab="EM Profile" href="/em_tab">
                 <IonIcon src={em}>EM</IonIcon>
               </IonTabButton>
