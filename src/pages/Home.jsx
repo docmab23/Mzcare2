@@ -28,7 +28,7 @@ function Home() {
             <h2> {"\u00a0\u00a0\u00a0"}
         {"\u00a0\u00a0\u00a0"} </h2>
           </IonText>
-          <IonItem></IonItem>
+         
             <IonButton className="rbutton" routerLink="/general">
               {" "}
               General Info{" "}
