@@ -12,12 +12,15 @@ import {
   IonItem,
   IonFooter,
   IonCard,
+  IonCol,
   IonCardSubtitle,
   IonCardContent,
   IonCardHeader,
   IonCardTitle,
   IonIcon,
   IonModal,
+  IonRow,
+  IonGrid,
   IonButtons,
 } from "@ionic/react";
 import { deleteField, doc, getDoc, updateDoc } from "firebase/firestore";
@@ -31,8 +34,12 @@ import { db } from "../../firebase";
 import AddImmunizationModal from "../../modals/AddImmunizationModal";
 import EditImmunizationModal from "../../modals/EditImmunizatioModal";
 import { setImmunization } from "../database";
+import { IoIosArrowRoundBack } from "react-icons/io";
+import "./Immunizations.css";
+import back from "../../images/back.svg";
 
 function Immunizations() {
+  const history = useHistory();
   const [status, setStatus] = useState(false);
   const input = useRef(null);
   const [vaccineName, setVaccineName] = useState("");
@@ -51,6 +58,10 @@ function Immunizations() {
     setImmunizationJson,
     setImmunizationList,
   } = useDatabase();
+
+  function changeroute(){
+    history.replace("/home");
+  }
 
   function changestatus() {
     setStatus(!status);
@@ -147,7 +158,15 @@ function Immunizations() {
         <FormTopBar />
         {"\u00a0\u00a0\u00a0"}
         <h1>{"\u00a0\u00a0\u00a0"} </h1>
-        <h1>Immunizations</h1>
+       <IonGrid>
+        <IonRow>
+      <IonCol><IonButton fill="clear"  routerLink="/home">
+      <IonIcon slot="icon-only" src={back} name="home"></IonIcon>
+       </IonButton></IonCol>
+       <IonCol><h1 align="center">Immunizations</h1></IonCol>
+       <IonCol><h1 align="center">{"\u00a0\u00a0\u00a0"}</h1></IonCol>
+        </IonRow>
+        </IonGrid>
         {immunizationList.map((item, pos) => {
           return (
             <IonCard key={pos} onClick={async () => {
@@ -175,10 +194,8 @@ function Immunizations() {
 
         <AddImmunizationModal show={status} changestatus={changestatus} create={createImmunization} vaccine={setVaccineName} administer={setAdminister} expiry={setExpiry}></AddImmunizationModal>
         <EditImmunizationModal show={editStatus} edit={editImmunization} delete={deleteImmunization} name={setEditName} administer={setEditdAminister} expiry={setEditExpiry} editName={editName} editAdminister={editAdminister} editExpiry={editExpiry}></EditImmunizationModal>
+        
 
-        <IonButton className="back-button" routerLink="/home">
-          Back
-        </IonButton>
       </IonContent>
     </IonPage>
   );

@@ -32,6 +32,7 @@ import Immunizations from "./resource-pages/Immunizations";
 import { useDispatch, useSelector } from "react-redux";
 import FootNavbar from "../components/Foot-Navbar";
 
+
 function Home() {
   const [user, setUser] = useState({ loggedIn: false });
   const [error, setError] = useState([]);
@@ -53,40 +54,38 @@ function Home() {
             <h2></h2>
           </IonText>
           <IonItem></IonItem>
-          <IonItem>
+         
             <IonButton className="rbutton" routerLink="/general">
               {" "}
               General Info{" "}
             </IonButton>
-          </IonItem>
+         
 
-          <IonItem>
+        
             <IonButton className="rbutton" routerLink="/allergy">
               {" "}
               Allergies{" "}
             </IonButton>
-          </IonItem>
+         
 
-          <IonItem>
+          
             <IonButton className="rbutton" onClick={goImmunization}>
               {" "}
               Immunizations{" "}
             </IonButton>
-          </IonItem>
+       
 
-          <IonItem>
+          
             <IonButton className="rbutton" routerLink="/ice">
               {" "}
               ICE details{" "}
             </IonButton>
-          </IonItem>
 
-          <IonItem>
             <IonButton className="rbutton" routerLink="/condition">
               {" "}
               Conditions{" "}
             </IonButton>
-          </IonItem>
+          
         </div>
       </IonContent>
     </IonPage>

@@ -123,118 +123,107 @@ import {
             </IonCard>
           );
         })}
-        <IonButton id="open-modal" expand="block" onClick={changestatus}>
-          Add General Info
-        </IonButton>
 
-        <IonModal isOpen={status}>
-          <IonHeader>
-            <IonToolbar>
-              <IonButtons slot="start">
-                <IonButton onClick={changestatus}>Cancel</IonButton>
-              </IonButtons>
-              <IonTitle>Add Allergy </IonTitle>
-              <IonButtons slot="end">
-                <IonButton strong={true} onClick={creategeneral}>  
-                  Confirm
-                </IonButton> 
-              </IonButtons> 
-            </IonToolbar>
-          </IonHeader>
-          <IonContent className="ion-padding">
-            <IonItem>
-              <IonLabel position="floating">Name</IonLabel>
-              <IonInput
-                ref={input}
-                type="text"
-                onIonChange={(e) => setName(e.target.value)}  
-              />
-            </IonItem>
-            <IonItem>
-              <IonLabel position="stacked">Age</IonLabel>
-              <IonInput
-                ref={input}
-                type="number"
-                onIonChange={(e) => setAge(e.target.value)}
-              />
-            </IonItem>
-			<IonItem>
-              <IonLabel position="stacked">Blood group</IonLabel>
-              <IonInput
-                ref={input}
-                type="text"
-                onIonChange={(e) => setBgroup(e.target.value)}
-              />
-            </IonItem>
-			<IonItem>
-              <IonLabel position="stacked">Height (in cm)</IonLabel>
-              <IonInput
-                ref={input}
-                type="number"
-                onIonChange={(e) => setHeight(e.target.value)}
-              />
-            </IonItem>
-			<IonItem>
-              <IonLabel position="stacked">Family physician(if any)</IonLabel>
-              <IonInput
-                ref={input}
-                type="text"
-                onIonChange={(e) => setFphysician(e.target.value)}
-              />
-            </IonItem>
-			<IonItem>
-              <IonLabel position="stacked">Ethinicity</IonLabel>
-			  
-              <IonInput
-                ref={input}
-                type="text"
-                onIonChange={(e) => setEthinicity(e.target.value)}
-              />
-            </IonItem>
-			<IonItem>
-              <IonLabel position="stacked">Street Address</IonLabel>
-			  
-              <IonInput
-                ref={input}
-                type="text"
-                onIonChange={(e) => setAddress(e.target.value)}
-              />
-            </IonItem>
-			<IonItem>
-              <IonLabel position="stacked">City</IonLabel>
-			  
-              <IonInput
-                ref={input}
-                type="text"
-                onIonChange={(e) => setCity(e.target.value)}
-              />
-            </IonItem>
-			<IonItem>
-              <IonLabel position="stacked">State</IonLabel>
-			  
-              <IonInput
-                ref={input}
-                type="text"
-                onIonChange={(e) => setState(e.target.value)}
-              />
-            </IonItem>
-			<IonItem>
-              <IonLabel position="stacked">Zip/Postal code</IonLabel>
-			  
-              <IonInput
-                ref={input}
-                type="number"
-                onIonChange={(e) => setZip(e.target.value)}
-              />
-            </IonItem>
-          </IonContent>
-        </IonModal>
-        <IonButton className="back-button" routerLink="/home">
-          Back
-        </IonButton>
+        {genList.length == 0 && <><IonButton id="open-modal" expand="block" onClick={changestatus}>
+          Add General Info
+        </IonButton><IonModal isOpen={status}>
+            <IonHeader>
+              <IonToolbar>
+                <IonButtons slot="start">
+                  <IonButton onClick={changestatus}>Cancel</IonButton>
+                </IonButtons>
+                <IonTitle>Add Allergy </IonTitle>
+                <IonButtons slot="end">
+                  <IonButton strong={true} onClick={creategeneral}>
+                    Confirm
+                  </IonButton>
+                </IonButtons>
+              </IonToolbar>
+            </IonHeader>
+            <IonContent className="ion-padding">
+              <IonItem>
+                <IonLabel position="floating">Name</IonLabel>
+                <IonInput
+                  ref={input}
+                  type="text"
+                  onIonChange={(e) => setName(e.target.value)} />
+              </IonItem>
+              <IonItem>
+                <IonLabel position="stacked">Age</IonLabel>
+                <IonInput
+                  ref={input}
+                  type="number"
+                  onIonChange={(e) => setAge(e.target.value)} />
+              </IonItem>
+              <IonItem>
+                <IonLabel position="stacked">Blood group</IonLabel>
+                <IonInput
+                  ref={input}
+                  type="text"
+                  onIonChange={(e) => setBgroup(e.target.value)} />
+              </IonItem>
+              <IonItem>
+                <IonLabel position="stacked">Height (in cm)</IonLabel>
+                <IonInput
+                  ref={input}
+                  type="number"
+                  onIonChange={(e) => setHeight(e.target.value)} />
+              </IonItem>
+              <IonItem>
+                <IonLabel position="stacked">Family physician(if any)</IonLabel>
+                <IonInput
+                  ref={input}
+                  type="text"
+                  onIonChange={(e) => setFphysician(e.target.value)} />
+              </IonItem>
+              <IonItem>
+                <IonLabel position="stacked">Ethinicity</IonLabel>
+
+                <IonInput
+                  ref={input}
+                  type="text"
+                  onIonChange={(e) => setEthinicity(e.target.value)} />
+              </IonItem>
+              <IonItem>
+                <IonLabel position="stacked">Street Address</IonLabel>
+
+                <IonInput
+                  ref={input}
+                  type="text"
+                  onIonChange={(e) => setAddress(e.target.value)} />
+              </IonItem>
+              <IonItem>
+                <IonLabel position="stacked">City</IonLabel>
+
+                <IonInput
+                  ref={input}
+                  type="text"
+                  onIonChange={(e) => setCity(e.target.value)} />
+              </IonItem>
+              <IonItem>
+                <IonLabel position="stacked">State</IonLabel>
+
+                <IonInput
+                  ref={input}
+                  type="text"
+                  onIonChange={(e) => setState(e.target.value)} />
+              </IonItem>
+              <IonItem>
+                <IonLabel position="stacked">Zip/Postal code</IonLabel>
+
+                <IonInput
+                  ref={input}
+                  type="number"
+                  onIonChange={(e) => setZip(e.target.value)} />
+              </IonItem>
+            </IonContent>
+          </IonModal></>}
+          <IonButton className="back-button" routerLink="/home">
+            Back
+          </IonButton>
       </IonContent>
       <IonFooter></IonFooter>
-    </IonPage>
+    </IonPage> 
 	 
 	);
   }
