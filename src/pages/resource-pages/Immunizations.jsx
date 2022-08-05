@@ -32,7 +32,6 @@ import back from "../../images/back.svg";
 function Immunizations() {
   const history = useHistory();
   const [status, setStatus] = useState(false);
-  const input = useRef(null);
   const [vaccineName, setVaccineName] = useState("");
   const [editStatus, setEditStatus] = useState(false);
   const [editName, setEditName] = useState("");
@@ -50,7 +49,7 @@ function Immunizations() {
     setImmunizationList,
   } = useDatabase();
 
-  function changeroute(){
+  function changeroute() {
     history.replace("/home");
   }
 
@@ -73,34 +72,34 @@ function Immunizations() {
     const immunizationData = {
       vaccineName: editName,
       administerDate: editAdminister,
-      expiryDate: editExpiry
+      expiryDate: editExpiry,
     };
     submitImmunizationData[editName] = immunizationData;
     if (originalEditName === editName) {
-      updateDoc(immunizationRef, submitImmunizationData)
+      updateDoc(immunizationRef, submitImmunizationData);
     } else {
       immunizationList.push(editName);
-    for (let key in immunizationJson) {
-      submitImmunizationData[key] = immunizationJson[key];
-    }
-    setImmunizationJson(submitImmunizationData);
-    setImmunizationList(immunizationList);
-    await setImmunization(submitImmunizationData);
-    await updateDoc(immunizationRef, {
-      [originalEditName]: deleteField(),
-    })
-    }
-      const immunizationLinks = [];
-      await getDoc(immunizationRef).then((docSnap) => {
-        if (docSnap.exists()) {
-          const immunizationData = docSnap.data();
-          for (let key in immunizationData) {
-            immunizationLinks.push(key);
-          }
-          setImmunizationList(immunizationLinks);
-          setImmunizationJson(immunizationData);
-        }
+      for (let key in immunizationJson) {
+        submitImmunizationData[key] = immunizationJson[key];
+      }
+      setImmunizationJson(submitImmunizationData);
+      setImmunizationList(immunizationList);
+      await setImmunization(submitImmunizationData);
+      await updateDoc(immunizationRef, {
+        [originalEditName]: deleteField(),
       });
+    }
+    const immunizationLinks = [];
+    await getDoc(immunizationRef).then((docSnap) => {
+      if (docSnap.exists()) {
+        const immunizationData = docSnap.data();
+        for (let key in immunizationData) {
+          immunizationLinks.push(key);
+        }
+        setImmunizationList(immunizationLinks);
+        setImmunizationJson(immunizationData);
+      }
+    });
     setEditStatus(!editStatus);
   }
 
@@ -149,23 +148,35 @@ function Immunizations() {
   return (
     <IonPage>
       <IonContent className="ion-padding">
-        <FormTopBar />
-        {"\u00a0\u00a0\u00a0"}
+        <div>
+          <FormTopBar />
+        </div>
         <h1>{"\u00a0\u00a0\u00a0"} </h1>
-       <IonGrid>
-        <IonRow>
-      <IonCol><IonButton fill="clear"  routerLink="/home">
-      <IonIcon slot="icon-only" src={back} name="home"></IonIcon>
-       </IonButton></IonCol>
-       <IonCol><h1 align="center">Immunizations</h1></IonCol>
-       <IonCol><h1 align="center">{"\u00a0\u00a0\u00a0"}</h1></IonCol>
-        </IonRow>
+        <IonGrid>
+        <h1>
+          <IonRow>
+            <IonCol className="ion-align-self-start">
+              <div>
+                <IonIcon slot="icon-only" src={back} name="home"></IonIcon>
+              </div>{" "}
+            </IonCol>
+            <IonCol className="ion-align-self-center heading">
+              Immunizations
+            </IonCol>
+            <IonCol className="ion-align-self-end">
+              
+            </IonCol>
+          </IonRow>
+          </h1>
         </IonGrid>
         {immunizationList.map((item, pos) => {
           return (
-            <IonCard key={pos} onClick={async () => {
-              changeEditStatus(immunizationJson[item]);
-            }}>
+            <IonCard
+              key={pos}
+              onClick={async () => {
+                changeEditStatus(immunizationJson[item]);
+              }}
+            >
               <IonCardHeader>
                 <IonCardTitle>
                   {immunizationJson[item]["vaccineName"]}
@@ -185,11 +196,25 @@ function Immunizations() {
         <IonButton id="open-modal" expand="block" onClick={changestatus}>
           Add Immunizations
         </IonButton>
-
-        <AddImmunizationModal show={status} changestatus={changestatus} create={createImmunization} vaccine={setVaccineName} administer={setAdminister} expiry={setExpiry}></AddImmunizationModal>
-        <EditImmunizationModal show={editStatus} edit={editImmunization} delete={deleteImmunization} name={setEditName} administer={setEditdAminister} expiry={setEditExpiry} editName={editName} editAdminister={editAdminister} editExpiry={editExpiry}></EditImmunizationModal>
-        
-
+        <AddImmunizationModal
+          show={status}
+          changestatus={changestatus}
+          create={createImmunization}
+          vaccine={setVaccineName}
+          administer={setAdminister}
+          expiry={setExpiry}
+        ></AddImmunizationModal>
+        <EditImmunizationModal
+          show={editStatus}
+          edit={editImmunization}
+          delete={deleteImmunization}
+          name={setEditName}
+          administer={setEditdAminister}
+          expiry={setEditExpiry}
+          editName={editName}
+          editAdminister={editAdminister}
+          editExpiry={editExpiry}
+        ></EditImmunizationModal>
       </IonContent>
     </IonPage>
   );
