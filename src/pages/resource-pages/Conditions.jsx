@@ -20,7 +20,6 @@ import { deleteField, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useAuth } from "../../contexts/AuthContext";
 import EditConditionModal from "../../modals/EditConditionModal";
-//   import EditConditionModal from "../../modals/EditConditionModal";
 
 function Condition() {
   const modal = useRef(null);

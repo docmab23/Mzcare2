@@ -19,6 +19,7 @@ import { registerUser } from "../firebase";
 import "./Register.css";
 import FormTopBar from "../components/FormTopBar";
 import { useAuth } from "../contexts/AuthContext";
+import { errors } from "../utils/Utils";
 
 function Register() {
   const history = useHistory();
@@ -46,7 +47,7 @@ function Register() {
       }
       
     } catch (e) {
-      toast(e);
+      toast (errors(e))
     }
     setBusy(false);
   }

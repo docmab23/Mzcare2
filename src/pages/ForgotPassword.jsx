@@ -19,6 +19,7 @@ import {
   import { useDispatch } from "react-redux";
   import FormTopBar from "../components/FormTopBar";
   import { useAuth } from "../contexts/AuthContext";
+import { errors } from "../utils/Utils";
   
   function ForgotPassword () {
     const [busy, setBusy] = useState<boolean>(false);
@@ -32,8 +33,8 @@ import {
       try {
        await resetPassword(email);
         toast("Email sent");
-      } catch {
-        toast("error");
+      } catch(e) {
+        toast (errors(e))
       }
       setBusy(false);
     }

@@ -22,6 +22,7 @@ import { useDispatch } from "react-redux";
 import FormTopBar from "../components/FormTopBar";
 import  { changeUser } from "./auth";
 import { useAuth } from "../contexts/AuthContext";
+import { errors } from "../utils/Utils";
 
 function Login() {
 	const [busy, setBusy] = useState(false);
@@ -42,7 +43,7 @@ function Login() {
 			toast("You have logged in");
 		}
     } catch (e) {
-      toast (e)
+      toast (errors(e))
     }
 		setBusy(false);
 	}
