@@ -56,6 +56,7 @@ import Em from './pages/Em';
 import { connectStorageEmulator } from 'firebase/storage';
 import Condition from './pages/resource-pages/Conditions';
 import "./App.css";
+import Settings from './pages/Settings';
 
 
 // import Home from "../pages/Home";
@@ -86,6 +87,7 @@ function App() {
           <Route path="/forgotPassword" component={ForgotPassword} />
           <Route path="/allergy" component={Allergy} />
           <Route path="/immune" component={Immunizations} />
+          <Route path="/settings" component={Settings} />
           <Route path="/ice" component={Ice} />
           <Route path="/condition" component={Condition} />
           <Route path="/general" render={(props) => <General {...props} tell={true} />}/>
@@ -99,7 +101,7 @@ function App() {
               <IonTabButton tab="Home" href="/home">
                 <IonIcon src={hicon}>Home</IonIcon>
               </IonTabButton>
-              <IonTabButton tab="Settings" href="/home">
+              <IonTabButton tab="Settings" href="/settings">
                 <IonIcon src={sett}>Settings</IonIcon>
               </IonTabButton>
   

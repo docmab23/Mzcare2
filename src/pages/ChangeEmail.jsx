@@ -23,7 +23,7 @@ import { errors } from "../utils/Utils";
 
 
 function ChangeEmail ()  {
-  const [busy, setBusy] = useState<boolean>(false);
+  const [busy, setBusy] = useState(false);
   const history = useHistory();
   // const dispatch = useDispatch();
   const [email, setEmail] = useState("");
