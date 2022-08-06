@@ -2,7 +2,7 @@ import React from 'react';
 import './FormTopBar.css';
 import white from "../images/MzCare_Logo_white.png"
 
-const FormTopBar: React.FC = () => {
+function FormTopBar () {
   return (
     <div className="placeTop">
         <div className='logoPlacement'>

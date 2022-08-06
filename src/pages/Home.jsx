@@ -3,7 +3,7 @@ import {
   IonPage,
   IonButton,
   IonItem,
-  IonText,
+  IonText
 } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 import React from "react";
@@ -28,7 +28,7 @@ function Home() {
             <h2> {"\u00a0\u00a0\u00a0"}
         {"\u00a0\u00a0\u00a0"} </h2>
           </IonText>
-          <IonItem></IonItem>
+         
             <IonButton className="rbutton" routerLink="/general">
               {" "}
               General Info{" "}

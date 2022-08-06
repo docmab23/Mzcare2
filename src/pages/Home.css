@@ -1,6 +1,5 @@
 .rbutton {
-    size: 100px;
-    width: 300px;
+    width: 100%;
     height: 70px;
     --background-hover: #FFFFFF;
 }
@@ -9,13 +8,6 @@
     size:48px;
     height: 30px;
 };
-
-.image-icons{
-    height: 50px;
-    width: 90x;
-    
-
-}; 
 
 h2 {
 

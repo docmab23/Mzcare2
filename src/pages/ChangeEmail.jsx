@@ -19,6 +19,7 @@ import { toast } from "../toast";
 import { useDispatch } from "react-redux";
 import FormTopBar from "../components/FormTopBar";
 import { useAuth } from "../contexts/AuthContext";
+import { errors } from "../utils/Utils";
 
 
 function ChangeEmail ()  {
@@ -35,8 +36,8 @@ function ChangeEmail ()  {
       await reAuthenticate(password);
       await updateUserEmail(email);
       toast("Email changed successfully");
-    } catch {
-      toast("error");
+    } catch(e) {
+      toast (errors(e))
     }
     setBusy(false);
   }

@@ -24,6 +24,7 @@ import  { changeUser } from "./auth";
 import { useAuth } from "../contexts/AuthContext";
 import {useDatabase} from "../contexts/DatabaseContext";
 import { compose } from "@reduxjs/toolkit";
+import FromTopBar from"../components/FormTopBar";
 function Login() {
 	const [busy, setBusy] = useState(false);
 	const history = useHistory();

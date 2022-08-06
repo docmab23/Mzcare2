@@ -19,6 +19,7 @@ import { toast } from "../toast";
 import { useDispatch } from "react-redux";
 import FormTopBar from "../components/FormTopBar";
 import { useAuth } from "../contexts/AuthContext";
+import { errors } from "../utils/Utils";
 
 function ChangePassword () {
 	const [busy, setBusy] = useState(false);
@@ -40,10 +41,9 @@ function ChangePassword () {
       await reAuthenticate(oldPassword);
       await updateUserPassword(password);
       toast("Password Reset Succesfully")
-    } catch {
-      toast("error")
+    } catch (e) {
+      toast (errors(e))
     }
-		// const res: any = await loginUser(username, password);
 		setBusy(false);
 	}
 
