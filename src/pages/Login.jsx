@@ -22,7 +22,8 @@ import { useDispatch } from "react-redux";
 import FormTopBar from "../components/FormTopBar";
 import  { changeUser } from "./auth";
 import { useAuth } from "../contexts/AuthContext";
-
+import {useDatabase} from "../contexts/DatabaseContext";
+import { compose } from "@reduxjs/toolkit";
 function Login() {
 	const [busy, setBusy] = useState(false);
 	const history = useHistory();
@@ -30,6 +31,7 @@ function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
   const { login } = useAuth();
+  const {genList} = useDatabase();
   
 
 	async function loginUser() {
@@ -37,12 +39,33 @@ function Login() {
     try {
       const res = await login(email, password);
 		if (res) {
+      if (auth.currentUser.emailVerified){
       dispatch(changeUser(auth.currentUser.uid))
-			history.replace("/home");
+      if (genList.length==0){
+        history.replace("/general");
+      }
+      else{
+			history.replace("/home");}
 			toast("You have logged in");
 		}
+    else{
+      toast("Email not verified, check your Spam!");
+    }
+  }
+    else{
+      toast("Not able to login");
+    }
     } catch (e) {
-      toast (e)
+      if (e.code=="auth/wrong-password"){
+        toast('Wrong password!');
+      }
+      else if (e.code=="auth/user-not-found"){
+        toast("This Email ID has not been registered with MzCare");
+      }
+      else{
+      toast (e);}
+      console.log(e);
+      
     }
 		setBusy(false);
 	}

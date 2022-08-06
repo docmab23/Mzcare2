@@ -19,6 +19,7 @@ import { registerUser } from "../firebase";
 import "./Register.css";
 import FormTopBar from "../components/FormTopBar";
 import { useAuth } from "../contexts/AuthContext";
+import { auth } from "../firebase";
 
 function Register() {
   const history = useHistory();
@@ -27,6 +28,8 @@ function Register() {
   const [cpassword, setCPassword] = useState("");
   const [busy, setBusy] = useState(false);
   const {signup} = useAuth();
+  const {emailVerification} = useAuth();
+  const currentUser = useAuth();
 
   async function register() {
     // validation
@@ -39,17 +42,27 @@ function Register() {
         return toast("Username and password are required");
       }
   
+      /*const res = await signup(username, password).then(() => {
+         emailVerification().then(() => {toast('You must have recieved an email.')})}).then(() =>  {toast("You have registered successfully");
+         history.replace("/general")});*/
+      
       const res = await signup(username, password);
-      if (res) {
-        toast("You have registered successfully");
-        history.replace("/general");
+      // console.log(currentUser);
+      if (res) {  
+        await emailVerification();
+        toast("Verify your email to Login");
+        // history.replace("/general");
+        }
       }
       
-    } catch (e) {
+    catch (e) {
       toast(e);
     }
+    
     setBusy(false);
   }
+  
+
 
   return (
     <IonPage>
