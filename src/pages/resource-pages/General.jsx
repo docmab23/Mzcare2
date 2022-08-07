@@ -16,6 +16,10 @@ import {
 	IonCardTitle,
 	IonButtons,
 	IonModal,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonIcon
   } from "@ionic/react";
   
   import React, { useState, useRef } from "react";
@@ -24,6 +28,7 @@ import {
   import { setGeneral } from "../database";
   import { useDatabase } from "../../contexts/DatabaseContext";
 import { useAuth } from "../../contexts/AuthContext";
+  import back from "../../images/back.svg";
   
   function General(props) {
 	const input = useRef(null);
@@ -40,6 +45,7 @@ import { useAuth } from "../../contexts/AuthContext";
 	const [zip, setZip] = useState("");
 	const [busy, setBusy] = useState(false);
   const {currentUser} = useAuth();
+  const history = useHistory();
 	const {
 	  genJson,
 	  setGenJson,
@@ -81,8 +87,8 @@ import { useAuth } from "../../contexts/AuthContext";
 	  setStatus(!status);
 	}
 
-  if (currentUser === null) {
-    return (<Redirect to="/login"/>)
+  function changeroute(){
+    history.replace("/home")
   }
   
 	return (
@@ -91,7 +97,27 @@ import { useAuth } from "../../contexts/AuthContext";
         <FormTopBar />
         {"\u00a0\u00a0\u00a0"}
         <h1>{"\u00a0\u00a0\u00a0"} </h1>
-        <h1>General</h1>
+        <IonGrid>
+        <h1>
+          <IonRow className="home">
+            <IonCol>
+              <div>
+                <IonButton onClick={changeroute} color="light">
+                <IonIcon src={back}></IonIcon>
+                </IonButton>
+              </div>{" "}
+            </IonCol>
+            <IonCol className="ion-align-self-center heading">
+              General Info
+            </IonCol>
+            <IonCol className="ion-align-self-end">
+              
+            </IonCol>
+          </IonRow>
+          </h1>
+          </IonGrid>
+       
+
         {genList.map((item, pos) => {
           return (
             <IonCard key={pos}>
@@ -133,7 +159,7 @@ import { useAuth } from "../../contexts/AuthContext";
                 <IonButtons slot="start">
                   <IonButton onClick={changestatus}>Cancel</IonButton>
                 </IonButtons>
-                <IonTitle>Add Allergy </IonTitle>
+                <IonTitle>Add Info</IonTitle>
                 <IonButtons slot="end">
                   <IonButton strong={true} onClick={creategeneral}>
                     Confirm
@@ -219,9 +245,7 @@ import { useAuth } from "../../contexts/AuthContext";
               </IonItem>
             </IonContent>
           </IonModal></>}
-          <IonButton className="back-button" routerLink="/home">
-            Back
-          </IonButton>
+          
       </IonContent>
       <IonFooter></IonFooter>
     </IonPage> 
