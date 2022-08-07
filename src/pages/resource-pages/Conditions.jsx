@@ -20,6 +20,7 @@ import { deleteField, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useAuth } from "../../contexts/AuthContext";
 import EditConditionModal from "../../modals/EditConditionModal";
+import BackButton from "../../components/Backbutton";
 
 function Condition() {
   const modal = useRef(null);
@@ -132,7 +133,7 @@ function Condition() {
         <FormTopBar />
         {"\u00a0\u00a0\u00a0"}
         <h1>{"\u00a0\u00a0\u00a0"} </h1>
-        <h1>Conditions</h1>
+        <BackButton page="Conditions"/>
         {conditionList.map((item, pos) => {
           return (
             <IonCard
@@ -173,9 +174,7 @@ function Condition() {
           editName={editConditionName}
           editStatus={editConditionStatus}
         ></EditConditionModal>
-        <IonButton className="back-button" routerLink="/home">
-          Back
-        </IonButton>
+       
       </IonContent>
       <IonFooter></IonFooter>
     </IonPage>

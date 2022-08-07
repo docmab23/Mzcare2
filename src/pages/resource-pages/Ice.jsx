@@ -8,6 +8,10 @@ import {
   IonCard,
   IonCardContent,
   IonCardSubtitle,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonIcon
 } from "@ionic/react";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -19,6 +23,8 @@ import { db } from "../../firebase";
 import { useAuth } from "../../contexts/AuthContext";
 import AddICEModal from "../../modals/AddICEModal";
 import EditICEModal from "../../modals/EditICEModal";
+import back from "../../images/back.svg";
+import { useHistory } from "react-router";
 
 function Ice() {
   const input = useRef(null);
@@ -32,6 +38,7 @@ function Ice() {
   const [busy, setBusy] = useState(false);
   const { iceJson, iceList, setICEJson, setICEList } = useDatabase();
   const { currentUser } = useAuth();
+  const history = useHistory();
 
   function changestatus() {
     setStatus(!status);
@@ -43,6 +50,11 @@ function Ice() {
     setEditContact(jsonToEdit["number"]);
     setEditStatus(!status);
   }
+
+  function changeroute() {
+    history.replace("/home");
+  }
+
 
   async function editICE(e) {
     e.preventDefault();
@@ -128,7 +140,25 @@ function Ice() {
         <FormTopBar />
         {"\u00a0\u00a0\u00a0"}
         <h1>{"\u00a0\u00a0\u00a0"} </h1>
-        <h1>In Case of Emergency</h1>
+        <IonGrid>
+       
+          <IonRow className="home">
+            <IonCol>
+              <div>
+                <IonButton onClick={changeroute} color="light">
+                <IonIcon src={back}></IonIcon>
+                </IonButton>
+              </div>{" "}
+            </IonCol>
+            <IonCol className="ion-align-self-center heading">
+              Emergency Contacts
+            </IonCol>
+            <IonCol className="ion-align-self-end">
+              
+            </IonCol>
+          </IonRow>
+          </IonGrid>
+        
         {iceList.map((item, pos) => {
           return (
             <IonCard
@@ -183,9 +213,7 @@ function Ice() {
           editName={editName}
           editContact={editContact}
         ></EditICEModal>
-        <IonButton className="back-button" routerLink="/home">
-          Back
-        </IonButton>
+        
       </IonContent>
     </IonPage>
   );

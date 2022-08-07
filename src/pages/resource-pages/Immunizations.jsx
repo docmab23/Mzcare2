@@ -156,8 +156,8 @@ function Immunizations() {
         <h1>
           <IonRow className="home">
             <IonCol>
-              <div className>
-                <IonButton onClick={changeroute} className="kneic">
+              <div>
+                <IonButton onClick={changeroute} color="light">
                 <IonIcon src={back}></IonIcon>
                 </IonButton>
               </div>{" "}

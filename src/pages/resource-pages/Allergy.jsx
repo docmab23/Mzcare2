@@ -20,6 +20,7 @@ import { deleteField, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useAuth } from "../../contexts/AuthContext";
 import EditAllergyModal from "../../modals/EditAllergyModal";
+import BackButton from "../../components/Backbutton";
 
 function Allergy() {
   const [status, setStatus] = useState(false);
@@ -134,7 +135,7 @@ function Allergy() {
         <FormTopBar />
         {"\u00a0\u00a0\u00a0"}
         <h1>{"\u00a0\u00a0\u00a0"} </h1>
-        <h1>Allergies</h1>
+        <BackButton page="Allergy"/>
         {allergyList.map((item, pos) => {
           return (
             <IonCard

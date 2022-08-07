@@ -31,6 +31,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import FormTopBar from "../components/FormTopBar";
 // import { setImmunization } from "../../firebase";
+import {toast} from "../toast";
 import { useDatabase } from "../contexts/DatabaseContext";
   
 import "./Em.css" ;
@@ -70,7 +71,7 @@ function Em() {
 	  console.log(show_);
 	
 
-  
+    if (genList.length != 0){
 	return (
 		<IonPage>
       <IonContent className="ion-padding">
@@ -92,8 +93,6 @@ function Em() {
 				 <IonCol><IonText color="primary">Full Address</IonText>: {genJson[item]["Str_address"]+", "+genJson[item]["City"]+", "+genJson[item]["State"]+", "+genJson[item]["Zip"]}</IonCol>
 				</IonRow>
 			</IonGrid>
-			
-			
 );
 })}
 </IonCardContent>
@@ -143,5 +142,18 @@ function Em() {
 </IonContent>
 </IonPage>
 	);
+	}	
+else {
+
+	toast("Please fill your General info first to make your Emergency profile!");
+	return (
+		<IonPage>
+			<IonContent>
+				
+			</IonContent>
+		</IonPage>
+	)
 }
+}
+
 export default Em;
