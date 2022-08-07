@@ -21,8 +21,21 @@ import FormTopBar from "../components/FormTopBar";
 import { useAuth } from "../contexts/AuthContext";
 import { errors } from "../utils/Utils";
 
+
+
+
 function Settings () {
 	
+    const {logout} = useAuth();
+    const history = useHistory();
+
+
+    async function logout_user () {
+
+        await logout();
+        toast("You have been logged out!");
+        history.replace("/login");
+    }
 
 	return (
 		<IonPage>
@@ -35,10 +48,17 @@ function Settings () {
           </IonText>
         
        <IonButton  routerLink="/changePassword">
-        CHANGE PASSWORD
+       {" "}
+        CHANGE PASSWORD  {" "}
        </IonButton>
        <IonButton  routerLink="/changeEmail">
-        CHANGE EMAIL
+       {" "}
+        CHANGE EMAIL  {" "}
+       </IonButton>
+
+       <IonButton onClick={logout_user}>
+       {" "}
+        LOGOUT   {" "}
        </IonButton>
        </div>
       </IonContent>
