@@ -13,7 +13,7 @@ import {
 } from "@ionic/react";
 
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { toast } from "../toast";
 // import { setUserState } from "../redux/actions";
 import { useDispatch } from "react-redux";
@@ -28,7 +28,8 @@ function ChangePassword () {
 	const [oldPassword, setOldPassword] = useState("");
 	const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const {reAuthenticate, updateUserPassword} = useAuth();
+  const {reAuthenticate, updateUserPassword, currentUser} = useAuth();
+
 
 	async function changePassword() {
 		setBusy(true);
@@ -46,6 +47,10 @@ function ChangePassword () {
     }
 		setBusy(false);
 	}
+
+  if (currentUser === null) {
+    return (<Redirect to="/login"/>)
+  }
 
 	return (
 		<IonPage>

@@ -28,7 +28,6 @@ import FromTopBar from"../components/FormTopBar";
 function Login() {
 	const [busy, setBusy] = useState(false);
 	const history = useHistory();
-	const dispatch = useDispatch();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
   const { login } = useAuth();
@@ -41,7 +40,7 @@ function Login() {
       const res = await login(email, password);
 		if (res) {
       if (auth.currentUser.emailVerified){
-      dispatch(changeUser(auth.currentUser.uid))
+    
       if (genList.length==0){
         history.replace("/general");
       }

@@ -19,6 +19,7 @@ import { db } from "../../firebase";
 import { useAuth } from "../../contexts/AuthContext";
 import AddICEModal from "../../modals/AddICEModal";
 import EditICEModal from "../../modals/EditICEModal";
+import { Redirect } from "react-router";
 
 function Ice() {
   const input = useRef(null);
@@ -120,6 +121,10 @@ function Ice() {
     await setICE(submitICEData);
     setBusy(false);
     setStatus(!status);
+  }
+
+  if (currentUser === null) {
+    return (<Redirect to="/login"/>)
   }
 
   return (

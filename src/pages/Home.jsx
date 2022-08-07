@@ -5,18 +5,24 @@ import {
   IonItem,
   IonText
 } from "@ionic/react";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import React from "react";
 import "./Register.css";
 
 import FormTopBar from "../components/FormTopBar";
 import "./Home.css";
+import { useAuth } from "../contexts/AuthContext";
 
 
 function Home() {
   const history = useHistory();
+  const {currentUser} = useAuth();
   async function goImmunization() {
     history.replace("/immune");
+  }
+
+  if (currentUser === null) {
+    return (<Redirect to="/login"/>)
   }
 
   return (

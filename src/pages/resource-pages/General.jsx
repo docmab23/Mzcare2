@@ -19,10 +19,11 @@ import {
   } from "@ionic/react";
   
   import React, { useState, useRef } from "react";
-  import { useHistory } from "react-router-dom";
+  import { Redirect, useHistory } from "react-router-dom";
   import FormTopBar from "../../components/FormTopBar";
   import { setGeneral } from "../database";
   import { useDatabase } from "../../contexts/DatabaseContext";
+import { useAuth } from "../../contexts/AuthContext";
   
   function General(props) {
 	const input = useRef(null);
@@ -38,6 +39,7 @@ import {
 	const [city, setCity] = useState("");
 	const [zip, setZip] = useState("");
 	const [busy, setBusy] = useState(false);
+  const {currentUser} = useAuth();
 	const {
 	  genJson,
 	  setGenJson,
@@ -78,6 +80,10 @@ import {
 	function changestatus() {
 	  setStatus(!status);
 	}
+
+  if (currentUser === null) {
+    return (<Redirect to="/login"/>)
+  }
   
 	return (
 		<IonPage>

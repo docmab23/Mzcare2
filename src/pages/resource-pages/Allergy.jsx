@@ -11,7 +11,7 @@ import {
 } from "@ionic/react";
 
 import React, { useState, useRef } from "react";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import FormTopBar from "../../components/FormTopBar";
 import { setAllergy } from "../database";
 import { useDatabase } from "../../contexts/DatabaseContext";
@@ -126,6 +126,10 @@ function Allergy() {
 
   function changestatus() {
     setStatus(!status);
+  }
+
+  if (currentUser === null) {
+    return (<Redirect to="/login"/>)
   }
 
   return (

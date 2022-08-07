@@ -13,7 +13,7 @@ import {
 } from "@ionic/react";
 
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { toast } from "../toast";
 // import { setUserState } from "../redux/actions";
 import { useDispatch } from "react-redux";
@@ -28,7 +28,8 @@ function ChangeEmail ()  {
   // const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {reAuthenticate, updateUserEmail} = useAuth();
+  const {reAuthenticate, updateUserEmail, currentUser} = useAuth();
+
 
   async function changeEmail() {
     setBusy(true);
@@ -40,6 +41,10 @@ function ChangeEmail ()  {
       toast (errors(e))
     }
     setBusy(false);
+  }
+
+  if (currentUser === null) {
+    return (<Redirect to="/login"/>)
   }
 
   return (
