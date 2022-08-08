@@ -1,0 +1,11 @@
+{
+  "name": "twilio-stuff",
+  "version": "1.0.0",
+  "description": "server for making calls ",
+  "main": "Twilio.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
