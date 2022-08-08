@@ -18,7 +18,7 @@ var auth_error = {
     "auth/unverified-email": "The operation requires a verified email.",
     "auth/user-disabled": "The user account has been disabled by an administrator.",
     "auth/user-mismatch": "The supplied credentials do not correspond to the previously signed in user.",
-    "auth/user-not-found": "Incorrect email id or password.",
+    "auth/user-not-found": "Account is not registered with MzCare.",
     "auth/user-token-expired": "User credential has expired. Please sign in again.",
     "auth/invalid-verification-id": "Invalid verification id",
     "auth/weak-password": "Password should be at least 6 characters.",
