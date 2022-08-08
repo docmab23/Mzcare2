@@ -1,53 +1,54 @@
 import {
-    IonContent,
-    IonHeader,
-    IonPage,
-    IonTitle,
-    IonToolbar,
-    IonInput,
-    IonButton,
-    IonLoading,
-    IonText,
-    IonLabel,
-    IonItem,
-  } from "@ionic/react";
-  
-  import React, { useState } from "react";
-  import { Link, useHistory } from "react-router-dom";
-  import { toast } from "../toast";
-  // import { setUserState } from "../redux/actions";
-  import { useDispatch } from "react-redux";
-  import FormTopBar from "../components/FormTopBar";
-  import { useAuth } from "../contexts/AuthContext";
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonInput,
+  IonButton,
+  IonLoading,
+  IonText,
+  IonLabel,
+  IonItem,
+} from "@ionic/react";
+
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { toast } from "../toast";
+// import { setUserState } from "../redux/actions";
+import { useDispatch } from "react-redux";
+import FormTopBar from "../components/FormTopBar";
+import { useAuth } from "../contexts/AuthContext";
 import { errors } from "../utils/Utils";
-  
-  function ForgotPassword () {
-    const [busy, setBusy] = useState<boolean>(false);
-    const history = useHistory();
-    // const dispatch = useDispatch();
-    const [email, setEmail] = useState("");
-    const {resetPassword} = useAuth();
-  
-    async function forgotPassword() {
-      setBusy(true);
-      try {
-       await resetPassword(email);
-        toast("Email sent");
-      } catch(e) {
-        toast (errors(e))
-      }
-      setBusy(false);
+
+function ForgotPassword() {
+  const [busy, setBusy] = useState(false);
+  const history = useHistory();
+  // const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const { resetPassword } = useAuth();
+
+  async function forgotPassword() {
+    setBusy(true);
+    try {
+      await resetPassword(email);
+      toast("Email sent");
+    } catch (e) {
+      toast(errors(e));
     }
-  
-    return (
-      <IonPage>
-        <IonContent className="ion-padding">
-          <FormTopBar />
-          <IonLoading message="Registering..." duration={0} isOpen={busy} />
-          <div className="ion-padding container">
-            <IonText>
-              <h2>Forgot Password</h2>
-            </IonText>
+    setBusy(false);
+  }
+
+  return (
+    <IonPage>
+      <IonContent className="ion-padding">
+        <FormTopBar />
+        <IonLoading message="Sending Email.." duration={0} isOpen={busy} />
+        <div className="ion-padding container">
+          <div className="form-heading">
+            <h1>FORGOT PASSWORD</h1>
+          </div>
+          <div className="form-input-placement">
             <IonItem lines="none" className="form-border">
               <IonLabel position="floating">Email</IonLabel>
               <IonInput
@@ -55,16 +56,19 @@ import { errors } from "../utils/Utils";
                 onIonChange={(e) => setEmail(e.target.value)}
               />
             </IonItem>
-            <div className="padding-lign">
-              <IonButton class="form-button" onClick={forgotPassword}>
-                Send Email
-              </IonButton>
+          </div>
+          <div className="form-button-placement">
+            <IonButton class="form-button" onClick={forgotPassword}>
+              Send Email
+            </IonButton>
+            <div>
+              Go back to <Link to="/register">Login</Link>
             </div>
           </div>
-        </IonContent>
-      </IonPage>
-    );
-  };
-  
-  export default ForgotPassword;
-  
+        </div>
+      </IonContent>
+    </IonPage>
+  );
+}
+
+export default ForgotPassword;

@@ -58,10 +58,10 @@ function ChangePassword () {
       <FormTopBar/>
         <IonLoading message="Registering..." duration={0} isOpen={busy} />
         <div className="ion-padding container">
-        <IonText >
-          <h2>
-          CHANGE PASSWORD
-            </h2></IonText>
+        <div className="form-heading">
+            <h1>CHANGE PASSWORD</h1>
+          </div>
+          <div className="form-input-placement">
           <IonItem lines="none" className="form-border">
             <IonLabel position="floating">Password</IonLabel>
             <IonInput
@@ -83,10 +83,14 @@ function ChangePassword () {
               onIonChange={(e) => setConfirmPassword(e.target.value)}
             />
           </IonItem>
-          <div className="padding-lign">
+          </div>
+          <div className="form-button-placement">
             <IonButton class="form-button" onClick={changePassword}>
-              Change Password
+              RESET
             </IonButton>
+            <div>
+              Go back to <Link to="/settings">Settings</Link>
+            </div>
           </div>
         </div>
       </IonContent>

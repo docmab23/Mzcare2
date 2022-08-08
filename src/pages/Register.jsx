@@ -42,16 +42,11 @@ function Register() {
         return toast("Username and password are required");
       }
   
-      /*const res = await signup(username, password).then(() => {
-         emailVerification().then(() => {toast('You must have recieved an email.')})}).then(() =>  {toast("You have registered successfully");
-         history.replace("/general")});*/
-      
       const res = await signup(username, password);
       // console.log(currentUser);
       if (res) {  
         await emailVerification();
         toast("Verify your email to Login");
-        // history.replace("/general");
         }
       }
       
@@ -70,10 +65,10 @@ function Register() {
       <FormTopBar></FormTopBar>
         <IonLoading message="Registering..." duration={0} isOpen={busy} />
         <div className="ion-padding container">
-        <IonText >
-          <h2>
-          SIGN UP
-            </h2></IonText>
+        <div className="form-heading">
+            <h1>SIGN UP</h1>
+          </div>
+          <div className="form-input-placement">
           <IonItem lines="none" className="form-border">
             <IonLabel position="floating">Email</IonLabel>
             <IonInput
@@ -95,14 +90,15 @@ function Register() {
               onIonChange={(e) => setCPassword(e.target.value)}
             />
           </IonItem>
-          <div className="padding-lign">
+          </div>
+          <div className="form-button-placement">
             <IonButton class="form-button" onClick={register}>
               SIGN UP
             </IonButton>
-          </div>
-          <span className="padding-lign">
+          <div>
             Already signed up? <Link to="/login">Login</Link>
-          </span>
+          </div>
+          </div>
         </div>
       </IonContent>
     </IonPage>

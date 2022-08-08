@@ -6,7 +6,7 @@
 .form-button {
     --background: rgb(98, 142, 80);
     position: relative;
-    width: 132px;
+    width: 20vh;
 }
 
 .form-button-placement {

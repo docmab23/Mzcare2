@@ -86,9 +86,7 @@ function Login() {
               SIGN IN
             </IonButton>
             <div>
-              <span>
-                New to MzCare? <Link to="/register">Sign Up</Link>
-              </span>
+              New to MzCare? <Link to="/register">Sign Up</Link>
             </div>
           </div>
         </div>
