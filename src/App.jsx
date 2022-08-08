@@ -58,6 +58,7 @@ import Condition from "./pages/resource-pages/Conditions";
 import "./App.css";
 import Settings from "./pages/Settings";
 import { ok } from "assert";
+import { home, medkitSharp, settings } from "ionicons/icons";
 
 // import Home from "../pages/Home";
 // import {Redirect} from 'react-router-dom';
@@ -100,13 +101,13 @@ function App() {
 
               <IonTabBar slot="bottom" className="footer-tab">
                 <IonTabButton tab="EM Profile" href="/em_tab">
-                  <IonIcon src={em}>EM</IonIcon>
+                  <IonIcon src={medkitSharp}>EM</IonIcon>
                 </IonTabButton>
                 <IonTabButton tab="Home" href="/home">
-                  <IonIcon src={hicon}>Home</IonIcon>
+                  <IonIcon src={home}>Home</IonIcon>
                 </IonTabButton>
                 <IonTabButton tab="Settings" href="/settings">
-                  <IonIcon src={sett}>Settings</IonIcon>
+                  <IonIcon icon={settings}>Settings</IonIcon>
                 </IonTabButton>
               </IonTabBar>
             </IonTabs>
