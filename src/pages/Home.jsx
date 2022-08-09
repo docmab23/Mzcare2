@@ -16,15 +16,9 @@ function Home() {
   
   }
 
-<<<<<<< HEAD
-    
-
-
-=======
   if (currentUser === null) {
     return <Redirect to="/login" />;
   }
->>>>>>> 183482b1561d46dfc226201daa83ae941ca864c4
 
   return (
     <IonPage>
@@ -38,26 +32,11 @@ function Home() {
               {"\u00a0\u00a0\u00a0"}{" "}
             </h2>
           </IonText>
-<<<<<<< HEAD
-         
-            <IonButton className="rbutton" routerLink="/general">
-              {" "}
-              General Info{" "}
-            </IonButton>
-            
-        
-            <IonButton className="rbutton" routerLink="/allergy">
-              {" "}
-              Allergies{" "}
-            </IonButton>
-         
-=======
 
           <IonButton className="rbutton" routerLink="/general">
             {" "}
             General Info{" "}
           </IonButton>
->>>>>>> 183482b1561d46dfc226201daa83ae941ca864c4
 
           <IonButton className="rbutton" routerLink="/allergy">
             {" "}

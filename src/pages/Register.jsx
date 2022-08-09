@@ -108,7 +108,6 @@ function Register() {
             <IonButton class="form-button" onClick={register}>
               SIGN UP
             </IonButton>
-<<<<<<< HEAD
             <div className="padding-lign">
           <Link onClick={resendEmailVerification}
             disabled={buttonDisabled}>Resend Email</Link>
@@ -117,12 +116,6 @@ function Register() {
          
             Already signed up? <Link to="/login">Login</Link>
           
-=======
-          <div>
-            Already signed up? <Link to="/login">Login</Link>
-          </div>
-          </div>
->>>>>>> 183482b1561d46dfc226201daa83ae941ca864c4
         </div>
       </IonContent>
     </IonPage>

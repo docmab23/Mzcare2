@@ -25,10 +25,7 @@ import AddICEModal from "../../modals/AddICEModal";
 import EditICEModal from "../../modals/EditICEModal";
 import back from "../../images/back.svg";
 import { Redirect, useHistory } from "react-router";
-<<<<<<< HEAD
 import axios from "axios";
-=======
->>>>>>> 183482b1561d46dfc226201daa83ae941ca864c4
 
 function Ice() {
   const input = useRef(null);
@@ -165,11 +162,6 @@ function Ice() {
     return (<Redirect to="/login"/>)
   }
 
-<<<<<<< HEAD
-  
-
-=======
->>>>>>> 183482b1561d46dfc226201daa83ae941ca864c4
   return (
     <IonPage>
       <IonContent className="ion-padding">
