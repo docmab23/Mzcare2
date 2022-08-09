@@ -44,13 +44,15 @@ function General(props) {
   const [fphysician, setFphysician] = useState("");
   const [ethinicity, setEthinicity] = useState("");
   const [address_, setAddress] = useState("");
-  const [state, setState] = useState("New York");
+  const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [zip, setZip] = useState("");
   const [busy, setBusy] = useState(false);
   const { currentUser } = useAuth();
   const history = useHistory();
   const { genJson, setGenJson, genList, setGenList } = useDatabase();
+  const [editStatus, changeEditStatus] = useState(false);
+
 
   async function creategeneral(e) {
     e.preventDefault();
@@ -68,8 +70,8 @@ function General(props) {
       City: city,
       Zip: zip,
     };
-    submitGeneralData[name] = generalData;
-    genList.push(name);
+    submitGeneralData["General"] = generalData;
+    genList.push("General");
     for (let key in genJson) {
       submitGeneralData[key] = genJson[key];
     }
@@ -115,8 +117,7 @@ function General(props) {
         {genList.map((item, pos) => {
           return (
             <IonCard key={pos} onClick={async () => {
-              // changeEditStatus(genJson[item]);
-              console.log("clicked!");
+              changeEditStatus(genJson[item]);
             }}>
               <IonCardHeader>
                 <IonCardTitle>Name: {genJson[item]["Name"]}</IonCardTitle>
@@ -243,7 +244,7 @@ function General(props) {
                 <IonItem>
                   <IonLabel position="stacked">City</IonLabel>
                   <IonSelect onIonChange={(e) => setCity(e.target.value)}>
-                    {US_Cities[state].map((item, pos) => {
+                     { state!== "" && US_Cities[state].map((item, pos) => {
                       return (
                         <IonSelectOption value={item}>{item}</IonSelectOption>
                       );
