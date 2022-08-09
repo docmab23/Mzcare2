@@ -105,15 +105,20 @@ function Em() {
                     <IonRow key={pos}>
                       <IonCol>
                         <IonText color="primary" font="bold">
-                          ICE Contact Name
+                         Name:
                         </IonText>
-                        : {iceJson[item]["name"]}
+                        <div>
+                        {iceJson[item]["name"]}
+                        </div>
                       </IonCol>
                       <IonCol>
                         <IonText color="primary" font="bold">
-                          Contact No:
+                         Mobile Phone:
                         </IonText>
+                        <div>
                         {iceJson[item]["number"]}
+                        </div>
+                        {/* {iceJson[item]["number"]} */}
                       </IonCol>
                     </IonRow>
                   </IonGrid>
