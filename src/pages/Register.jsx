@@ -9,7 +9,7 @@ import {
   IonLoading,
   IonItem,
   IonLabel,
-  IonText,
+  IonText
 } from "@ionic/react";
 import React, { useState} from "react";
 import { useHistory } from "react-router-dom";
@@ -26,6 +26,7 @@ function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setCPassword] = useState("");
+  const [buttonDisabled, setButtonDisabled] = useState(false)
   const [busy, setBusy] = useState(false);
   const {signup} = useAuth();
   const {emailVerification} = useAuth();
@@ -61,6 +62,18 @@ function Register() {
     
     setBusy(false);
   }
+
+  const resendEmailVerification = () => {
+    setButtonDisabled(true)
+    emailVerification()
+    .then(() => {
+      setButtonDisabled(false)
+    }).catch((err) => {
+      alert(err.message)
+      setButtonDisabled(false)
+    })
+  }
+  
   
 
 
@@ -99,10 +112,14 @@ function Register() {
             <IonButton class="form-button" onClick={register}>
               SIGN UP
             </IonButton>
+            <div className="padding-lign">
+          <Link onClick={resendEmailVerification}
+            disabled={buttonDisabled}>Resend Email</Link>
+           </div>
           </div>
-          <span className="padding-lign">
+         
             Already signed up? <Link to="/login">Login</Link>
-          </span>
+          
         </div>
       </IonContent>
     </IonPage>

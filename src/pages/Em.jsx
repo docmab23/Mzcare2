@@ -33,11 +33,16 @@ import FormTopBar from "../components/FormTopBar";
 // import { setImmunization } from "../../firebase";
 import {toast} from "../toast";
 import { useDatabase } from "../contexts/DatabaseContext";
+//import General from "./resource-pages/General";
+
   
 import "./Em.css" ;
+import General from "./resource-pages/General";
 
 function Em() {
 	var show_ = false;
+
+	
 
 
 	const {
@@ -146,12 +151,9 @@ function Em() {
 else {
 
 	toast("Please fill your General info first to make your Emergency profile!");
+	
 	return (
-		<IonPage>
-			<IonContent>
-				
-			</IonContent>
-		</IonPage>
+		<General/>
 	)
 }
 }

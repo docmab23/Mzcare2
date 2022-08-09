@@ -24,7 +24,8 @@ import { useAuth } from "../../contexts/AuthContext";
 import AddICEModal from "../../modals/AddICEModal";
 import EditICEModal from "../../modals/EditICEModal";
 import back from "../../images/back.svg";
-import { useHistory } from "react-router";
+import { Redirect, useHistory } from "react-router";
+import axios from "axios";
 
 function Ice() {
   const input = useRef(null);
@@ -40,6 +41,29 @@ function Ice() {
   const { currentUser } = useAuth();
   const history = useHistory();
 
+
+  async function getDataAxios(number){
+    var requestOptions = {
+      method: 'POST',
+      redirect: 'follow'
+    };
+    
+    fetch(`http://localhost:3001/api/messages?to="${number}"`, requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+}
+
+   
+  function sendSms(){
+  if (iceList.length != 0){
+    iceList.map((item, pos) => {
+
+      console.log((iceJson[item]["number"]));
+      getDataAxios((iceJson[item]["number"]));
+
+  })}
+}
   function changestatus() {
     setStatus(!status);
   }
@@ -134,6 +158,12 @@ function Ice() {
     setStatus(!status);
   }
 
+  if (currentUser === null) {
+    return (<Redirect to="/login"/>)
+  }
+
+  
+
   return (
     <IonPage>
       <IonContent className="ion-padding">
@@ -141,7 +171,7 @@ function Ice() {
         {"\u00a0\u00a0\u00a0"}
         <h1>{"\u00a0\u00a0\u00a0"} </h1>
         <IonGrid>
-       
+       <IonButton onClick={sendSms}>Send</IonButton>
           <IonRow className="home">
             <IonCol>
               <div>

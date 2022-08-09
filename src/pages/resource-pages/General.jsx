@@ -28,21 +28,38 @@ import {
   import { setGeneral } from "../database";
   import { useDatabase } from "../../contexts/DatabaseContext";
   import back from "../../images/back.svg";
+  import EditGeneralModal from "../../modals/EditGeneralModal";
+  import { deleteField, doc, getDoc, updateDoc } from "firebase/firestore";
+  import { db } from "../../firebase";
+  import { useAuth } from "../../contexts/AuthContext";
+import EditAllergyModal from "../../modals/EditAllergyModal";
   
   function General(props) {
 	const input = useRef(null);
 	const [status, setStatus] = useState(props.tell);
-	const [name, setName] = useState("");
+	const [Name, setName] = useState("");
 	const [age, setAge] = useState("");
 	const [height, setHeight] = useState("");
 	const [bgroup, setBgroup] = useState("");
 	const [fphysician, setFphysician] = useState("");
+  const [editName, setEditName] = useState("");
+  const [originalEditName, setOriginalEditName] = useState("");
+  const [editbgroup, setEditBloodgroup] = useState("");
+  const [editheight, setEditHeight] = useState("");
+  const [editphys, setEditPhysician] = useState("");
+  const [editethinicity, setEditEthinicity] = useState("");
+  const [editstraddress, setEditStr_address] = useState("");
+  const [editage, setEditAge] = useState("");
+  const [editcity, setEditCity] = useState("");
+  const [editstate, setEditState] = useState("");
+  const [editzip, setEditZip] = useState("");
 	const [ethinicity, setEthinicity] = useState("");
 	const [address_, setAddress] = useState("");
 	const [state, setState] = useState("");
 	const [city, setCity] = useState("");
 	const [zip, setZip] = useState("");
 	const [busy, setBusy] = useState(false);
+  const [editStatus, setEditStatus] = useState(false);
   const history = useHistory();
 	const {
 	  genJson,
@@ -50,14 +67,79 @@ import {
 	  genList,
 	  setGenList
 	} = useDatabase();
+
+  const { currentUser } = useAuth();
   
-  
+  function changeEditStatus(jsonToEdit) {
+    setEditName(jsonToEdit["Name"]);
+    setOriginalEditName(jsonToEdit["Name"]);
+    setEditAge(jsonToEdit["Age"]);
+    setEditBloodgroup(jsonToEdit["Bloodgroup"]);
+    setEditHeight(jsonToEdit["Height"]);
+    setEditPhysician(jsonToEdit["Family_physician"]);
+    setEditEthinicity(jsonToEdit["Ethinicity"]);
+    setEditStr_address(jsonToEdit["Str_address"]);
+    setEditCity(jsonToEdit["City"]);
+    setEditState(jsonToEdit["State"]);
+    setEditZip(jsonToEdit["Zip"]);
+    setEditStatus(!editStatus);
+  }
+
+  async function editGeneral(e) {
+    e.preventDefault();
+    const genRef = doc(db, currentUser.uid + "/general");
+    const submitGeneralData = {};
+    const generalData = {
+      Name: Name,
+      Age: age,
+      Bloodgroup: bgroup,
+      Height: height,
+      Family_physician: fphysician,
+      Ethinicity: ethinicity,
+      Str_address: address_,
+      State: state,
+      City: city,
+      Zip: zip
+    };
+    submitGeneralData[editName] = generalData;
+    if (originalEditName === editName) {
+      updateDoc(genRef, submitGeneralData);
+    } else {
+      genList.push(editName);
+      for (let key in genJson) {
+        submitGeneralData[key] = genJson[key];
+      }
+      setGenJson(submitGeneralData);
+      setGenList(genList);
+      await setGeneral(submitGeneralData);
+      await updateDoc(genRef, {
+        [originalEditName]: deleteField(),
+      });
+    }
+    const genLinks = [];
+    await getDoc(genRef).then((docSnap) => {
+      if (docSnap.exists()) {
+        const generalData = docSnap.data();
+        for (let key in generalData) {
+          genLinks.push(key);
+        }
+        setGenList(genLinks);
+        setGenJson(generalData);
+      }
+    });
+    setEditStatus(!editStatus);
+  }
+
+ 
+
+
+  console.log(editStatus);
 	async function creategeneral(e) {
 	  e.preventDefault()
 	  setBusy(true);
 	  const submitGeneralData = {};
 	  const generalData = {
-		Name: name,
+		Name: Name,
 		Age: age,
 		Bloodgroup: bgroup,
 		Height: height,
@@ -69,8 +151,8 @@ import {
 		Zip: zip
 
 	  };
-	  submitGeneralData[name] = generalData;
-	  genList.push(name);
+	  submitGeneralData[Name] = generalData;
+	  genList.push(Name);
 	  for (let key in genJson) {
 		submitGeneralData[key] = genJson[key];
 	  }
@@ -89,35 +171,38 @@ import {
   }
   
 	return (
-		<IonPage>
+		<><IonPage>
       <IonContent className="ion-padding">
         <FormTopBar />
         {"\u00a0\u00a0\u00a0"}
         <h1>{"\u00a0\u00a0\u00a0"} </h1>
         <IonGrid>
-        <h1>
-          <IonRow className="home">
-            <IonCol>
-              <div>
-                <IonButton onClick={changeroute} color="light">
-                <IonIcon src={back}></IonIcon>
-                </IonButton>
-              </div>{" "}
-            </IonCol>
-            <IonCol className="ion-align-self-center heading">
-              General Info
-            </IonCol>
-            <IonCol className="ion-align-self-end">
-              
-            </IonCol>
-          </IonRow>
+          <h1>
+            <IonRow className="home">
+              <IonCol>
+                <div>
+                  <IonButton onClick={changeroute} color="light">
+                    <IonIcon src={back}></IonIcon>
+                  </IonButton>
+                </div>{" "}
+              </IonCol>
+              <IonCol className="ion-align-self-center heading">
+                General Info
+              </IonCol>
+              <IonCol className="ion-align-self-end">
+
+              </IonCol>
+            </IonRow>
           </h1>
-          </IonGrid>
-       
+        </IonGrid>
+
 
         {genList.map((item, pos) => {
           return (
-            <IonCard key={pos}>
+            <IonCard key={pos} onClick={async () => {
+              changeEditStatus(genJson[item]);
+              console.log("clicked!");
+            }}>
               <IonCardHeader>
                 <IonCardTitle>
                   Name: {genJson[item]["Name"]}
@@ -127,26 +212,49 @@ import {
                 <IonCardSubtitle>
                   Age: {genJson[item]["Age"]}
                 </IonCardSubtitle>
-				<IonCardSubtitle>
+                <IonCardSubtitle>
                   Blood group: {genJson[item]["Bloodgroup"]}
                 </IonCardSubtitle>
-				<IonCardSubtitle>
+                <IonCardSubtitle>
                   Height: {genJson[item]["Height"]}
                 </IonCardSubtitle>
-				<IonCardSubtitle>
+                <IonCardSubtitle>
                   Family physician: {genJson[item]["Family_physician"]}
                 </IonCardSubtitle>
-				<IonCardSubtitle>
+                <IonCardSubtitle>
                   Ethinicity: {genJson[item]["Ethinicity"]}
                 </IonCardSubtitle>
-				<IonCardSubtitle>
-                  Full Address: {genJson[item]["Str_address"]+", "+genJson[item]["City"]+", "+genJson[item]["State"]+", "+genJson[item]["Zip"]}
+                <IonCardSubtitle>
+                  Full Address: {genJson[item]["Str_address"] + ", " + genJson[item]["City"] + ", " + genJson[item]["State"] + ", " + genJson[item]["Zip"]}
                 </IonCardSubtitle>
-				
+
               </IonCardContent>
             </IonCard>
           );
         })}
+
+<EditGeneralModal 
+          show={editStatus}
+          edit={editGeneral}
+          name={setEditName}
+          age={setEditAge}
+          bgroup={setEditBloodgroup}
+          height={setEditHeight}
+          f_physician={setEditPhysician}
+          staddress={setEditStr_address}
+          city ={setEditCity}
+          state={setEditState}
+          zip={setEditZip}
+          editName = {editName}
+          editAge=  {editage}
+          editbgroup = {editbgroup}
+          editheight= {editheight}
+          editphys= {editphys}
+          editethinicity= {editethinicity}
+          editaddress ={editstraddress}
+          editcity ={editcity}
+          editstate= {editstate}
+          editzip = {editzip}/>
 
         {genList.length == 0 && <><IonButton id="open-modal" expand="block" onClick={changestatus}>
           Add General Info
@@ -242,10 +350,10 @@ import {
               </IonItem>
             </IonContent>
           </IonModal></>}
-          
+         
       </IonContent>
       <IonFooter></IonFooter>
-    </IonPage> 
+    </IonPage></>
 	 
 	);
   }

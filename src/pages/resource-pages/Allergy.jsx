@@ -174,9 +174,7 @@ function Allergy() {
           editName={editAllergyName}
           editDate={editDate}
         ></EditAllergyModal>
-        <IonButton className="back-button" routerLink="/home">
-          Back
-        </IonButton>
+       
       </IonContent>
       <IonFooter></IonFooter>
     </IonPage>

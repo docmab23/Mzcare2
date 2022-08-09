@@ -17,7 +17,13 @@ function Home() {
   const history = useHistory();
   async function goImmunization() {
     history.replace("/immune");
+
+  
   }
+
+    
+
+
 
   return (
     <IonPage>
@@ -33,8 +39,7 @@ function Home() {
               {" "}
               General Info{" "}
             </IonButton>
-         
-
+            
         
             <IonButton className="rbutton" routerLink="/allergy">
               {" "}
