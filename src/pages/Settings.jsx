@@ -13,7 +13,7 @@ import {
 } from "@ionic/react";
 
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { toast } from "../toast";
 // import { setUserState } from "../redux/actions";
 import { useDispatch } from "react-redux";
@@ -28,6 +28,7 @@ function Settings () {
 	
     const {logout} = useAuth();
     const history = useHistory();
+    const {currentUser} = useAuth();
 
 
     async function logout_user () {
@@ -36,6 +37,10 @@ function Settings () {
         toast("You have been logged out!");
         history.replace("/login");
     }
+
+    if (currentUser === null) {
+        return (<Redirect to="/login"/>)
+      }
 
 	return (
 		<IonPage>

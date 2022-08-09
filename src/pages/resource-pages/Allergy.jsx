@@ -11,7 +11,7 @@ import {
 } from "@ionic/react";
 
 import React, { useState, useRef } from "react";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import FormTopBar from "../../components/FormTopBar";
 import { setAllergy } from "../database";
 import { useDatabase } from "../../contexts/DatabaseContext";
@@ -129,6 +129,10 @@ function Allergy() {
     setStatus(!status);
   }
 
+  if (currentUser === null) {
+    return (<Redirect to="/login"/>)
+  }
+
   return (
     <IonPage>
       <IonContent className="ion-padding">
@@ -174,7 +178,11 @@ function Allergy() {
           editName={editAllergyName}
           editDate={editDate}
         ></EditAllergyModal>
+<<<<<<< HEAD
        
+=======
+        
+>>>>>>> 183482b1561d46dfc226201daa83ae941ca864c4
       </IonContent>
       <IonFooter></IonFooter>
     </IonPage>

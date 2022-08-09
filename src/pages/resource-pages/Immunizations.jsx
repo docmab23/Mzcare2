@@ -15,7 +15,7 @@ import {
   IonButtons,
 } from "@ionic/react";
 import { deleteField, doc, getDoc, updateDoc } from "firebase/firestore";
-import { useHistory } from "react-router";
+import { Redirect, useHistory } from "react-router";
 
 import React, { useRef, useState } from "react";
 import FormTopBar from "../../components/FormTopBar";
@@ -143,6 +143,10 @@ function Immunizations() {
     await setImmunization(submitVaccineData);
     setBusy(false);
     setStatus(!status);
+  }
+
+  if (currentUser === null) {
+    return (<Redirect to="/login"/>)
   }
 
   return (

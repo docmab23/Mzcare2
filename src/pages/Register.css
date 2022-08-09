@@ -6,9 +6,20 @@
 .form-button {
     --background: rgb(98, 142, 80);
     position: relative;
-    width: 132px;
+    width: 20vh;
 }
 
-.padding-lign {
-    padding-top: 25%;
+.form-button-placement {
+    padding-top: 15vh;
+    text-align: center;
 }
+
+.form-input-placement {
+    padding-top: 12vh;
+}
+
+.form-heading {
+    text-align: center;
+    padding-top: 10vh;
+  }
+  
