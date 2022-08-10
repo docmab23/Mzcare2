@@ -53,6 +53,10 @@ app.get('/api/try', (req, res) => {
     });
     
 app.listen(process.env.PORT || 5000, () =>
+<<<<<<< HEAD
   console.log('Express server is running on localhost:5000')
+=======
+  console.log('Express server is running on localhost:8080')
+>>>>>>> 2d6bd6b69f1ac0570751c97ae8b68a2cd58b21fd
 );
 
