@@ -33,6 +33,20 @@ app.post('/api/messages', (req, res) => {
     });
 });
 
+app.post('/api/fax', (req, res) => {
+client.fax.faxes
+  .create({
+     from: +17408753450,
+     to: req.query.to,
+     mediaUrl: req.query.fileURL
+   })
+  .then(fax => 
+      console.log(fax.sid)
+  ).catch(error => 
+      console.log(error)
+  );
+
+});
 app.get('/api/try', (req, res) => {
       const name_= req.params.name;
       res.send(JSON.stringify(name_));
