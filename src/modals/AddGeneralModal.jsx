@@ -42,7 +42,6 @@ const AddGeneralModal = (props) => {
         <IonItem>
           <IonLabel position="stacked">Age</IonLabel>
           <IonInput
-            
             type="number"
             onIonChange={(e) => props.setAge(e.target.value)}
           />
@@ -50,7 +49,6 @@ const AddGeneralModal = (props) => {
         <IonItem>
           <IonLabel position="stacked">Blood group</IonLabel>
           <IonInput
-            
             type="text"
             onIonChange={(e) => props.setBgroup(e.target.value)}
           />
@@ -58,7 +56,6 @@ const AddGeneralModal = (props) => {
         <IonItem>
           <IonLabel position="stacked">Height (in cm)</IonLabel>
           <IonInput
-            
             type="number"
             onIonChange={(e) => props.setHeight(e.target.value)}
           />
@@ -66,7 +63,6 @@ const AddGeneralModal = (props) => {
         <IonItem>
           <IonLabel position="stacked">Family physician(if any)</IonLabel>
           <IonInput
-            
             type="text"
             onIonChange={(e) => props.setFphysician(e.target.value)}
           />
@@ -75,7 +71,6 @@ const AddGeneralModal = (props) => {
           <IonLabel position="stacked">Ethinicity</IonLabel>
 
           <IonInput
-            
             type="text"
             onIonChange={(e) => props.setEthinicity(e.target.value)}
           />
@@ -84,7 +79,6 @@ const AddGeneralModal = (props) => {
           <IonLabel position="stacked">Street Address</IonLabel>
 
           <IonInput
-            
             type="text"
             onIonChange={(e) => props.setAddress(e.target.value)}
           />
@@ -110,7 +104,6 @@ const AddGeneralModal = (props) => {
           <IonLabel position="stacked">Zip/Postal code</IonLabel>
 
           <IonInput
-            
             type="number"
             onIonChange={(e) => props.setZip(e.target.value)}
           />

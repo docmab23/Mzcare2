@@ -32,9 +32,9 @@ import { useDatabase } from "../../contexts/DatabaseContext";
 import { useAuth } from "../../contexts/AuthContext";
 import back from "../../images/back.svg";
 import AddGeneralModal from "../../modals/AddGeneralModal";
+import EditGeneralModal from "../../modals/EditGeneralModal";
 
 function General(props) {
-  const input = useRef(null);
   const [status, setStatus] = useState(props.tell);
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
@@ -46,12 +46,21 @@ function General(props) {
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [zip, setZip] = useState("");
+  const [editName, setEditName] = useState("");
+  const [editAge, setEditAge] = useState("");
+  const [editHeight, setEditHeight] = useState("");
+  const [editBgroup, setEditBgroup] = useState("");
+  const [editFphysician, setEditFphysician] = useState("");
+  const [editEthinicity, setEditEthinicity] = useState("");
+  const [editAddress_, setEditAddress] = useState("");
+  const [editState, setEditState] = useState("");
+  const [editCity, setEditCity] = useState("");
+  const [editZip, setEditZip] = useState("");
   const [busy, setBusy] = useState(false);
   const { currentUser } = useAuth();
   const history = useHistory();
   const { genJson, setGenJson, genList, setGenList } = useDatabase();
-  const [editStatus, changeEditStatus] = useState(false);
-
+  const [editStatus, setEditStatus] = useState(false);
 
   async function createGeneral(e) {
     e.preventDefault();
@@ -63,7 +72,7 @@ function General(props) {
       Bloodgroup: bgroup,
       Height: height,
       Family_physician: fphysician,
-      Ethinicity: ethinicity,
+      Ethnicity: ethinicity,
       Str_address: address_,
       State: state,
       City: city,
@@ -81,8 +90,49 @@ function General(props) {
     setStatus(!status);
   }
 
+  async function editGeneral(e) {
+    e.preventDefault();
+    const submitGeneralData = {};
+    const generalData = {
+      Name: editName,
+      Age: editAge,
+      Bloodgroup: editBgroup,
+      Height: editHeight,
+      Family_physician: editFphysician,
+      Ethnicity: editEthinicity,
+      Str_address: editAddress_,
+      State: editState,
+      City: editCity,
+      Zip: editZip,
+    };
+    console.log(generalData)
+    submitGeneralData["General"] = generalData;
+    setGenJson(submitGeneralData);
+    setGenList(genList);
+    await setGeneral(submitGeneralData);
+    setEditStatus(!editStatus);
+  }
+
   function changeStatus() {
     setStatus(!status);
+  }
+
+  function cancel() {
+    setEditStatus(!editStatus);
+  }
+
+  function changeEditStatus() {
+    setEditName(genJson["General"]["Name"]);
+    setEditAge(genJson["General"]["Age"]);
+    setEditBgroup(genJson["General"]["Bloodgroup"]);
+    setEditCity(genJson["General"]["City"]);
+    setEditEthinicity(genJson["General"]["Ethnicity"]);
+    setEditFphysician(genJson["General"]["Family_physician"]);
+    setEditHeight(genJson["General"]["Height"]);
+    setEditState(genJson["General"]["State"]);
+    setEditAddress(genJson["General"]["Str_address"]);
+    setEditZip(genJson["General"]["Zip"]);
+    setEditStatus(!editStatus);
   }
 
   function changeroute() {
@@ -115,9 +165,12 @@ function General(props) {
 
         {genList.map((item, pos) => {
           return (
-            <IonCard key={pos} onClick={async () => {
-              changeEditStatus(genJson[item]);
-            }}>
+            <IonCard
+              key={pos}
+              onClick={async () => {
+                changeEditStatus();
+              }}
+            >
               <IonCardHeader>
                 <IonCardTitle>Name: {genJson[item]["Name"]}</IonCardTitle>
               </IonCardHeader>
@@ -133,7 +186,7 @@ function General(props) {
                   Family physician: {genJson[item]["Family_physician"]}
                 </IonCardSubtitle>
                 <IonCardSubtitle>
-                  Ethinicity: {genJson[item]["Ethinicity"]}
+                  Ethnicity: {genJson[item]["Ethnicity"]}
                 </IonCardSubtitle>
                 <IonCardSubtitle>
                   Full Address:{" "}
@@ -155,9 +208,49 @@ function General(props) {
             <IonButton id="open-modal" expand="block" onClick={changeStatus}>
               Add General Info
             </IonButton>
-            <AddGeneralModal show={status} changeStatus={changeStatus} create={createGeneral} setName={setName} setAge={setAge} setBgroup={setBgroup} setHeight={setHeight} setFphysician={setFphysician} setEthinicity={setEthinicity} setAddress={setAddress} setState={setState} setCity={setCity} setZip={setZip} state={state}/>
+            <AddGeneralModal
+              show={status}
+              changeStatus={changeStatus}
+              create={createGeneral}
+              setName={setName}
+              setAge={setAge}
+              setBgroup={setBgroup}
+              setHeight={setHeight}
+              setFphysician={setFphysician}
+              setEthinicity={setEthinicity}
+              setAddress={setAddress}
+              setState={setState}
+              setCity={setCity}
+              setZip={setZip}
+              state={state}
+            />
           </>
         )}
+        <EditGeneralModal
+          show={editStatus}
+          cancel={cancel}
+          save={editGeneral}
+          editName={editName}
+          setEditName={setEditName}
+          editAge={editAge}
+          setEditAge={setEditAge}
+          editBgroup={editBgroup}
+          setEditBgroup={setEditBgroup}
+          editHeight={editHeight}
+          setEditHeight={setEditHeight}
+          editFphysician={editFphysician}
+          setEditFphysician={setEditFphysician}
+          editEthinicity={editEthinicity}
+          setEditEthinicity={setEditEthinicity}
+          editAddress_={editAddress_}
+          setEditAddress={setEditAddress}
+          editCity={editCity}
+          setEditCity={setEditCity}
+          editState={editState}
+          setEditState={setEditState}
+          editZip={editZip}
+          setEditZip={setEditZip}
+        />
       </IonContent>
       <IonFooter></IonFooter>
     </IonPage>
