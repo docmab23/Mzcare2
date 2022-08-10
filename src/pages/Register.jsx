@@ -21,7 +21,7 @@ import "./Register.css";
 import FormTopBar from "../components/FormTopBar";
 import { useAuth } from "../contexts/AuthContext";
 import { auth } from "../firebase";
-import { hideTabBar } from "../utils/Utils";
+import { errors, hideTabBar } from "../utils/Utils";
 
 function Register() {
   const history = useHistory();
@@ -58,7 +58,7 @@ function Register() {
       }
       
     catch (e) {
-      toast(e);
+      toast(errors(e));
     }
     
     setBusy(false);

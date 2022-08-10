@@ -23,7 +23,7 @@ import { useDispatch } from "react-redux";
 import FormTopBar from "../components/FormTopBar";
 import { useAuth } from "../contexts/AuthContext";
 import { useDatabase } from "../contexts/DatabaseContext";
-import { hideTabBar } from "../utils/Utils";
+import { errors, hideTabBar } from "../utils/Utils";
 
 function Login() {
   const [busy, setBusy] = useState(false);
@@ -56,7 +56,7 @@ function Login() {
         toast("Not able to login");
       }
     } catch (e) {
-      toast(e);
+      toast(errors(e));
       console.log(e);
     }
     setBusy(false);
