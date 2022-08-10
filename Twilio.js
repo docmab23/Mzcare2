@@ -52,7 +52,7 @@ app.get('/api/try', (req, res) => {
       res.send(JSON.stringify(name_));
     });
     
-app.listen(3000, () =>
-  console.log('Express server is running on localhost:8080')
+app.listen(process.env.PORT || 5000, () =>
+  console.log('Express server is running on localhost:5000')
 );
 
