@@ -66,7 +66,7 @@ import { home, medkitSharp, settings } from "ionicons/icons";
 function App() {
   // const {currentUser} = useAuth();
   // console.log(currentUser);
-
+  
   return (
     <IonApp>
       <AuthProvider>
@@ -99,7 +99,7 @@ function App() {
                 />
               </IonRouterOutlet>
 
-              <IonTabBar slot="bottom" className="footer-tab">
+              <IonTabBar slot="bottom" className="footer-tab" id="app-tab-bar">
                 <IonTabButton tab="EM Profile" href="/em_tab">
                   <IonIcon src={medkitSharp}>EM</IonIcon>
                 </IonTabButton>

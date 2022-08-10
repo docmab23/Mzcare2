@@ -9,7 +9,8 @@ import {
   IonLoading,
   IonItem,
   IonLabel,
-  IonText
+  IonText,
+  useIonViewDidEnter
 } from "@ionic/react";
 import React, { useState} from "react";
 import { useHistory } from "react-router-dom";
@@ -20,6 +21,7 @@ import "./Register.css";
 import FormTopBar from "../components/FormTopBar";
 import { useAuth } from "../contexts/AuthContext";
 import { auth } from "../firebase";
+import { hideTabBar } from "../utils/Utils";
 
 function Register() {
   const history = useHistory();
@@ -31,6 +33,10 @@ function Register() {
   const {signup} = useAuth();
   const {emailVerification} = useAuth();
   const currentUser = useAuth();
+
+  useIonViewDidEnter(() => {
+    hideTabBar();
+  });
 
   async function register() {
     // validation
@@ -112,10 +118,8 @@ function Register() {
           <Link onClick={resendEmailVerification}
             disabled={buttonDisabled}>Resend Email</Link>
            </div>
-          </div>
-         
             Already signed up? <Link to="/login">Login</Link>
-          
+            </div>
         </div>
       </IonContent>
     </IonPage>

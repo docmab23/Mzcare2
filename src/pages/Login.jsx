@@ -11,6 +11,7 @@ import {
   IonLabel,
   IonItem,
   IonFooter,
+  useIonViewDidEnter,
 } from "@ionic/react";
 
 import React, { useState } from "react";
@@ -22,6 +23,7 @@ import { useDispatch } from "react-redux";
 import FormTopBar from "../components/FormTopBar";
 import { useAuth } from "../contexts/AuthContext";
 import { useDatabase } from "../contexts/DatabaseContext";
+import { hideTabBar } from "../utils/Utils";
 
 function Login() {
   const [busy, setBusy] = useState(false);
@@ -30,6 +32,10 @@ function Login() {
   const [password, setPassword] = useState("");
   const { login } = useAuth();
   const { genList } = useDatabase();
+
+  useIonViewDidEnter(() => {
+    hideTabBar();
+  });
 
   async function loginUser() {
     setBusy(true);

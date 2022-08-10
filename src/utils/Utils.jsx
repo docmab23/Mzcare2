@@ -35,4 +35,18 @@ var auth_error = {
           return (errorMessage);
        }
   }
+
+  export const hideTabBar = () => {
+    const tabBar = document.getElementById('app-tab-bar');
+    if (tabBar !== null) {
+      tabBar.style.display = 'none';
+    }
+  };
+
+  export const showTabBar = () => {
+    const tabBar = document.getElementById('app-tab-bar');
+    if (tabBar !== null) {
+      tabBar.style.display = 'flex';
+    }
+  };
   

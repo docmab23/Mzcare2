@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonButton, IonItem, IonText } from "@ionic/react";
+import { IonContent, IonPage, IonButton, IonItem, IonText, useIonViewDidEnter } from "@ionic/react";
 import { Redirect, useHistory } from "react-router-dom";
 import React from "react";
 import "./Register.css";
@@ -6,15 +6,18 @@ import "./Register.css";
 import FormTopBar from "../components/FormTopBar";
 import "./Home.css";
 import { useAuth } from "../contexts/AuthContext";
+import { showTabBar } from "../utils/Utils";
 
 function Home() {
   const history = useHistory();
   const { currentUser } = useAuth();
   async function goImmunization() {
     history.replace("/immune");
-
-  
   }
+
+  useIonViewDidEnter(() => {
+    showTabBar();
+  });
 
   if (currentUser === null) {
     return <Redirect to="/login" />;
