@@ -10,9 +10,9 @@
 .field {
 
     font-size: large;
-    font-weight: 300;
+    font-weight: bold;
 }
 
 ion-text {
-    font-weight: 300;
+    font-weight: bold;
 }

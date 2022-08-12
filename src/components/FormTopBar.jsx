@@ -1,14 +1,14 @@
 import React from 'react';
 import './FormTopBar.css';
-import white from "../images/MzCare_Logo_white.svg"
+import white from "../images/MzCare_Logo_white.png"
 
 function FormTopBar () {
   return (
     <div className="placeTop">
-        <div className='logoPlacement'>
-        <img src={white}>
+         {/* <div> */}
+        <img className='logoPlacement'src={white}>
         </img>
-        </div>
+        {/* </div> */}
       </div>
   );
 };
