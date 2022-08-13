@@ -115,7 +115,7 @@ function Register() {
               SIGN UP
             </IonButton>
             <div className="padding-lign">
-          <Link onClick={resendEmailVerification}
+          <Link to="" onClick={resendEmailVerification}
             disabled={buttonDisabled}>Resend Email</Link>
            </div>
             Already signed up? <Link to="/login">Login</Link>

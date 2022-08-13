@@ -14,24 +14,37 @@ import {
   useIonViewDidEnter,
 } from "@ionic/react";
 
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { auth } from "../firebase";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import { auth, db } from "../firebase";
 import { toast } from "../toast";
-// import { setUserState } from "../redux/actions";
 import { useDispatch } from "react-redux";
 import FormTopBar from "../components/FormTopBar";
 import { useAuth } from "../contexts/AuthContext";
 import { useDatabase } from "../contexts/DatabaseContext";
 import { errors, hideTabBar } from "../utils/Utils";
+import { doc, setDoc } from "firebase/firestore";
 
 function Login() {
   const [busy, setBusy] = useState(false);
+  const location = useLocation();
+  const [card_id, setCardId] = useState(location.state !== null && location.state !== undefined ? location.state.card_id : "")
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useAuth();
   const { genList } = useDatabase();
+  const controller = new AbortController()
+
+  async function updateDatabase(state, card_uid, user_uid) {
+    console.log(card_id)
+    console.log(card_uid)
+    const cardRef = doc(db, "qrCode/" + card_uid);
+    const cardObject = {};
+    cardObject["state"] = state;
+    cardObject["user_uid"] = user_uid;
+    setDoc(cardRef, cardObject);
+  }
 
   useIonViewDidEnter(() => {
     hideTabBar();
@@ -43,6 +56,9 @@ function Login() {
       const res = await login(email, password);
       if (res) {
         if (auth.currentUser.emailVerified) {
+          if (card_id !== "" && card_id !== undefined) {
+            await updateDatabase(true, card_id, auth.currentUser.uid);
+          }
           if (genList.length == 0) {
             history.replace("/general");
           } else {
@@ -61,6 +77,12 @@ function Login() {
     }
     setBusy(false);
   }
+
+  useEffect(() => {
+    return () => {
+      controller.abort()
+    }
+  },[])
 
   return (
     <IonPage>

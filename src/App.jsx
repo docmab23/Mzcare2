@@ -59,6 +59,7 @@ import "./App.css";
 import Settings from "./pages/Settings";
 import { ok } from "assert";
 import { home, medkitSharp, settings } from "ionicons/icons";
+import QRRoute from "./pages/QRRoute";
 
 // import Home from "../pages/Home";
 // import {Redirect} from 'react-router-dom';
@@ -97,6 +98,7 @@ function App() {
                   render={() => <Redirect to="/login" />}
                   exact={true}
                 />
+                <Route path="/qr/:id" component={QRRoute} exact={true}/>
               </IonRouterOutlet>
 
               <IonTabBar slot="bottom" className="footer-tab" id="app-tab-bar">
