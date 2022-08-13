@@ -25,7 +25,7 @@ app.post('/api/messages', (req, res) => {
     .create({
       from: +17408753450 ,
       to:  req.query.to,
-      body: "Hi Bro!"
+      body: req.query.body
     })
     .then(() => {
       res.send(JSON.stringify({ success: true }));
