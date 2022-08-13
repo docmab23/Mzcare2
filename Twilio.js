@@ -4,6 +4,9 @@ const pino = require('express-pino-logger')();
 const client = require('twilio')("AC935ee7307449bece15a765669166e634"
   ,"d4d6c2d609c775ded00a85fc14a8e407"
 );
+const Phaxio = require('phaxio-official');
+const phaxio = new Phaxio(process.env.PHAXIOKEY, process.env.PHAXIOSECRET);
+ 
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -34,18 +37,23 @@ app.post('/api/messages', (req, res) => {
 });
 
 app.post('/api/fax', (req, res) => {
-client.fax.faxes
-  .create({
-     from: +17408753450,
-     to: req.query.to,
-     mediaUrl: req.query.fileURL
-   })
-  .then(fax => 
-      console.log(fax.sid)
-  ).catch(error => 
-      console.log(error)
-  );
-
+  phaxio.faxes.create({
+    to: req.query.to, // Replace this with a number that can receive faxes.
+    content_url: 'https://google.com',
+    file: req.query.filepath,
+  })
+    .then((fax) => {
+      // The `create` method returns a fax object with methods attached to it for doing things
+      // like cancelling, resending, getting info, etc.
+   
+      // Wait 5 seconds to let the fax send, then get the status of the fax by getting its info from the API.
+      return setTimeout(() => {
+        fax.getInfo()
+      }, 5000)
+    })
+    .then(status => console.log('Fax status response:\n', JSON.stringify(status, null, 2)))
+    .catch((err) => { throw err; });
+   
 });
 app.get('/api/try', (req, res) => {
       const name_= req.params.name;
@@ -53,10 +61,6 @@ app.get('/api/try', (req, res) => {
     });
     
 app.listen(process.env.PORT || 5000, () =>
-<<<<<<< HEAD
   console.log('Express server is running on localhost:5000')
-=======
-  console.log('Express server is running on localhost:8080')
->>>>>>> 2d6bd6b69f1ac0570751c97ae8b68a2cd58b21fd
 );
 
