@@ -2,14 +2,23 @@ import { IonContent, IonPage, IonButton, IonItem, IonText, useIonViewDidEnter } 
 import { Redirect, useHistory } from "react-router-dom";
 import React from "react";
 import "./Register.css";
-
+import { useState, useEffect } from 'react';
+import {storage} from "../firebase";
 import FormTopBar from "../components/FormTopBar";
 import "./Home.css";
 import { useAuth } from "../contexts/AuthContext";
 import { showTabBar } from "../utils/Utils";
+import Camera2 from "../hooks/Camera2";
+import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { Filesystem, Directory,  } from '@capacitor/filesystem';
+import {auth} from "../firebase";
 
 function Home() {
   const history = useHistory();
+  const [photos, setPhotos] = useState([]);
+  const [imgUrl, setImgUrl] = useState(null);
+  const [progresspercent, setProgresspercent] = useState(0);
   const { currentUser } = useAuth();
   async function goImmunization() {
     history.replace("/immune");
@@ -22,6 +31,8 @@ function Home() {
   if (currentUser === null) {
     return <Redirect to="/login" />;
   }
+
+ 
 
   return (
     <IonPage>
@@ -61,7 +72,13 @@ function Home() {
             Conditions{" "}
           </IonButton>
         </div>
+        <diiv>
+          <IonButton routerLink="/camera">
+            Upload your Medical Records 
+          </IonButton>
+        </diiv>
       </IonContent>
+     
     </IonPage>
   );
 }

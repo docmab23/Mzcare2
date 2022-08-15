@@ -44,6 +44,7 @@ import Ice from "./pages/resource-pages/Ice";
 import General from "./pages/resource-pages/General";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import FootNavbar from "./components/Foot-Navbar";
+import Geo from "./pages/Geo";
 
 import { DatabaseProvider } from "./contexts/DatabaseContext";
 
@@ -59,6 +60,8 @@ import "./App.css";
 import Settings from "./pages/Settings";
 import { ok } from "assert";
 import { home, medkitSharp, settings } from "ionicons/icons";
+import Camera2 from "./hooks/Camera2";
+import DisplayEm from "./pages/DisplayEm";
 
 // import Home from "../pages/Home";
 // import {Redirect} from 'react-router-dom';
@@ -66,7 +69,7 @@ import { home, medkitSharp, settings } from "ionicons/icons";
 function App() {
   // const {currentUser} = useAuth();
   // console.log(currentUser);
-  
+
   return (
     <IonApp>
       <AuthProvider>
@@ -78,6 +81,8 @@ function App() {
                 <Route path="/try" component={Try1} />
                 <Route path="/home" component={Home} />
                 <Route path="/register" component={Register} />
+                <Route path="/geo" component={Geo}/>
+                <Route path="/camera" component={Camera2} />
                 <Route path="/tabs" component={FootNavbar} />
                 <Route path="/em_tab" component={Em} />
                 <Route path="/changeEmail" component={ChangeEmail} />
@@ -86,6 +91,7 @@ function App() {
                 <Route path="/allergy" component={Allergy} />
                 <Route path="/immune" component={Immunizations} />
                 <Route path="/settings" component={Settings} />
+                <Route path="/display_em" component={DisplayEm} />
                 <Route path="/ice" component={Ice} />
                 <Route path="/condition" component={Condition} />
                 <Route
