@@ -40,29 +40,29 @@ function Ice() {
   const { iceJson, iceList, setICEJson, setICEList } = useDatabase();
   const { currentUser } = useAuth();
   const history = useHistory();
+  const {genJson} = useDatabase();
+
+  const name = genJson["Name"]
+  // console.log(iceList);
 
 
-  async function getDataAxios(number){
+
+ 
+  async function Sms_Ice(number){
     var requestOptions = {
       method: 'POST',
       redirect: 'follow'
     };
     
-    fetch(`http://localhost:3001/api/messages?to="${number}"`, requestOptions)
+    fetch(`http://mzcare2.herokuapp.com/api/messages?to="${number}"&body=You have been assigned as an emergency contact for: "${genJson["General"]["Name"]}""`, requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
 }
 
    
-  function sendSms(){
-  if (iceList.length != 0){
-    iceList.map((item, pos) => {
-
-      console.log((iceJson[item]["number"]));
-      getDataAxios((iceJson[item]["number"]));
-
-  })}
+  function sendSms(icestuff){
+       Sms_Ice((icestuff["number"])); 
 }
   function changestatus() {
     setStatus(!status);
@@ -148,12 +148,20 @@ function Ice() {
     };
     submitICEData[iceName] = iceData;
     iceList.push(iceName);
+    // console.log(typeof iceName);
+
     for (let key in iceJson) {
       submitICEData[key] = iceJson[key];
+      // console.log(submitICEData[key]["number"])
+
+      sendSms(submitICEData[key]);
+
     }
+    // console.log(submitICEData);
     setICEJson(submitICEData);
     setICEList(iceList);
     await setICE(submitICEData);
+   //  sendSms(iceList);
     setBusy(false);
     setStatus(!status);
   }
@@ -169,7 +177,6 @@ function Ice() {
         {"\u00a0\u00a0\u00a0"}
         <h1>{"\u00a0\u00a0\u00a0"} </h1>
         <IonGrid>
-       <IonButton onClick={sendSms}>Send</IonButton>
           <IonRow className="home">
             <IonCol>
               <div>
