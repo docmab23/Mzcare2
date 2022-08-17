@@ -46,8 +46,6 @@ import {
     const {genJson, genList, iceList, iceJson, allergyJson, allergyList, immunizationJson, immunizationList} = useDatabase();
 
     const [address, setAddress] = useState([]);
-    console.log(iceList);
-
 
     const getLocation = async () => {
         // setLoading(true);
