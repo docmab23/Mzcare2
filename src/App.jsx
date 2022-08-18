@@ -60,11 +60,9 @@ import "./App.css";
 import Settings from "./pages/Settings";
 import { ok } from "assert";
 import { home, medkitSharp, settings } from "ionicons/icons";
-
+import QRRoute from "./pages/QRRoute";
 import Camera2 from "./hooks/Camera2";
 import DisplayEm from "./pages/DisplayEm";
-import QRRoute from "./pages/QRRoute";
-
 
 // import Home from "../pages/Home";
 // import {Redirect} from 'react-router-dom';

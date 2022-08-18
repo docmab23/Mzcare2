@@ -54,7 +54,7 @@ function Ice() {
       redirect: 'follow'
     };
     
-    fetch(`http://mzcare2.herokuapp.com/api/messages?to="${number}"&body=You have been assigned as an emergency contact for: "${genJson["General"]["Name"]}""`, requestOptions)
+    fetch(`https://mzcare2.herokuapp.com/api/messages?to="${number}"&body=You have been assigned as an emergency contact for: "${genJson["General"]["Name"]}'s MzCare Health ID. Get yours, now at https://mzcare.us""`, requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
@@ -62,6 +62,7 @@ function Ice() {
 
    
   function sendSms(icestuff){
+       console.log(icestuff["number"]);
        Sms_Ice((icestuff["number"])); 
 }
   function changestatus() {
@@ -148,16 +149,18 @@ function Ice() {
     };
     submitICEData[iceName] = iceData;
     iceList.push(iceName);
-    // console.log(typeof iceName);
+    console.log(typeof iceData);
 
     for (let key in iceJson) {
       submitICEData[key] = iceJson[key];
-      // console.log(submitICEData[key]["number"])
+      //console.log(submitICEData.at[-1])
+      // submitICEData[key]
 
       sendSms(submitICEData[key]);
 
     }
     // console.log(submitICEData);
+    console.log(submitICEData);
     setICEJson(submitICEData);
     setICEList(iceList);
     await setICE(submitICEData);
