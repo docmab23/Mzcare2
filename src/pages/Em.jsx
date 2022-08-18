@@ -32,7 +32,18 @@ import General from "./resource-pages/General";
 function Em() {
   var show_ = false;
 
-  const {genJson, genList, iceList, iceJson, allergyJson, allergyList, immunizationJson, immunizationList} = useDatabase();
+  const {
+    genJson,
+    genList,
+    iceList,
+    iceJson,
+    allergyJson,
+    allergyList,
+    immunizationJson,
+    immunizationList,
+    conditionList,
+    conditionJson
+  } = useDatabase();
   if (genList.length != 0) {
     return (
       <IonPage>
@@ -90,17 +101,13 @@ function Em() {
                         <IonText color="primary" font="bold">
                           Contact Name:
                         </IonText>
-                        <div>
-                        {iceJson[item]["name"]}
-                        </div>
+                        <div>{iceJson[item]["name"]}</div>
                       </IonCol>
                       <IonCol>
                         <IonText color="primary" font="bold">
                           Contact No:
                         </IonText>
-                        <div>
-                        {iceJson[item]["number"]}
-                        </div>
+                        <div>{iceJson[item]["number"]}</div>
                       </IonCol>
                     </IonRow>
                   </IonGrid>
@@ -133,6 +140,23 @@ function Em() {
                     <IonCard>
                       <IonCardContent>
                         {immunizationJson[item]["vaccineName"]}
+                      </IonCardContent>
+                    </IonCard>
+                  </IonCol>
+                </IonRow>
+              </IonGrid>
+            );
+          })}
+
+          <h2>Conditions</h2>
+          {conditionList.map((item, pos) => {
+            return (
+              <IonGrid>
+                <IonRow key={pos}>
+                  <IonCol>
+                    <IonCard>
+                      <IonCardContent>
+                        {conditionJson[item]["conditionName"]}
                       </IonCardContent>
                     </IonCard>
                   </IonCol>

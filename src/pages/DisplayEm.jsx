@@ -43,7 +43,7 @@ import {
         hideTabBar();
       });
   
-    const {genJson, genList, iceList, iceJson, allergyJson, allergyList, immunizationJson, immunizationList} = useDatabase();
+    const {genJson, genList, iceList, iceJson, allergyJson, allergyList, immunizationJson, immunizationList, conditionJson, conditionList} = useDatabase();
 
     const [address, setAddress] = useState([]);
 
