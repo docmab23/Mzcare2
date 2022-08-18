@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef} from 'react';
-import { IonContent, isPlatform, IonIcon} from '@ionic/react';
+import { IonContent, isPlatform, IonIcon, IonCol, IonRow, IonGrid} from '@ionic/react';
 
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 import { Filesystem, Directory,  } from '@capacitor/filesystem';
@@ -15,6 +15,9 @@ import {auth} from "../firebase";
 
  
 import { fileTray, home, images, medkitSharp, settings } from "ionicons/icons";
+import { lstat } from 'fs';
+import AddFileName from '../modals/AddFileName';
+import ShowImage from '../modals/ShowImage';
 
 function Camera2(props) {
 
@@ -27,11 +30,23 @@ function Camera2(props) {
     const [data,setData] = useState([]);
     const [disable , setDisable] = useState(false);
     const fileInput = useRef(null);
+    const [status, setStatus] = useState(false);
+    const [status2, setStatus2] = useState(false);
+    const [imageclicked, setImageclicked] = useState(false);
+    const [filename, setFilename] = useState("m2.jpeg");
+    const ls =[];
 
     const hiddenFileInput = React.useRef(null);
     const uid = auth.currentUser.uid;
    
+    function changestatus(){
+      setStatus(!status);
+    }
 
+    function changestatus2(){
+      setStatus2(!status2);
+
+    }
   
     const handleClick = event => {
       hiddenFileInput.current.click();
@@ -41,6 +56,11 @@ function Camera2(props) {
     };
    
    
+    function show_image(){
+        changestatus2();
+
+
+    }
 
     const takePhoto = async () => {
     try{
@@ -51,7 +71,7 @@ function Camera2(props) {
       });
       var imageUrl = photo.webPath;
       console.log(imageUrl);
-      const fileName = 'try2';
+      //const fileName = 'try2';
      // const savedFileImage = await savePicture(photo, fileName);
       save_picture(photo);
     }
@@ -62,10 +82,8 @@ function Camera2(props) {
       // const newPhotos = [savedFileImage, ...photos];
       // setPhotos(newPhotos);
 
-     const fileName = "chicken";
-      
-      console.log(uid);
-      const storageRef = ref(storage, `${uid}/images/${fileName}`);
+     
+     
       
       // const path = new Blob(photo , {type:"image/jpeg"})
 
@@ -76,9 +94,15 @@ function Camera2(props) {
 
       //const upload_file= uploadBytesResumable(storageRef2, file);
     
-          
+    function makefilename(){
+      setFilename(filename)
+      //setStatus(false);
+    }
 
      async function save_picture(photo){
+      setStatus(!status);
+      console.log(filename);
+      const storageRef = ref(storage, `${uid}/images/${filename}`);
       var b64_string = await base64FromPath(photo.webPath);
       console.log(b64_string);
       //var b64_ = decodeURIComponent(b64);
@@ -148,66 +172,84 @@ function Camera2(props) {
           function get_files() {
     
             const dir_ref = ref(storage , `${uid}/images/`)
-            if (disable === false){
+           if (disable === false){
             listAll(dir_ref)
             .then((res) => {
-              res.prefixes.forEach((folderRef) => {
-                console.log(folderRef);
-                // All the prefixes under listRef.
-                // You may call listAll() recursively on them.
-              });
-              const image_list = []
-    
               res.items.forEach((itemRef) => {
                 // All the items under listRef.
                 // itemRef.getDownloadURL();
                 getDownloadURL(itemRef).then((url_) =>
-                {setImageList(images => images.concat(url_));});
+                {setImageList(images => images.concat(url_));
+                ls.push(url_);});
+              
                 
 
                 
               }
+              
              );
+            
              setDisable(true);
+             console.log(images.length)
+             
               
             }).catch((error) => {
               // Uh-oh, an error occurred!
               console.log(error);
             });
+          }
 
-            
-              
-
-          
-
-          
-      }
-     
     }
 
-      console.log(typeof images);
+      // console.log(typeof images);
+
       get_files();
+      console.log(images);
+      console.log(imageclicked);
+
+      function show_image_large(image_clicked){
+        setImageclicked(image_clicked);
+        changestatus2();
+      }
       
       
     return (
+     
+
 
         <IonPage>
             <IonContent>
+            <IonGrid>
+              <IonRow>
             {images.map((item, pos) => {
-              console.log(images[pos])
+              // console.log(images[pos])
                 return ( 
-                  <img src={images[pos]}></img>
+                 
+                <IonCol> <img src={images[pos]} 
+                   onClick={() => 
+                   show_image_large(images[pos])}></img></IonCol> 
+
                 )
                 }) }
+                </IonRow>
+                 </IonGrid>
 
-              <label onClick={upload_file}>
+       {/* <IonButton onClick={upload_file}>
                 <input type="file" hidden onChange={handleChange}/>
                     Upload
                 
-              </label>
+              </IonButton> */}
                 <IonButton onClick={takePhoto}>
                     Upload your medical records
                 </IonButton>
+
+                <AddFileName  show={status}
+            close={changestatus}
+            name={setFilename}
+            />
+            <ShowImage show={status2}
+            close = {changestatus2}
+            image = {imageclicked} />
                 
 
                 

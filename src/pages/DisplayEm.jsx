@@ -94,7 +94,7 @@ import {
           redirect: 'follow'
         };
         
-        fetch(`http://mzcare2.herokuapp.com/api/messages?to="${number}"&body="There's an emergency at:"${pos_}""`, requestOptions)
+        fetch(`https://mzcare2.herokuapp.com/api/messages?to="${number}"&body="There's an emergency at:"${pos_}""`, requestOptions)
           .then(response => response.text())
           .then(result => console.log(result))
           .catch(error => console.log('error', error));
