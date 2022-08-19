@@ -38,7 +38,7 @@ function Em() {
   if (genList.length != 0) {
     return (
       <IonPage>
-        <IonContent className="ion-padding">
+        <IonContent className="ion-padding" color="primary">
           <FormTopBar />
 		  <IonGrid align="center" color="primary">
 			<IonRow>
@@ -54,7 +54,6 @@ function Em() {
               {genList.map((item, pos) => {
                 return (
               
-                   
                       <>
                        <IonRow><IonText color="primary">
                           Name {"\u00a0\u00a0"}
