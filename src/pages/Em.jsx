@@ -23,7 +23,7 @@ import {
 } from "@ionic/react";
 
 import React, { useState } from "react";
-import FormTopBar from "../components/FormTopBar";
+import FormTopBarW from "../components/FormTopBarW";
 import { toast } from "../toast";
 import { useDatabase } from "../contexts/DatabaseContext";
 
@@ -38,8 +38,8 @@ function Em() {
   if (genList.length != 0) {
     return (
       <IonPage>
-        <IonContent className="ion-padding">
-          <FormTopBar />
+        <IonContent className="ion-padding" color="primary">
+          <FormTopBarW />
 		  <IonGrid align="center" color="primary">
 			<IonRow>
             <IonText>MzCare Emergency Profile{" "}</IonText>
@@ -54,7 +54,6 @@ function Em() {
               {genList.map((item, pos) => {
                 return (
               
-                   
                       <>
                        <IonRow><IonText color="primary">
                           Name {"\u00a0\u00a0"}
