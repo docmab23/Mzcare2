@@ -23,7 +23,7 @@ import {
 } from "@ionic/react";
 
 import React, { useState } from "react";
-import FormTopBar from "../components/FormTopBar";
+import FormTopBarW from "../components/FormTopBarW";
 import { toast } from "../toast";
 import { useDatabase } from "../contexts/DatabaseContext";
 
@@ -39,7 +39,7 @@ function Em() {
     return (
       <IonPage>
         <IonContent className="ion-padding" color="primary">
-          <FormTopBar />
+          <FormTopBarW />
 		  <IonGrid align="center" color="primary">
 			<IonRow>
             <IonText>MzCare Emergency Profile{" "}</IonText>

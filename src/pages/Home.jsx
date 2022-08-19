@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonButton, IonItem, IonText, useIonViewDidEnter } from "@ionic/react";
+import { IonContent, IonPage, IonButton, IonItem, IonText, useIonViewDidEnter, IonHeader } from "@ionic/react";
 import { Redirect, useHistory } from "react-router-dom";
 import React from "react";
 import "./Register.css";
@@ -36,12 +36,19 @@ function Home() {
 
   return (
     <IonPage>
+      
       <IonContent className="ion-padding">
+      <div class = "bar bar-header bar-positive">
         <FormTopBar />
+        </div>
+        <h2>
+        {"\u00a0\u00a0\u00a0"}
+        </h2>
         <div className="ion-padding container">
           <IonText>
             <h2>
               {" "}
+              {"\u00a0\u00a0\u00a0"}
               {"\u00a0\u00a0\u00a0"}
               {"\u00a0\u00a0\u00a0"}{" "}
             </h2>
