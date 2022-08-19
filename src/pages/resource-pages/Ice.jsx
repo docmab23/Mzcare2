@@ -49,12 +49,19 @@ function Ice() {
 
  
   async function Sms_Ice(number){
+    let headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    // headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
+    headers.append('Origin','http://localhost:3000');
     var requestOptions = {
       method: 'POST',
-      redirect: 'follow'
+      redirect: 'follow',
+  
     };
     
-    fetch(`https://mzcare2.herokuapp.com/api/messages?to="${number}"&body=You have been assigned as an emergency contact for: "${genJson["General"]["Name"]}'s MzCare Health ID. Get yours, now at https://mzcare.us""`, requestOptions)
+    fetch(`https://mzcare2.herokuapp.com/api/messages?to="${number}"&body=You have been assigned as an emergency contact for: "${genJson["General"]["Name"]}'s MzCare Health ID. Get yours, now at https://mzcare.us""`, requestOptions,headers=headers)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
@@ -149,14 +156,15 @@ function Ice() {
     };
     submitICEData[iceName] = iceData;
     iceList.push(iceName);
-    console.log(typeof iceData);
+    console.log(iceData);
+    sendSms(iceData);
+
 
     for (let key in iceJson) {
       submitICEData[key] = iceJson[key];
-      //console.log(submitICEData.at[-1])
-      // submitICEData[key]
+      // console.log(i)
+      ;
 
-      sendSms(submitICEData[key]);
 
     }
     // console.log(submitICEData);

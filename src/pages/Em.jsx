@@ -32,7 +32,8 @@ import General from "./resource-pages/General";
 function Em() {
   var show_ = false;
 
-  const {genJson, genList, iceList, iceJson, allergyJson, allergyList, immunizationJson, immunizationList} = useDatabase();
+  const {genJson, genList, iceList, iceJson, allergyJson, allergyList, immunizationJson, immunizationList , conditionJson, 
+	setConditionJson,conditionList,setConditionList} = useDatabase();
   if (genList.length != 0) {
     return (
       <IonPage>
@@ -49,12 +50,12 @@ function Em() {
               {genList.map((item, pos) => {
                 return (
                   <IonGrid>
-                    <IonRow key={pos}>
-                      <IonCol>
+                   
+                      
                         <IonText color="primary">
                           Name: {genJson[item]["Name"]}
                         </IonText>
-                      </IonCol>
+                    
                       <IonCol>
                         <IonText color="primary">Age</IonText>:{" "}
                         {genJson[item]["Age"]}
@@ -73,7 +74,7 @@ function Em() {
                           ", " +
                           genJson[item]["Zip"]}
                       </IonCol>
-                    </IonRow>
+                    
                   </IonGrid>
                 );
               })}
@@ -140,6 +141,37 @@ function Em() {
               </IonGrid>
             );
           })}
+          <h2>Conditions</h2>
+          <IonCard>
+            <IonCardContent>
+              {conditionList.map((item, pos) => {
+                return (
+                  <IonGrid>
+                    <IonRow key={pos}>
+                      <IonCol>
+                        <IonText color="primary" font="bold">
+					     	Condtion Name{}
+                        </IonText>
+                        <IonText>
+                          {conditionJson[item]["conditionName"]}
+						  </IonText>
+                        
+                      
+                      </IonCol>
+                      <IonCol>
+                        <IonText color="primary" font="bold">
+                         Status:
+                        </IonText>
+                        <div>
+                        {conditionJson[item]["status"]}
+                        </div>
+                      </IonCol>
+                    </IonRow>
+                  </IonGrid>
+                );
+              })}
+            </IonCardContent>
+          </IonCard>
         </IonContent>
       </IonPage>
     );
