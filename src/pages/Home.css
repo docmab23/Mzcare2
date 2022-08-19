@@ -1,0 +1,14 @@
+.rbutton {
+    width: 100%;
+    height: 85px;
+    --background-hover: #FFFFFF;
+}
+
+.footer-icons{
+    size:48px;
+    height: 30px;
+};
+
+h2 {
+    background-color: #FFFFFF;
+}

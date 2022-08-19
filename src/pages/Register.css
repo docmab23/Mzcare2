@@ -1,0 +1,25 @@
+.form-border {
+    border-bottom: 2px solid rgb(98, 142, 80);
+    /* border-bottom-color: rgb(186, 218, 85); */
+}
+
+.form-button {
+    --background: rgb(98, 142, 80);
+    position: relative;
+    width: 20vh;
+}
+
+.form-button-placement {
+    padding-top: 15vh;
+    text-align: center;
+}
+
+.form-input-placement {
+    padding-top: 12vh;
+}
+
+.form-heading {
+    text-align: center;
+    padding-top: 10vh;
+  }
+  
