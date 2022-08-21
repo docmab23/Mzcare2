@@ -11,3 +11,8 @@
 ion-text {
     font-weight: bold;
 }
+
+.Phone {
+
+    white-space: nowrap;
+}
