@@ -89,12 +89,17 @@ import {
 
 
     async function Send_Sms(number,pos_){
+      let headers = new Headers();
+
+      headers.append('Content-Type', 'application/json');
+      headers.append('Accept', 'application/json');
+      headers.append('Origin','https://localhost:3000');
         var requestOptions = {
           method: 'POST',
           redirect: 'follow'
         };
         
-        fetch(`https://mzcare2.herokuapp.com/api/messages?to="${number}"&body="There's an emergency at:"${pos_}""`, requestOptions)
+        fetch(`https://mzcare2.herokuapp.com/api/messages?to="${number}"&body="There's an emergency at:"${pos_}""`, requestOptions,headers=headers)
           .then(response => response.text())
           .then(result => console.log(result))
           .catch(error => console.log('error', error));
