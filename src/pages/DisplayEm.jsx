@@ -22,7 +22,7 @@ import {
   useIonViewDidEnter,
 } from "@ionic/react";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormTopBar from "../components/FormTopBar";
 import { toast } from "../toast";
 import { useDatabase } from "../contexts/DatabaseContext";
@@ -32,6 +32,9 @@ import Geocode from "react-geocode";
 
 // import "./Em.css";
 import General from "./resource-pages/General";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { useLocation } from "react-router";
 
 function DisplayEm() {
   var show_ = false;
@@ -39,52 +42,118 @@ function DisplayEm() {
     hideTabBar();
   });
 
-  const {
-    genJson,
-    genList,
-    iceList,
-    iceJson,
-    allergyJson,
-    allergyList,
-    immunizationJson,
-    immunizationList,
-    conditionJson,
-    conditionList,
-  } = useDatabase();
+  useEffect(() => {
+    getData();
+  }, []);
 
+  const location = useLocation();
+  var uid = location.pathname;
+  uid = uid.split("/").pop();
   const [address, setAddress] = useState([]);
+  const [immunizationJson, setImmunizationJson] = useState("")
+  const [immunizationList, setImmunizationList] = useState([])
+  const [allergyJson, setAllergyJson] = useState("")
+  const [allergyList, setAllergyList] = useState([])
+  const [iceJson, setICEJson] = useState("")
+  const [iceList, setICEList] = useState([])
+  const [conditionJson, setConditionJson] = useState("")
+  const [conditionList, setConditionList] = useState([])
+  const [genJson, setGenJson] = useState("")
+  const [genList, setGenList] = useState([])
+
+  function getData() {
+    getImmunizations();
+    getAllergy();
+    getICE();
+    getCondition();
+    getGeneral();
+  }
+
+  function getImmunizations() {
+    const immunizationRef = doc(db, uid + "/immunization");
+    const immuneList = []
+    getDoc(immunizationRef).then((docSnap) => {
+        if (docSnap.exists()) {
+            const immunizationData = docSnap.data();
+            for (let key in immunizationData) {
+                immuneList.push(key)
+            }
+            setImmunizationJson(immunizationData);
+            setImmunizationList(immuneList);
+        }
+    })
+  }
+
+  function getICE() {
+    const iceRef = doc(db, uid + "/ice");
+    const iceList = []
+    getDoc(iceRef).then((docSnap) => {
+        if (docSnap.exists()) {
+            const iceData = docSnap.data();
+            for (let key in iceData) {
+                iceList.push(key)
+            }
+            setICEJson(iceData);
+            setICEList(iceList);
+        }
+    })
+  }
+
+  function getAllergy() {
+    const allergyRef = doc(db, uid + "/allergy");
+    const allergyList = []
+    getDoc(allergyRef).then((docSnap) => {
+        if (docSnap.exists()) {
+            const allergyData = docSnap.data();
+            for (let key in allergyData) {
+                allergyList.push(key)
+            }
+            setAllergyJson(allergyData);
+            setAllergyList(allergyList);
+        }
+    })
+  }
+
+  function getCondition() {
+    const conditionRef = doc(db, uid + "/condition");
+    const conditionList = []
+    getDoc(conditionRef).then((docSnap) => {
+        if (docSnap.exists()) {
+            const conditionData = docSnap.data();
+            for (let key in conditionData) {
+                conditionList.push(key)
+            }
+            setConditionJson(conditionData);
+            setConditionList(conditionList);
+        }
+    })
+  }
+
+  function getGeneral() {
+    const generalRef = doc(db, uid + "/general");
+    const generalList = []
+    getDoc(generalRef).then((docSnap) => {
+        if (docSnap.exists()) {
+            const generalData = docSnap.data();
+            for (let key in generalData) {
+                generalList.push(key)
+            }
+            setGenJson(generalData);
+            setGenList(generalList);
+        }
+    })
+  }
 
   const getLocation = async () => {
-    // setLoading(true);
-
     try {
       const position = await Geolocation.getCurrentPosition();
-      // setPosition(position);
-      // setLoading(false);
-      // setError({ showError: false });
       const lat = position.coords.latitude.toString();
       const long = position.coords.longitude.toString();
       setAddress([lat, long]);
-      // alert(typeof lat);
-      /* await Geocode.fromLatLng("48.", "2.2922926").then(
-                (response) => {
-                  const address = response.results[0].formatted_address;
-                  alert(address);
-                  setAddress(address);
-                  
-                },
-                (error) => {
-                  console.error(error);
-                }
-              );*/
     } catch (e) {
-      //setError({ showError: true, message: e.message });
-      // setLoading(false);
       toast(e);
     }
   };
-
-  // const pos_ = getLocation();
 
   async function Send_Sms(number, pos_) {
     var requestOptions = {
@@ -104,11 +173,7 @@ function DisplayEm() {
   async function Sms_Ice() {
     iceList.map((item, pos) => {
       const phone_no = iceJson[item]["number"];
-      // getLocation();
       getLocation().then(Send_Sms(phone_no, address));
-      // alert(address);
-
-      // console.log(position);
     });
   }
 
@@ -203,36 +268,32 @@ function DisplayEm() {
         </IonCard>
 
         <h2>Immunizations</h2>
-          <IonCard>
-            <IonCardContent>
-              {immunizationList.map((item, pos) => {
-                return (
-                  <IonGrid key={pos}>
-                    <IonRow>
-                      {immunizationJson[item]["vaccineName"]}
-                    </IonRow>
-                  </IonGrid>
-                );
-              })}
-            </IonCardContent>
-          </IonCard>
+        <IonCard>
+          <IonCardContent>
+            {immunizationList.map((item, pos) => {
+              return (
+                <IonGrid key={pos}>
+                  <IonRow>{immunizationJson[item]["vaccineName"]}</IonRow>
+                </IonGrid>
+              );
+            })}
+          </IonCardContent>
+        </IonCard>
 
-          <h2>Conditions</h2>
-          <IonCard>
-            <IonCardContent>
-              {conditionList.map((item, pos) => {
-                return (
-                  <IonGrid key={pos}>
-                    <IonRow>
-                      {conditionJson[item]["conditionName"]}
-                    </IonRow>
-                  </IonGrid>
-                );
-              })}
-            </IonCardContent>
-          </IonCard>
-        </IonContent>
-      </IonPage>
+        <h2>Conditions</h2>
+        <IonCard>
+          <IonCardContent>
+            {conditionList.map((item, pos) => {
+              return (
+                <IonGrid key={pos}>
+                  <IonRow>{conditionJson[item]["conditionName"]}</IonRow>
+                </IonGrid>
+              );
+            })}
+          </IonCardContent>
+        </IonCard>
+      </IonContent>
+    </IonPage>
   );
 }
 
