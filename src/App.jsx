@@ -63,6 +63,7 @@ import { home, medkitSharp, settings } from "ionicons/icons";
 import QRRoute from "./pages/QRRoute";
 import Camera2 from "./hooks/Camera2";
 import DisplayEm from "./pages/DisplayEm";
+
 // import Home from "../pages/Home";
 // import {Redirect} from 'react-router-dom';
 
@@ -91,7 +92,7 @@ function App() {
                 <Route path="/allergy" component={Allergy} />
                 <Route path="/immune" component={Immunizations} />
                 <Route path="/settings" component={Settings} />
-                <Route path="/display_em" component={DisplayEm} />
+                <Route path="/:id" component={DisplayEm} exact={true} />
                 <Route path="/ice" component={Ice} />
                 <Route path="/condition" component={Condition} />
                 <Route

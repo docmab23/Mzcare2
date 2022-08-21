@@ -100,17 +100,13 @@ function Em() {
                         <IonText color="primary" font="bold">
                           Name  {"\u00a0\u00a0"}
                         </IonText>
-                        <IonText>
-                        {iceJson[item]["name"]}
-                        </IonText>
+                        <div>{iceJson[item]["name"]}</div>
                       </IonCol>
                       <IonCol>
                         <IonText color="primary" font="bold">
                          Contact No {"\u00a0\u00a0"}
                         </IonText>
-                         <IonText align="center" class="Phone">
-                        {iceJson[item]["number"]}
-                        </IonText>
+                        <div>{iceJson[item]["number"]}</div>
                       </IonCol>
                     </IonRow>
                   </IonGrid>
@@ -134,47 +130,29 @@ function Em() {
             </IonCardContent>
           </IonCard>
 
-          <h2>Immunizations/Vaccines</h2>
-          {immunizationList.map((item, pos) => {
-            return (
-              <IonGrid>
-                <IonRow key={pos}>
-                  <IonCol>
-                    <IonCard>
-                      <IonCardContent>
-                        {immunizationJson[item]["vaccineName"]}
-                      </IonCardContent>
-                    </IonCard>
-                  </IonCol>
-                </IonRow>
-              </IonGrid>
-            );
-          })}
+          <h2>Immunizations</h2>
+          <IonCard>
+            <IonCardContent>
+              {immunizationList.map((item, pos) => {
+                return (
+                  <IonGrid key={pos}>
+                    <IonRow>
+                      {immunizationJson[item]["vaccineName"]}
+                    </IonRow>
+                  </IonGrid>
+                );
+              })}
+            </IonCardContent>
+          </IonCard>
+
           <h2>Conditions</h2>
           <IonCard>
             <IonCardContent>
               {conditionList.map((item, pos) => {
                 return (
-                  <IonGrid>
-                    <IonRow key={pos}>
-                      <IonCol>
-                        <IonText color="primary" font="bold">
-					     	Condtion Name{}
-                        </IonText>
-                        <IonText>
-                          {conditionJson[item]["conditionName"]}
-						  </IonText>
-                        
-                      
-                      </IonCol>
-                      <IonCol>
-                        <IonText color="primary" font="bold">
-                         Status:
-                        </IonText>
-                        <div>
-                        {conditionJson[item]["status"]}
-                        </div>
-                      </IonCol>
+                  <IonGrid key={pos}>
+                    <IonRow>
+                      {conditionJson[item]["conditionName"]}
                     </IonRow>
                   </IonGrid>
                 );
