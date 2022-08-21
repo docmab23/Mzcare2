@@ -23,7 +23,7 @@ function QRRoute() {
           const data = docSnap.data();
           setuserid(data["user_uid"]);
           cardObject["user_uid"] = data["user_uid"];
-          if (data["state"] !== false) history.push(`/em_tab`);
+          if (data["state"] !== false) history.push(`/${uid.split(":").pop()}`);
         }
       });
   }

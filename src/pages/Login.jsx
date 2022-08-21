@@ -24,6 +24,10 @@ import { useAuth } from "../contexts/AuthContext";
 import { useDatabase } from "../contexts/DatabaseContext";
 import { errors, hideTabBar } from "../utils/Utils";
 import { doc, setDoc } from "firebase/firestore";
+import { setUserState } from "../redux/actions";
+import ForgotPassword from "../modals/ForgotPassword";
+import { sendSignInLinkToEmail } from "firebase/auth";
+
 
 function Login() {
   const [busy, setBusy] = useState(false);
@@ -32,9 +36,24 @@ function Login() {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAuth();
+  const { login, resetPassword } = useAuth();
   const { genList } = useDatabase();
+  const [status , setStatus] = useState(false);
+  const [emailForgot , setEmailForgot] = useState();
   const controller = new AbortController()
+
+
+  function changestatus() {
+
+    setStatus(!status)
+  }
+
+
+  function sendEmail(){
+    resetPassword(emailForgot, auth);
+    setStatus(false);
+  }
+  
 
   async function updateDatabase(state, card_uid, user_uid) {
     console.log(card_id)
@@ -86,6 +105,8 @@ function Login() {
 
   return (
     <IonPage>
+       
+
       <IonContent className="ion-padding">
         <FormTopBar />
         <IonLoading message="Signing in..." duration={0} isOpen={busy} />
@@ -107,6 +128,9 @@ function Login() {
                 type="password"
                 onIonChange={(e) => setPassword(e.target.value)}
               />
+              <a onClick={changestatus}>Forgot Password</a>
+
+
             </IonItem>
           </div>
           <div className="form-button-placement">
@@ -118,6 +142,8 @@ function Login() {
             </div>
           </div>
         </div>
+        <ForgotPassword show={status} sendmail={sendEmail} setEmailforgot={setEmailForgot}  changestatus={changestatus}/>
+
       </IonContent>
     </IonPage>
   );
