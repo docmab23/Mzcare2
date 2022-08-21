@@ -130,39 +130,35 @@ function Em() {
             </IonCardContent>
           </IonCard>
 
-          <h2>Immunizations/Vaccines</h2>
-          {immunizationList.map((item, pos) => {
-            return (
-              <IonGrid>
-                <IonRow key={pos}>
-                  <IonCol>
-                    <IonCard>
-                      <IonCardContent>
-                        {immunizationJson[item]["vaccineName"]}
-                      </IonCardContent>
-                    </IonCard>
-                  </IonCol>
-                </IonRow>
-              </IonGrid>
-            );
-          })}
+          <h2>Immunizations</h2>
+          <IonCard>
+            <IonCardContent>
+              {immunizationList.map((item, pos) => {
+                return (
+                  <IonGrid key={pos}>
+                    <IonRow>
+                      {immunizationJson[item]["vaccineName"]}
+                    </IonRow>
+                  </IonGrid>
+                );
+              })}
+            </IonCardContent>
+          </IonCard>
 
           <h2>Conditions</h2>
-          {conditionList.map((item, pos) => {
-            return (
-              <IonGrid>
-                <IonRow key={pos}>
-                  <IonCol>
-                    <IonCard>
-                      <IonCardContent>
-                        {conditionJson[item]["conditionName"]}
-                      </IonCardContent>
-                    </IonCard>
-                  </IonCol>
-                </IonRow>
-              </IonGrid>
-            );
-          })}
+          <IonCard>
+            <IonCardContent>
+              {conditionList.map((item, pos) => {
+                return (
+                  <IonGrid key={pos}>
+                    <IonRow>
+                      {conditionJson[item]["conditionName"]}
+                    </IonRow>
+                  </IonGrid>
+                );
+              })}
+            </IonCardContent>
+          </IonCard>
         </IonContent>
       </IonPage>
     );
