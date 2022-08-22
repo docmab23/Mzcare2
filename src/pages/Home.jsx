@@ -79,11 +79,11 @@ function Home() {
             Conditions{" "}
           </IonButton>
         </div>
-        <diiv>
+        <div>
           <IonButton routerLink="/camera">
             Upload your Medical Records 
           </IonButton>
-        </diiv>
+        </div>
       </IonContent>
      
     </IonPage>

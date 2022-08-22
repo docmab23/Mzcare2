@@ -79,9 +79,9 @@ function Login() {
             await updateDatabase(true, card_id, auth.currentUser.uid);
           }
           if (genList.length == 0) {
-            history.replace("/general");
+            history.push("/general");
           } else {
-            history.replace("/home");
+            history.push("/home");
           }
           toast("You have logged in");
         } else {

@@ -92,12 +92,12 @@ function App() {
                 <Route path="/allergy" component={Allergy} />
                 <Route path="/immune" component={Immunizations} />
                 <Route path="/settings" component={Settings} />
-                <Route path="/:id" component={DisplayEm} exact={true} />
-                <Route path="/ice" component={Ice} />
-                <Route path="/condition" component={Condition} />
+                <Route path="/id/:id" component={DisplayEm} exact={true} />
+                <Route path="/ice" component={Ice} exact={true} />
+                <Route path="/condition" component={Condition} exact={true} />
                 <Route
                   path="/general"
-                  render={(props) => <General {...props} tell={true} />}
+                 component={General}
                 />
                 <Route
                   path="/"

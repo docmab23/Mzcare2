@@ -164,7 +164,6 @@ function General(props) {
         </IonGrid>
 
         {genList.map((item, pos) => {
-          console.log(item);
           return (
             <IonCard
               key={pos}
