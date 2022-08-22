@@ -23,9 +23,9 @@ app.post('/api/messages', (req, res) => {
   res.header('Content-Type', 'application/json');
   client.messages
     .create({
-      from: +17408753450 ,
+      from: req.query.from,
       to:  req.query.to,
-      body: "Hi Bro!"
+      body: req.query.body,
     })
     .then(() => {
       res.send(JSON.stringify({ success: true }));
