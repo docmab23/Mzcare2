@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const pino = require('express-pino-logger')();
-const client = require('twilio')("AC935ee7307449bece15a765669166e634"
-  ,"d4d6c2d609c775ded00a85fc14a8e407"
+const client = require('twilio')("AC01490d81aa05d87d3a5662dbbff45e93"
+  ,"ec07e5c4aa5372e072b985d1f24fc5c6"
 );
 const Phaxio = require('phaxio-official');
 const phaxio = new Phaxio(process.env.PHAXIOKEY, process.env.PHAXIOSECRET);
@@ -23,7 +23,7 @@ app.post('/api/messages', (req, res) => {
   res.header('Content-Type', 'application/json');
   client.messages
     .create({
-      from: req.query.from,
+      from: req.query.from_number,
       to:  req.query.to,
       body: req.query.body,
     })
