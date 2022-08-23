@@ -4,8 +4,10 @@ import {
   IonCol,
   IonRow,
   IonGrid,
+  IonIcon,
+  IonText,
 } from "@ionic/react";
-
+import back from "../images/back.svg";
 import {
   Camera,
   CameraResultType,
@@ -24,8 +26,11 @@ import {
 import { auth } from "../firebase";
 import AddFileName from "../modals/AddFileName";
 import ShowImage from "../modals/ShowImage";
+import FormTopBar from "../components/FormTopBar";
+import { useHistory } from "react-router";
 
 function Camera2(props) {
+  const history = useHistory();
   const [images, setImageList] = useState([]);
   const [url, setUrl] = useState([]);
   const [file, setFile] = useState("");
@@ -59,7 +64,7 @@ function Camera2(props) {
       setPhoto(photo);
       var imageUrl = photo.webPath;
       console.log(imageUrl);
-      setStatus(!status)
+      setStatus(!status);
       // save_picture(photo);
     } catch (e) {
       console.log(e);
@@ -108,8 +113,11 @@ function Camera2(props) {
     });
   }
 
-  function b64_to_blob(b64) {
+  function changeroute() {
+    history.replace("/home");
+  }
 
+  function b64_to_blob(b64) {
     const byteCharacters = window.atob(
       b64.replace(/^data:image\/(png|jpeg|jpg);base64,/, "")
     );
@@ -149,9 +157,9 @@ function Camera2(props) {
   }
 
   useEffect(() => {
-    get_files()
+    get_files();
   }, []);
- 
+
   function show_image_large(image_clicked) {
     setImageclicked(image_clicked);
     changestatus2();
@@ -159,26 +167,85 @@ function Camera2(props) {
 
   return (
     <IonPage>
-      <IonContent>
+      <IonContent className="ion-padding">
+        <div className="bar bar-header bar-positive">
+          <FormTopBar />
+        </div>
+        <h2>{"\u00a0\u00a0\u00a0"}</h2>
         <IonGrid>
-          <IonRow>
+          <h1>
+            <IonRow className="home">
+              <IonCol>
+                <div>
+                  <IonButton onClick={changeroute} color="light">
+                    <IonIcon src={back}></IonIcon>
+                  </IonButton>
+                </div>{" "}
+              </IonCol>
+              <IonText></IonText>
+              <IonCol className="ion-align-self-center heading">Records</IonCol>
+              <IonCol className="ion-align-self-end">
+              </IonCol>
+            </IonRow>
+          </h1>
+        </IonGrid>
+        <div>
+          <IonGrid columns="1fr 1fr">
             {images.map((item, pos) => {
               return (
-                <IonCol key={pos}>
-                  {" "}
-                  <img
-                    src={item}
-                    onClick={() => show_image_large(images[pos])}
-                  ></img>
-                </IonCol>
+                <div key={pos}>
+                  {
+                    <div
+                      role="button"
+                      style={{
+                        marginTop: "3vh",
+                        marginBottom: "3vh",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {
+                        <div
+                          key={item}
+                          style={{
+                            width: "45vw",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                          className="image-container"
+                        >
+                          <img
+                            style={{ width: "40vw", borderRadius: "5px" }}
+                            onClick={() => show_image_large(images[pos])}
+                            src={images[pos]}
+                            alt=""
+                          />
+                        </div>
+                      }
+                    </div>
+                  }
+                </div>
               );
             })}
-          </IonRow>
-        </IonGrid>
-        <IonButton onClick={takePhoto}>Upload your medical records</IonButton>
-
-        <AddFileName show={status} close={changestatus}  name={setFilename} photo={photo}  savePhoto={save_picture}/>
-        <ShowImage show={status2} close={changestatus2} image={imageclicked} />
+          </IonGrid>
+          <IonButton onClick={takePhoto}>Add</IonButton>
+          <AddFileName
+            show={status}
+            close={changestatus}
+            name={setFilename}
+            photo={photo}
+            savePhoto={save_picture}
+          />
+          <ShowImage
+            show={status2}
+            close={changestatus2}
+            image={imageclicked}
+          />
+        </div>
       </IonContent>
     </IonPage>
   );
