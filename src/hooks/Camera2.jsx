@@ -67,14 +67,10 @@ function Camera2(props) {
   };
 
   async function save_picture(photo) {
-    console.log(filename);
     const storageRef = ref(storage, `${uid}/images/${filename}`);
     var b64_string = await base64FromPath(photo.webPath);
-    console.log(b64_string);
     var blob_ = b64_to_blob(b64_string);
-
     const uploadTask = uploadBytesResumable(storageRef, blob_);
-
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -88,6 +84,7 @@ function Camera2(props) {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setImageList((images) => images.concat(downloadURL));
           setImgUrl(downloadURL);
         });
       }
@@ -134,8 +131,6 @@ function Camera2(props) {
 
   function get_files() {
     const dir_ref = ref(storage, `${uid}/images/`);
-    const imagesList = [];
-    const imagesJson = {};
     if (disable === false) {
       listAll(dir_ref)
         .then((res) => {
@@ -151,14 +146,11 @@ function Camera2(props) {
           console.log(error);
         });
     }
-    console.log(images)
   }
 
   useEffect(() => {
     get_files()
   }, []);
-
-  ;
  
   function show_image_large(image_clicked) {
     setImageclicked(image_clicked);
