@@ -1,28 +1,22 @@
 import {
   IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
   IonInput,
   IonButton,
   IonLoading,
-  IonText,
   IonLabel,
   IonItem,
 } from "@ionic/react";
 
 import React, { useState } from "react";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { toast } from "../toast";
-import { useDispatch } from "react-redux";
 import FormTopBar from "../components/FormTopBar";
 import { useAuth } from "../contexts/AuthContext";
 import { errors } from "../utils/Utils";
 
 function ChangeEmail() {
   const [busy, setBusy] = useState(false);
-  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { reAuthenticate, updateUserEmail, currentUser } = useAuth();

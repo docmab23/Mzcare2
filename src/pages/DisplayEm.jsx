@@ -1,37 +1,20 @@
 import {
   IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
-  IonInput,
-  IonButton,
-  IonLoading,
   IonText,
-  IonLabel,
-  IonItem,
-  IonFooter,
-  IonCardHeader,
-  IonCardTitle,
   IonCard,
   IonRow,
   IonCol,
   IonGrid,
   IonCardContent,
-  IonSubTitle,
   useIonViewDidEnter,
 } from "@ionic/react";
 
 import React, { useEffect, useState } from "react";
-import FormTopBar from "../components/FormTopBar";
 import { toast } from "../toast";
-import { useDatabase } from "../contexts/DatabaseContext";
-import { errors, hideTabBar } from "../utils/Utils";
-import { Geolocation, Geoposition } from "@ionic-native/geolocation";
-import Geocode from "react-geocode";
 
-// import "./Em.css";
-import General from "./resource-pages/General";
+import { errors, hideTabBar } from "../utils/Utils";
+import { Geolocation } from "@ionic-native/geolocation";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useLocation } from "react-router";

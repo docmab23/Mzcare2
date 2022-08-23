@@ -1,31 +1,21 @@
 import {
   IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
-  IonInput,
   IonButton,
-  IonLabel,
-  IonItem,
   IonFooter,
   IonCard,
   IonCardSubtitle,
   IonCardContent,
   IonCardHeader,
   IonCardTitle,
-  IonButtons,
-  IonModal,
   IonGrid,
   IonRow,
   IonCol,
   IonIcon,
-  IonSelectOption,
-  IonSelect,
 } from "@ionic/react";
 
-import React, { useState, useRef } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import FormTopBar from "../../components/FormTopBar";
 import { setGeneral } from "../database";
 import { useDatabase } from "../../contexts/DatabaseContext";
