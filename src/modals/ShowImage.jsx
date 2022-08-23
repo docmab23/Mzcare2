@@ -9,7 +9,7 @@ return (
               <IonButtons slot="start">
                 <IonButton onClick={props.close}>Close</IonButton>
               </IonButtons>
-              <IonTitle> Add Contact Details </IonTitle>
+              <IonTitle> Image </IonTitle>
             </IonToolbar>
           </IonHeader>
           <IonContent className="ion-padding">

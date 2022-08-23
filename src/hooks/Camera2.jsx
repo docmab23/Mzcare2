@@ -1,8 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import {
   IonContent,
-  isPlatform,
-  IonIcon,
   IonCol,
   IonRow,
   IonGrid,
@@ -14,11 +12,8 @@ import {
   CameraSource,
   Photo,
 } from "@capacitor/camera";
-import { Filesystem, Directory } from "@capacitor/filesystem";
-import { Storage } from "@capacitor/storage";
-import { Capacitor } from "@capacitor/core";
 import React from "react";
-import { IonPage, IonButton, IonForm, IonInput } from "@ionic/react";
+import { IonPage, IonButton } from "@ionic/react";
 import { storage } from "../firebase";
 import {
   ref,
@@ -41,7 +36,7 @@ function Camera2(props) {
   const [status2, setStatus2] = useState(false);
   const [imageclicked, setImageclicked] = useState(false);
   const [filename, setFilename] = useState("");
-  const ls = [];
+  const [photo, setPhoto] = useState("");
 
   const hiddenFileInput = React.useRef(null);
   const uid = auth.currentUser.uid;
@@ -61,10 +56,11 @@ function Camera2(props) {
         source: CameraSource.Camera,
         quality: 100,
       });
+      setPhoto(photo);
       var imageUrl = photo.webPath;
       console.log(imageUrl);
       setStatus(!status)
-      save_picture(photo);
+      // save_picture(photo);
     } catch (e) {
       console.log(e);
     }
@@ -138,13 +134,14 @@ function Camera2(props) {
 
   function get_files() {
     const dir_ref = ref(storage, `${uid}/images/`);
+    const imagesList = [];
+    const imagesJson = {};
     if (disable === false) {
       listAll(dir_ref)
         .then((res) => {
           res.items.forEach((itemRef) => {
             getDownloadURL(itemRef).then((url_) => {
               setImageList((images) => images.concat(url_));
-              ls.push(url_);
             });
           });
           setDisable(true);
@@ -154,9 +151,14 @@ function Camera2(props) {
           console.log(error);
         });
     }
+    console.log(images)
   }
 
-  get_files();
+  useEffect(() => {
+    get_files()
+  }, []);
+
+  ;
  
   function show_image_large(image_clicked) {
     setImageclicked(image_clicked);
@@ -173,7 +175,7 @@ function Camera2(props) {
                 <IonCol key={pos}>
                   {" "}
                   <img
-                    src={images[pos]}
+                    src={item}
                     onClick={() => show_image_large(images[pos])}
                   ></img>
                 </IonCol>
@@ -181,15 +183,9 @@ function Camera2(props) {
             })}
           </IonRow>
         </IonGrid>
-
-        {/* <IonButton onClick={upload_file}>
-                <input type="file" hidden onChange={handleChange}/>
-                    Upload
-                
-              </IonButton> */}
         <IonButton onClick={takePhoto}>Upload your medical records</IonButton>
 
-        <AddFileName show={status} close={changestatus} name={setFilename} />
+        <AddFileName show={status} close={changestatus}  name={setFilename} photo={photo}  savePhoto={save_picture}/>
         <ShowImage show={status2} close={changestatus2} image={imageclicked} />
       </IonContent>
     </IonPage>
