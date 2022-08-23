@@ -129,8 +129,6 @@ function Login() {
                 onIonChange={(e) => setPassword(e.target.value)}
               />
               <a onClick={changestatus}>Forgot Password</a>
-
-
             </IonItem>
           </div>
           <div className="form-button-placement">

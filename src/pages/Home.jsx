@@ -38,7 +38,7 @@ function Home() {
     <IonPage>
       
       <IonContent className="ion-padding">
-      <div class = "bar bar-header bar-positive">
+      <div className = "bar bar-header bar-positive">
         <FormTopBar />
         </div>
         <h2>
