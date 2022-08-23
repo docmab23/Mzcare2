@@ -48,7 +48,7 @@ function Camera2(props) {
   const [status, setStatus] = useState(false);
   const [status2, setStatus2] = useState(false);
   const [imageclicked, setImageclicked] = useState(false);
-  const [filename, setFilename] = useState("m2.jpeg");
+  const [filename, setFilename] = useState("");
   const ls = [];
 
   const hiddenFileInput = React.useRef(null);
@@ -171,9 +171,7 @@ function Camera2(props) {
               ls.push(url_);
             });
           });
-
           setDisable(true);
-          console.log(images.length);
         })
         .catch((error) => {
           // Uh-oh, an error occurred!
@@ -196,7 +194,7 @@ function Camera2(props) {
           <IonRow>
             {images.map((item, pos) => {
               return (
-                <IonCol>
+                <IonCol key={pos}>
                   {" "}
                   <img
                     src={images[pos]}
