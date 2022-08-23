@@ -16,3 +16,7 @@ ion-text {
 
     white-space: nowrap;
 }
+
+.top-bar {
+    position: fixed;
+}

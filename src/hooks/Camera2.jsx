@@ -181,10 +181,7 @@ function Camera2(props) {
                 getDownloadURL(itemRef).then((url_) =>
                 {setImageList(images => images.concat(url_));
                 ls.push(url_);});
-              
-                
-
-                
+  
               }
               
              );
@@ -203,7 +200,7 @@ function Camera2(props) {
 
       // console.log(typeof images);
 
-      get_files();
+      useEffect(() => {get_files(); } ,[images]);
       console.log(images);
       console.log(imageclicked);
 
