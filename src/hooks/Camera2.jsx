@@ -26,25 +26,17 @@ import {
   uploadBytesResumable,
   listAll,
 } from "firebase/storage";
-import { type } from "os";
-import { BlobUtil } from "blob-util";
 import { auth } from "../firebase";
-
-import { fileTray, home, images, medkitSharp, settings } from "ionicons/icons";
-import { lstat } from "fs";
 import AddFileName from "../modals/AddFileName";
 import ShowImage from "../modals/ShowImage";
 
 function Camera2(props) {
-  const [photos, setPhotos] = useState([]);
   const [images, setImageList] = useState([]);
   const [url, setUrl] = useState([]);
   const [file, setFile] = useState("");
   const [imgUrl, setImgUrl] = useState(null);
   const [progresspercent, setProgresspercent] = useState(0);
-  const [data, setData] = useState([]);
   const [disable, setDisable] = useState(false);
-  const fileInput = useRef(null);
   const [status, setStatus] = useState(false);
   const [status2, setStatus2] = useState(false);
   const [imageclicked, setImageclicked] = useState(false);
@@ -62,17 +54,6 @@ function Camera2(props) {
     setStatus2(!status2);
   }
 
-  const handleClick = (event) => {
-    hiddenFileInput.current.click();
-  };
-  const handleChange = (event) => {
-    const fileUploaded = event.target.files[0];
-  };
-
-  function show_image() {
-    changestatus2();
-  }
-
   const takePhoto = async () => {
     try {
       const photo = await Camera.getPhoto({
@@ -82,23 +63,18 @@ function Camera2(props) {
       });
       var imageUrl = photo.webPath;
       console.log(imageUrl);
+      setStatus(!status)
       save_picture(photo);
     } catch (e) {
       console.log(e);
     }
   };
 
-  function makefilename() {
-    setFilename(filename);
-  }
-
   async function save_picture(photo) {
-    setStatus(!status);
     console.log(filename);
     const storageRef = ref(storage, `${uid}/images/${filename}`);
     var b64_string = await base64FromPath(photo.webPath);
     console.log(b64_string);
-    //var b64_ = decodeURIComponent(b64);
     var blob_ = b64_to_blob(b64_string);
 
     const uploadTask = uploadBytesResumable(storageRef, blob_);
