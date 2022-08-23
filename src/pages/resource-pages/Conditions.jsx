@@ -10,8 +10,8 @@ import {
   IonCardTitle,
 } from "@ionic/react";
 
-import React, { useState, useRef } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import FormTopBar from "../../components/FormTopBar";
 import { setCondition } from "../database";
 import { useDatabase } from "../../contexts/DatabaseContext";
@@ -23,8 +23,6 @@ import EditConditionModal from "../../modals/EditConditionModal";
 import BackButton from "../../components/Backbutton";
 
 function Condition() {
-  const modal = useRef(null);
-  const input = useRef(null);
   const [status, setStatus] = useState(false);
   const [editStatus, setEditStatus] = useState(false);
   const [editConditionName, setEditConditionName] = useState("");
@@ -33,7 +31,6 @@ function Condition() {
   const [conditionName, setConditionName] = useState("");
   const [conditionStatus, setConditionStatus] = useState("");
   const [editConditionStatus, setEditConditionStatus] = useState("");
-  const [busy, setBusy] = useState(false);
   const { currentUser } = useAuth();
   const { conditionJson, conditionList, setConditionJson, setConditionList } =
     useDatabase();
@@ -105,7 +102,6 @@ function Condition() {
 
   async function createCondition(e) {
     e.preventDefault();
-    setBusy(true);
     const submitConditionData = {};
     const conditionData = {
       conditionName: conditionName,
@@ -119,7 +115,6 @@ function Condition() {
     setConditionJson(submitConditionData);
     setConditionList(conditionList);
     await setCondition(submitConditionData);
-    setBusy(false);
     setStatus(!status);
   }
 

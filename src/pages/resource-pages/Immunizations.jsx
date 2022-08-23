@@ -15,7 +15,7 @@ import {
 import { deleteField, doc, getDoc, updateDoc } from "firebase/firestore";
 import { Redirect, useHistory } from "react-router";
 
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import FormTopBar from "../../components/FormTopBar";
 import { useAuth } from "../../contexts/AuthContext";
 import { useDatabase } from "../../contexts/DatabaseContext";

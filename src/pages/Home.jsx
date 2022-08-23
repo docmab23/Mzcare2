@@ -1,24 +1,20 @@
-import { IonContent, IonPage, IonButton, IonItem, IonText, useIonViewDidEnter, IonHeader } from "@ionic/react";
+import {
+  IonContent,
+  IonPage,
+  IonButton,
+  IonText,
+  useIonViewDidEnter,
+} from "@ionic/react";
 import { Redirect, useHistory } from "react-router-dom";
 import React from "react";
 import "./Register.css";
-import { useState, useEffect } from 'react';
-import {storage} from "../firebase";
 import FormTopBar from "../components/FormTopBar";
 import "./Home.css";
 import { useAuth } from "../contexts/AuthContext";
 import { showTabBar } from "../utils/Utils";
-import Camera2 from "../hooks/Camera2";
-import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
-import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { Filesystem, Directory,  } from '@capacitor/filesystem';
-import {auth} from "../firebase";
 
 function Home() {
   const history = useHistory();
-  const [photos, setPhotos] = useState([]);
-  const [imgUrl, setImgUrl] = useState(null);
-  const [progresspercent, setProgresspercent] = useState(0);
   const { currentUser } = useAuth();
   async function goImmunization() {
     history.replace("/immune");
@@ -32,18 +28,13 @@ function Home() {
     return <Redirect to="/login" />;
   }
 
- 
-
   return (
     <IonPage>
-      
       <IonContent className="ion-padding">
-      <div className = "bar bar-header bar-positive">
-        <FormTopBar />
+        <div className="bar bar-header bar-positive">
+          <FormTopBar />
         </div>
-        <h2>
-        {"\u00a0\u00a0\u00a0"}
-        </h2>
+        <h2>{"\u00a0\u00a0\u00a0"}</h2>
         <div className="ion-padding container">
           <IonText>
             <h2>
@@ -81,11 +72,10 @@ function Home() {
         </div>
         <div>
           <IonButton routerLink="/camera">
-            Upload your Medical Records 
+            Upload your Medical Records
           </IonButton>
         </div>
       </IonContent>
-     
     </IonPage>
   );
 }

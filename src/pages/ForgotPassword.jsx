@@ -1,13 +1,9 @@
 import {
   IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
   IonInput,
   IonButton,
   IonLoading,
-  IonText,
   IonLabel,
   IonItem,
 } from "@ionic/react";
@@ -16,7 +12,6 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { toast } from "../toast";
 // import { setUserState } from "../redux/actions";
-import { useDispatch } from "react-redux";
 import FormTopBar from "../components/FormTopBar";
 import { useAuth } from "../contexts/AuthContext";
 import { errors } from "../utils/Utils";
@@ -62,7 +57,7 @@ function ForgotPassword() {
               Send Email
             </IonButton>
             <div>
-              Go back to <Link to="/register">Login</Link>
+              Go back to <Link to="/login">Login</Link>
             </div>
           </div>
         </div>

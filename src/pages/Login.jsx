@@ -18,46 +18,32 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { auth, db } from "../firebase";
 import { toast } from "../toast";
-import { useDispatch } from "react-redux";
 import FormTopBar from "../components/FormTopBar";
 import { useAuth } from "../contexts/AuthContext";
 import { useDatabase } from "../contexts/DatabaseContext";
 import { errors, hideTabBar } from "../utils/Utils";
 import { doc, setDoc } from "firebase/firestore";
-import { setUserState } from "../redux/actions";
-import ForgotPassword from "../modals/ForgotPassword";
-import { sendSignInLinkToEmail } from "firebase/auth";
-
 
 function Login() {
   const [busy, setBusy] = useState(false);
   const location = useLocation();
-  const [card_id, setCardId] = useState(location.state !== null && location.state !== undefined ? location.state.card_id : "")
+  const [card_id, setCardId] = useState(
+    location.state !== null && location.state !== undefined
+      ? location.state.card_id
+      : ""
+  );
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, resetPassword } = useAuth();
   const { genList } = useDatabase();
-  const [status , setStatus] = useState(false);
-  const [emailForgot , setEmailForgot] = useState();
-  const controller = new AbortController()
+  const controller = new AbortController();
 
-
-  function changestatus() {
-
-    setStatus(!status)
+  function changePage() {
+    history.push("/forgotPassword");
   }
-
-
-  function sendEmail(){
-    resetPassword(emailForgot, auth);
-    setStatus(false);
-  }
-  
 
   async function updateDatabase(state, card_uid, user_uid) {
-    console.log(card_id)
-    console.log(card_uid)
     const cardRef = doc(db, "qrCode/" + card_uid);
     const cardObject = {};
     cardObject["state"] = state;
@@ -99,14 +85,12 @@ function Login() {
 
   useEffect(() => {
     return () => {
-      controller.abort()
-    }
-  },[])
+      controller.abort();
+    };
+  }, []);
 
   return (
     <IonPage>
-       
-
       <IonContent className="ion-padding">
         <FormTopBar />
         <IonLoading message="Signing in..." duration={0} isOpen={busy} />
@@ -129,7 +113,9 @@ function Login() {
                 onIonChange={(e) => setPassword(e.target.value)}
               />
             </IonItem>
-            <a onClick={changestatus}><u>Forgot Password</u></a>
+            <a onClick={changePage}>
+              <u>Forgot Password</u>
+            </a>
           </div>
           <div className="form-button-placement">
             <IonButton class="form-button" onClick={loginUser}>
@@ -140,8 +126,6 @@ function Login() {
             </div>
           </div>
         </div>
-        <ForgotPassword show={status} sendmail={sendEmail} setEmailforgot={setEmailForgot}  changestatus={changestatus}/>
-
       </IonContent>
     </IonPage>
   );

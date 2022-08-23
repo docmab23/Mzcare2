@@ -11,7 +11,7 @@ import {
 } from "@ionic/react";
 
 import React, { useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import FormTopBar from "../../components/FormTopBar";
 import { setAllergy } from "../database";
 import { useDatabase } from "../../contexts/DatabaseContext";

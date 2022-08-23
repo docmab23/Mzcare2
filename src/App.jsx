@@ -11,8 +11,6 @@ import {
 import { IonReactRouter } from "@ionic/react-router";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { Provider } from "react-redux";
-import store from "./pages/storage";
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
 
@@ -42,35 +40,24 @@ import Allergy from "./pages/resource-pages/Allergy";
 import Immunizations from "./pages/resource-pages/Immunizations";
 import Ice from "./pages/resource-pages/Ice";
 import General from "./pages/resource-pages/General";
-import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import { AuthProvider } from "./contexts/AuthContext";
 import FootNavbar from "./components/Foot-Navbar";
 import Geo from "./pages/Geo";
 
 import { DatabaseProvider } from "./contexts/DatabaseContext";
 
-import hicon from "./images/home-icon.svg";
-import sett from "./images/settings-icon.svg";
-// import { IonReactRouter } from "@ionic/react-router";
 import em from "./images/em.svg";
 import Try1 from "./pages/resource-pages/Try1";
 import Em from "./pages/Em";
-import { connectStorageEmulator } from "firebase/storage";
 import Condition from "./pages/resource-pages/Conditions";
 import "./App.css";
 import Settings from "./pages/Settings";
-import { ok } from "assert";
 import { home, medkitSharp, settings } from "ionicons/icons";
 import QRRoute from "./pages/QRRoute";
 import Camera2 from "./hooks/Camera2";
 import DisplayEm from "./pages/DisplayEm";
 
-// import Home from "../pages/Home";
-// import {Redirect} from 'react-router-dom';
-
 function App() {
-  // const {currentUser} = useAuth();
-  // console.log(currentUser);
-
   return (
     <IonApp>
       <AuthProvider>
@@ -82,7 +69,7 @@ function App() {
                 <Route path="/try" component={Try1} />
                 <Route path="/home" component={Home} />
                 <Route path="/register" component={Register} />
-                <Route path="/geo" component={Geo}/>
+                <Route path="/geo" component={Geo} />
                 <Route path="/camera" component={Camera2} />
                 <Route path="/tabs" component={FootNavbar} />
                 <Route path="/em_tab" component={Em} />
@@ -95,16 +82,13 @@ function App() {
                 <Route path="/id/:id" component={DisplayEm} exact={true} />
                 <Route path="/ice" component={Ice} exact={true} />
                 <Route path="/condition" component={Condition} exact={true} />
-                <Route
-                  path="/general"
-                 component={General}
-                />
+                <Route path="/general" component={General} />
                 <Route
                   path="/"
                   render={() => <Redirect to="/login" />}
                   exact={true}
                 />
-                <Route path="/qr/:id" component={QRRoute} exact={true}/>
+                <Route path="/qr/:id" component={QRRoute} exact={true} />
               </IonRouterOutlet>
 
               <IonTabBar slot="bottom" className="footer-tab" id="app-tab-bar">
