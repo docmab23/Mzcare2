@@ -1,4 +1,4 @@
-import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonModal, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonContent, IonHeader, IonItem, IonModal, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react'
 
 const ShowImage = (props) => {
@@ -9,12 +9,12 @@ return (
               <IonButtons slot="start">
                 <IonButton onClick={props.close}>Close</IonButton>
               </IonButtons>
-              <IonTitle> Add Contact Details </IonTitle>
+              <IonTitle> Image </IonTitle>
             </IonToolbar>
           </IonHeader>
           <IonContent className="ion-padding">
             <IonItem>
-              <img src={props.image}></img>
+              <img src={props.image} alt="detail"></img>
             </IonItem>
           </IonContent>
         </IonModal>

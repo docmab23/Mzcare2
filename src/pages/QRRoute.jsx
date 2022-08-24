@@ -1,5 +1,5 @@
 import { IonButton, IonText, IonContent, IonPage } from "@ionic/react";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import FormTopBar from "../components/FormTopBar";
@@ -23,7 +23,7 @@ function QRRoute() {
           const data = docSnap.data();
           setuserid(data["user_uid"]);
           cardObject["user_uid"] = data["user_uid"];
-          if (data["state"] !== false) history.push(`/${uid.split(":").pop()}`);
+          if (data["state"] !== false) history.push(`/id/${uid.split(":").pop()}`);
         }
       });
   }

@@ -1,17 +1,20 @@
-import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonModal, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonModal, IonTitle, IonToolbar, IonText } from '@ionic/react';
 import React from 'react'
 
 const AddFileName = (props) => {
+
+function close() {
+  props.savePhoto(props.photo);
+  props.close();
+}
+
 return (
     <IonModal isOpen={props.show}>
           <IonHeader>
             <IonToolbar>
-              <IonButtons slot="start">
-                <IonButton onClick={props.close}>Cancel</IonButton>
-              </IonButtons>
               <IonTitle>File name</IonTitle>
               <IonButtons slot="end">
-                <IonButton strong={true} onClick={props.close} >
+                <IonButton strong={true} onClick={close} >
                   Confirm
                 </IonButton>
               </IonButtons>
@@ -19,7 +22,7 @@ return (
           </IonHeader>
           <IonContent className="ion-padding">
             <IonItem>
-              <IonLabel position="floating">File Name</IonLabel>
+              <IonLabel position="floating">File Name<IonText>.png</IonText></IonLabel>
               <IonInput
                 type="text"
                 onIonChange={(e) => props.name(e.target.value)}

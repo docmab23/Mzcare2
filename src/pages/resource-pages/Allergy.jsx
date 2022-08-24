@@ -10,8 +10,8 @@ import {
   IonCardTitle,
 } from "@ionic/react";
 
-import React, { useState, useRef } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import FormTopBar from "../../components/FormTopBar";
 import { setAllergy } from "../database";
 import { useDatabase } from "../../contexts/DatabaseContext";
@@ -30,8 +30,6 @@ function Allergy() {
   const [allergyName, setAllergyName] = useState("");
   const [onsetDate, setDate] = useState("");
   const [editDate, setEditDate] = useState("");
-  const [busy, setBusy] = useState(false);
-  const history = useHistory();
   const { currentUser } = useAuth();
   const { allergyJson, allergyList, setAllergyJson, setAllergyList } =
     useDatabase();
@@ -41,10 +39,6 @@ function Allergy() {
     setOriginalEditAllergyName(jsonToEdit["allergyName"]);
     setEditDate(jsonToEdit["onsetDate"]);
     setEditStatus(!status);
-  }
-
-  async function updateAllergy(ref) {
-    updateDoc(ref);
   }
 
   async function editAllergy(e) {
@@ -107,7 +101,6 @@ function Allergy() {
 
   async function createallergy(e) {
     e.preventDefault();
-    setBusy(true);
     const submitAllergyData = {};
     const allergyData = {
       allergyName: allergyName,
@@ -121,7 +114,6 @@ function Allergy() {
     setAllergyJson(submitAllergyData);
     setAllergyList(allergyList);
     await setAllergy(submitAllergyData);
-    setBusy(false);
     setStatus(!status);
   }
 

@@ -9,15 +9,13 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonIcon,
-  IonModal,
   IonRow,
   IonGrid,
-  IonButtons,
 } from "@ionic/react";
 import { deleteField, doc, getDoc, updateDoc } from "firebase/firestore";
 import { Redirect, useHistory } from "react-router";
 
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import FormTopBar from "../../components/FormTopBar";
 import { useAuth } from "../../contexts/AuthContext";
 import { useDatabase } from "../../contexts/DatabaseContext";
@@ -25,7 +23,6 @@ import { db } from "../../firebase";
 import AddImmunizationModal from "../../modals/AddImmunizationModal";
 import EditImmunizationModal from "../../modals/EditImmunizatioModal";
 import { setImmunization } from "../database";
-import { IoIosArrowRoundBack } from "react-icons/io";
 import "./Immunizations.css";
 import back from "../../images/back.svg";
 
@@ -40,7 +37,6 @@ function Immunizations() {
   const [editExpiry, setEditExpiry] = useState("");
   const [administer, setAdminister] = useState("");
   const [expiry, setExpiry] = useState("");
-  const [busy, setBusy] = useState(false);
   const { currentUser } = useAuth();
   const {
     immunizationJson,
@@ -126,7 +122,6 @@ function Immunizations() {
 
   async function createImmunization(e) {
     e.preventDefault();
-    setBusy(true);
     const submitVaccineData = {};
     const vaccineData = {
       vaccineName: vaccineName,
@@ -141,7 +136,6 @@ function Immunizations() {
     setImmunizationJson(submitVaccineData);
     setImmunizationList(immunizationList);
     await setImmunization(submitVaccineData);
-    setBusy(false);
     setStatus(!status);
   }
 

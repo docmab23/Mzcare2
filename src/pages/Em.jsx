@@ -39,7 +39,9 @@ function Em() {
     return (
       <IonPage>
         <IonContent className="ion-padding" color="primary">
+			
           <FormTopBarW />
+		
 		  <IonGrid align="center" color="primary">
 			<IonRow>
             <IonText>MzCare Emergency Profile{" "}</IonText>

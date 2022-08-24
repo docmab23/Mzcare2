@@ -1,18 +1,12 @@
 import {
-    IonContent,
-    IonPage,
-    IonButton,
-    IonLoading,
-    IonItem,
-    IonText,
     IonIcon,
     IonTabButton,
     IonTabBar,
     IonTabs,
     IonRouterOutlet,
   } from "@ionic/react";
-  import { Route, useHistory } from "react-router-dom";
-  import React, { useState, useEffect } from "react";
+  import { Route } from "react-router-dom";
+  import React from "react";
 
   import Em from "../pages/Em" ;
   import hicon from "../images/home-icon.svg";

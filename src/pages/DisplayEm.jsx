@@ -1,37 +1,20 @@
 import {
   IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
-  IonInput,
-  IonButton,
-  IonLoading,
   IonText,
-  IonLabel,
-  IonItem,
-  IonFooter,
-  IonCardHeader,
-  IonCardTitle,
   IonCard,
   IonRow,
   IonCol,
   IonGrid,
   IonCardContent,
-  IonSubTitle,
   useIonViewDidEnter,
 } from "@ionic/react";
 
 import React, { useEffect, useState } from "react";
-import FormTopBar from "../components/FormTopBar";
 import { toast } from "../toast";
-import { useDatabase } from "../contexts/DatabaseContext";
-import { errors, hideTabBar } from "../utils/Utils";
-import { Geolocation, Geoposition } from "@ionic-native/geolocation";
-import Geocode from "react-geocode";
 
-// import "./Em.css";
-import General from "./resource-pages/General";
+import { errors, hideTabBar } from "../utils/Utils";
+import { Geolocation } from "@ionic-native/geolocation";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useLocation } from "react-router";
@@ -61,6 +44,9 @@ function DisplayEm() {
   const [conditionList, setConditionList] = useState([])
   const [genJson, setGenJson] = useState("")
   const [genList, setGenList] = useState([])
+  const [count, setCount] = useState(0)
+  var from_number = +17402364981; // store in .env
+
 
   function getData() {
     getLocation();
@@ -148,7 +134,7 @@ function DisplayEm() {
 
   useEffect(() => {
     Sms_Ice();
-  }, [iceList, address]);
+  }, [address]);
 
   async function getLocation() {
     try {
@@ -163,15 +149,24 @@ function DisplayEm() {
   };
 
   async function Send_Sms(number, pos_) {
+
+    let headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    // headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
+    headers.append('Origin','https://localhost:3000');
+  
     var requestOptions = {
       method: "POST",
       redirect: "follow",
     };
 
-    if (address!== undefined && address !== "") {
+    if (address!== undefined && address !== "" && count === 0) {
+      setCount(1);
       fetch(
-        `http://mzcare2.herokuapp.com/api/messages?to="${number}"&body="There's an emergency at:"${pos_}""`,
-        requestOptions
+        `http://mzcare2.herokuapp.com/api/messages?to="${number}"&from_number="${from_number}"&body="There's an emergency at:"${pos_}""`,
+        requestOptions, headers=headers
       )
         .then((response) => response.text())
         .then((result) => console.log(result))
@@ -182,7 +177,7 @@ function DisplayEm() {
   async function Sms_Ice() {
     iceList.map((item, pos) => {
       const phone_no = iceJson[item]["number"];
-        Send_Sms(phone_no, address);
+      Send_Sms(phone_no, address);
     });
   }
 

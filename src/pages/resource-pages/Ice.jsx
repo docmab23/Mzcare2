@@ -46,6 +46,8 @@ function Ice() {
   // console.log(iceList);
 
 
+  var from_number = +17402364981; // store in .env
+
 
  
   async function Sms_Ice(number){
@@ -61,7 +63,7 @@ function Ice() {
   
     };
     
-    fetch(`https://mzcare2.herokuapp.com/api/messages?to="${number}"&body=You have been assigned as an emergency contact for: "${genJson["General"]["Name"]}'s MzCare Health ID. Get yours, now at https://mzcare.us""`, requestOptions,headers=headers)
+    fetch(`https://mzcare2.herokuapp.com/api/messages?to="${number}"&from_number="${from_number}"&body=You have been assigned as an emergency contact for: "${genJson["General"]["Name"]}'s MzCare Health ID. Get yours, now at https://mzcare.us""`, requestOptions,headers=headers)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
