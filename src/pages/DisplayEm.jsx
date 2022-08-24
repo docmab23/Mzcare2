@@ -13,7 +13,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { toast } from "../toast";
 
-import { errors, hideTabBar } from "../utils/Utils";
+import { hideTabBar } from "../utils/Utils";
 import { Geolocation } from "@ionic-native/geolocation";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
@@ -45,7 +45,7 @@ function DisplayEm() {
   const [genJson, setGenJson] = useState("")
   const [genList, setGenList] = useState([])
   const [count, setCount] = useState(0)
-  var from_number = +17402364981; // store in .env
+  var from_number = +17408753450; // store in .env
 
 
   function getData() {
@@ -165,9 +165,7 @@ function DisplayEm() {
     if (address!== undefined && address !== "" && count === 0) {
       setCount(1);
       fetch(
-        `http://mzcare2.herokuapp.com/api/messages?to="${number}"&from_number="${from_number}"&body="There's an emergency at:"${pos_}""`,
-        requestOptions, headers=headers
-      )
+        `https://mzcare2.herokuapp.com/api/messages?from_number=${from_number}&body="There's an emergency at ${pos_}"&to=${number}`, requestOptions)
         .then((response) => response.text())
         .then((result) => console.log(result))
         .catch((error) => console.log("error", error));
