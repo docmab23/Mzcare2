@@ -42,11 +42,12 @@ function Ice() {
   const history = useHistory();
   const {genJson} = useDatabase();
 
-  const name = genJson["Name"]
+  // const name = genJson["Name"]
   // console.log(iceList);
 
 
-  var from_number = +17402364981; // store in .env
+  var from_number = +17408753450; // store in .env
+ 
 
 
  
@@ -57,16 +58,16 @@ function Ice() {
     headers.append('Accept', 'application/json');
     // headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
     headers.append('Origin','https://localhost:3000');
-    var requestOptions = {
-      method: 'POST',
-      redirect: 'follow',
-  
-    };
-    
-    fetch(`https://mzcare2.herokuapp.com/api/messages?to="${number}"&from_number="${from_number}"&body=You have been assigned as an emergency contact for: "${genJson["General"]["Name"]}'s MzCare Health ID. Get yours, now at https://mzcare.us""`, requestOptions,headers=headers)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
+
+      var requestOptions = {
+        method: 'POST',
+        redirect: 'follow'
+      };
+      
+      fetch(`https://mzcare2.herokuapp.com/api/messages?from_number=${from_number}&body=You have been added as an emergency contact for${genJson["General"]["Name"]}&to=${number}`, requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
 }
 
    
