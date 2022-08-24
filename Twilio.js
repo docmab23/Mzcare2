@@ -9,6 +9,14 @@ const phaxio = new Phaxio(process.env.PHAXIOKEY, process.env.PHAXIOSECRET);
  
 
 const app = express();
+const cors=require("cors");
+const corsOptions ={
+   origin:'*', 
+   credentials:true,            //access-control-allow-credentials:true
+   optionSuccessStatus:200,
+}
+
+app.use(cors(corsOptions)) 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(pino);
