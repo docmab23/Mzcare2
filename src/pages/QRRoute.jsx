@@ -46,7 +46,7 @@ function QRRoute() {
         </IonText>
 
         <IonButton className="rbutton" onClick={() => history.push("/login", { card_id: uid })}>
-          {" "}  {uid}
+          {" "} 
           Login{" "}
         </IonButton>
 
