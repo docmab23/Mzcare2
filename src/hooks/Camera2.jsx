@@ -6,6 +6,11 @@ import {
   IonGrid,
   IonIcon,
   IonText,
+  IonCheckbox,
+  IonInput,
+  IonItem,
+  IonLabel
+ 
 } from "@ionic/react";
 import back from "../images/back.svg";
 import {
@@ -30,6 +35,12 @@ import FormTopBar from "../components/FormTopBar";
 import { useHistory } from "react-router";
 
 function Camera2(props) {
+  let newDate = new Date()
+  let date = newDate.getDate();
+  let month = newDate.getMonth() + 1;
+  let year = newDate.getFullYear();
+  let time = newDate.getTime()
+  var default_filename = `${date}${month}${year}${time}.png"`
   const history = useHistory();
   const [images, setImageList] = useState([]);
   const [url, setUrl] = useState([]);
@@ -40,8 +51,15 @@ function Camera2(props) {
   const [status, setStatus] = useState(false);
   const [status2, setStatus2] = useState(false);
   const [imageclicked, setImageclicked] = useState(false);
-  const [filename, setFilename] = useState("");
+  const [filename, setFilename] = useState(default_filename);
   const [photo, setPhoto] = useState("");
+  const [fax_on , setFaxStatus] = useState(false);
+  const [items_selected, setSelectedItems] = useState([]);
+
+
+  function change_fax_status(){
+    setFaxStatus(!fax_on);
+  }
 
   const hiddenFileInput = React.useRef(null);
   const uid = auth.currentUser.uid;
@@ -156,6 +174,8 @@ function Camera2(props) {
     }
   }
 
+  
+
   useEffect(() => {
     get_files();
   }, []);
@@ -164,7 +184,15 @@ function Camera2(props) {
     setImageclicked(image_clicked);
     changestatus2();
   }
-
+  const handleChange = (e) => {
+    // Destructuring
+    const { value, checked , className} = e.target;
+    if (checked==true){
+    setSelectedItems((items_selected) => items_selected.concat(className));}
+      
+  
+    console.log(`${className} is ${checked}`);
+    }
   return (
     <IonPage>
       <IonContent className="ion-padding">
@@ -189,6 +217,8 @@ function Camera2(props) {
             </IonRow>
           </h1>
         </IonGrid>
+      
+        
         <div>
           <IonGrid columns="1fr 1fr">
             {images.map((item, pos) => {
@@ -222,8 +252,10 @@ function Camera2(props) {
                             style={{ width: "40vw", borderRadius: "5px" }}
                             onClick={() => show_image_large(images[pos])}
                             src={images[pos]}
-                            alt=""
+                            alt="medical records"
                           />
+                        { fax_on && 
+                          <input type="checkbox" className={`checkbox"${item}"`}id="check2"  onChange={handleChange}/> }
                         </div>
                       }
                     </div>
@@ -233,6 +265,16 @@ function Camera2(props) {
             })}
           </IonGrid>
           <IonButton onClick={takePhoto}>Add</IonButton>
+          <IonButton onClick={change_fax_status}>Fax your Records</IonButton>
+          { fax_on && 
+          <form>
+             <IonItem>
+              <IonLabel position="floating">Fax No. </IonLabel>
+           <IonInput type="tel"></IonInput>
+          <IonButton disabled>Fax it!</IonButton>
+          <IonButton onClick={change_fax_status}>Cancel</IonButton></IonItem></form>
+
+          }
           <AddFileName
             show={status}
             close={changestatus}
