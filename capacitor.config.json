@@ -1,7 +1,7 @@
 {
   "appId": "io.ionic.demo.pg.react",
-  "appName": "React Photo Gallery",
-  "bundledWebRuntime": false,
+  "appName": "MzCare",
+  "bundledWebRuntime": true,
   "npmClient": "npm",
   "webDir": "build",
   "cordova": {}
