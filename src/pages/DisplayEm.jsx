@@ -26,15 +26,12 @@ function DisplayEm() {
     hideTabBar();
   });
 
-  useEffect(() => {
-    getData();
-  }, []);
-
   const location = useLocation();
   var uid = location.pathname;
   uid = uid.split("/").pop();
   const [address, setAddress] = useState("");
   const [immunizationJson, setImmunizationJson] = useState("")
+  const [loading, setLoading] = useState(true)
   const [immunizationList, setImmunizationList] = useState([])
   const [allergyJson, setAllergyJson] = useState("")
   const [allergyList, setAllergyList] = useState([])
@@ -47,20 +44,23 @@ function DisplayEm() {
   const [count, setCount] = useState(0)
   var from_number = +17408753450; // store in .env
 
+  useEffect(() => {
+    getData(uid);
+  }, [location]);
 
-  function getData() {
-    getLocation();
-    getICE();
-    getImmunizations();
-    getAllergy();
-    getCondition();
-    getGeneral();
+  async function getData(uid) {
+     getICE(uid);
+     getImmunizations(uid);
+     getAllergy(uid);
+     getCondition(uid);
+     getGeneral(uid);
+    console.log("ojfoe")
   }
 
-  function getImmunizations() {
+  async function getImmunizations(uid) {
     const immunizationRef = doc(db, uid + "/immunization");
     const immuneList = []
-    getDoc(immunizationRef).then((docSnap) => {
+    await getDoc(immunizationRef).then((docSnap) => {
         if (docSnap.exists()) {
             const immunizationData = docSnap.data();
             for (let key in immunizationData) {
@@ -72,10 +72,10 @@ function DisplayEm() {
     })
   }
 
-  function getICE() {
+  async function getICE(uid) {
     const iceRef = doc(db, uid + "/ice");
     const iceList = []
-    getDoc(iceRef).then((docSnap) => {
+    await getDoc(iceRef).then((docSnap) => {
         if (docSnap.exists()) {
             const iceData = docSnap.data();
             for (let key in iceData) {
@@ -87,10 +87,10 @@ function DisplayEm() {
     })
   }
 
-  function getAllergy() {
+  async function getAllergy(uid) {
     const allergyRef = doc(db, uid + "/allergy");
     const allergyList = []
-    getDoc(allergyRef).then((docSnap) => {
+    await getDoc(allergyRef).then((docSnap) => {
         if (docSnap.exists()) {
             const allergyData = docSnap.data();
             for (let key in allergyData) {
@@ -102,10 +102,10 @@ function DisplayEm() {
     })
   }
 
-  function getCondition() {
+  async function getCondition(uid) {
     const conditionRef = doc(db, uid + "/condition");
     const conditionList = []
-    getDoc(conditionRef).then((docSnap) => {
+    await getDoc(conditionRef).then((docSnap) => {
         if (docSnap.exists()) {
             const conditionData = docSnap.data();
             for (let key in conditionData) {
@@ -117,10 +117,12 @@ function DisplayEm() {
     })
   }
 
-  function getGeneral() {
+  async function getGeneral(uid) {
+    console.log("heree")
+    console.log(uid)
     const generalRef = doc(db, uid + "/general");
     const generalList = []
-    getDoc(generalRef).then((docSnap) => {
+    await getDoc(generalRef).then((docSnap) => {
         if (docSnap.exists()) {
             const generalData = docSnap.data();
             for (let key in generalData) {
@@ -128,6 +130,7 @@ function DisplayEm() {
             }
             setGenJson(generalData);
             setGenList(generalList);
+            console.log("vnkf")
         }
     })
   }
@@ -154,7 +157,6 @@ function DisplayEm() {
 
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
-    // headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
     headers.append('Origin','https://localhost:3000');
   
     var requestOptions = {
@@ -178,6 +180,14 @@ function DisplayEm() {
       Send_Sms(phone_no, address);
     });
   }
+
+  // if (loading) {
+  //   return (
+  //     <div>
+  //       Nice
+  //     </div>
+  //   )
+  // }
 
   return (
     <IonPage>
